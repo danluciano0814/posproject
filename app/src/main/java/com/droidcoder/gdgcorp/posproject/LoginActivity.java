@@ -15,6 +15,5 @@ public class LoginActivity extends BaseCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Toast.makeText(this, "sample", Toast.LENGTH_SHORT).show();
     }
 }
