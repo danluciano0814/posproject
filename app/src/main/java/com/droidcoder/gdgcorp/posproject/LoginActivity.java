@@ -2,6 +2,7 @@ package com.droidcoder.gdgcorp.posproject;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 /**
  * Created by DanLuciano on 12/30/2016.
@@ -13,5 +14,7 @@ public class LoginActivity extends BaseCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        Toast.makeText(this, "sample", Toast.LENGTH_SHORT).show();
     }
 }
