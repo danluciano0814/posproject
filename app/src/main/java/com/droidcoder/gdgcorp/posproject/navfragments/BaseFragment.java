@@ -26,7 +26,7 @@ public abstract class BaseFragment extends Fragment {
 
     public void onReady()
     {
-        Toast.makeText(getActivity(), "Fragment Attached", Toast.LENGTH_SHORT).show();
+
     }
 
 }

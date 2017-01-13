@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="10dp"
+    android:focusableInTouchMode="true">
+
+    <TextView
+        android:text="Initial Registration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:textColor="@color/colorPrimary"
+        android:textAllCaps="true"
+        android:id="@+id/textView2"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:text="NOTE: Registration require internet and a valid email for password recovering purposes."/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/transparent_gray_bg"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EMAIL"
+                android:textColor="@color/colorPrimary"
+                android:textAllCaps="true"
+                android:layout_marginTop="10dp"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:maxLines="1"
+                android:inputType="textEmailAddress"
+                android:background="@drawable/edittxt_bg"
+                android:id="@+id/etEmail"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FIRST NAME"
+                android:textColor="@color/colorPrimary"
+                android:textAllCaps="true"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:maxLines="1"
+                android:inputType="text"
+                android:background="@drawable/edittxt_bg"
+                android:id="@+id/etFname"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LAST NAME"
+                android:textColor="@color/colorPrimary"
+                android:textAllCaps="true"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:maxLines="1"
+                android:inputType="text"
+                android:background="@drawable/edittxt_bg"
+                android:id="@+id/etLname"
+                />
+
+            <Button
+                android:text="Send"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:id="@+id/btnSend"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/white"/>
+
+            <Button
+                android:text="Enter Code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnEnterCode"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/white"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

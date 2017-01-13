@@ -12,43 +12,42 @@
         android:layout_height="wrap_content"
         app:cardElevation="6dp"
         android:layout_gravity="center"
-        android:layout_margin="5dp"
         >
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/login_layout_pane_w"
             android:layout_height="@dimen/login_layout_pane_h"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:weightSum="2">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight=".3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:id="@+id/fragmentContainer"
                 >
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="100dp"
+                    android:padding="20dp"
                     android:src="@drawable/logo"/>
 
             </LinearLayout>
 
             <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.7"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:background="@color/colorPrimaryDark">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:layout_gravity="center"
-                    android:paddingTop="20dp"
-                    android:paddingBottom="20dp"
-                    android:paddingLeft="30dp"
-                    android:paddingRight="30dp">
+                    android:gravity="center"
+                    android:padding="20dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -59,10 +58,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/login_layout_btn_h"
                             android:inputType="textPassword"
-                            android:maxLength="4"
                             android:background="@drawable/txt_transparentblue_bg"
                             android:textSize="30dp"
                             android:id="@+id/txtPassword"
+                            android:maxLength="4"
                             android:textColor="@color/btnLetter"
                             android:gravity="center"/>
 
@@ -79,9 +78,9 @@
                             android:layout_width="0dp"
                             android:layout_height="@dimen/login_layout_btn_h"
                             android:layout_weight="1"
+                            android:onClick="editTxtPassword"
                             android:textColor="@color/colorPrimary"
                             android:id="@+id/btn7"
-                            android:onClick="editTxtPassword"
                             android:layout_margin="5dp"
                             android:background="@drawable/button_bg"/>
 
@@ -93,8 +92,8 @@
                             android:layout_weight="1"
                             android:textColor="@color/colorPrimary"
                             android:id="@+id/btn8"
-                            android:layout_margin="5dp"
                             android:onClick="editTxtPassword"
+                            android:layout_margin="5dp"
                             android:background="@drawable/button_bg"
                             android:elevation="8dp"/>
 
@@ -137,8 +136,8 @@
                             android:layout_weight="1"
                             android:textColor="@color/colorPrimary"
                             android:id="@+id/btn5"
-                            android:layout_margin="5dp"
                             android:onClick="editTxtPassword"
+                            android:layout_margin="5dp"
                             android:background="@drawable/button_bg"
                             android:elevation="8dp"/>
 
@@ -168,8 +167,8 @@
                             android:layout_height="@dimen/login_layout_btn_h"
                             android:layout_weight="1"
                             android:textColor="@color/colorPrimary"
-                            android:onClick="editTxtPassword"
                             android:id="@+id/btn1"
+                            android:onClick="editTxtPassword"
                             android:layout_margin="5dp"
                             android:background="@drawable/button_bg"/>
 
@@ -193,9 +192,9 @@
                             android:layout_height="@dimen/login_layout_btn_h"
                             android:textColor="@color/colorPrimary"
                             android:layout_weight="1"
+                            android:onClick="editTxtPassword"
                             android:id="@+id/btn3"
                             android:layout_margin="5dp"
-                            android:onClick="editTxtPassword"
                             android:background="@drawable/button_bg"/>
 
                     </LinearLayout>
@@ -213,8 +212,8 @@
                             android:layout_weight="1"
                             android:textColor="@color/colorPrimary"
                             android:textAllCaps="false"
-                            android:id="@+id/btnClear"
                             android:onClick="editTxtPassword"
+                            android:id="@+id/btnClear"
                             android:layout_margin="5dp"
                             android:background="@drawable/button_bg"/>
 
@@ -237,10 +236,10 @@
                             android:layout_width="0dp"
                             android:layout_height="@dimen/login_layout_btn_h"
                             android:textColor="@color/colorPrimary"
+                            android:onClick="editTxtPassword"
                             android:layout_weight="1"
                             android:textAllCaps="false"
                             android:id="@+id/btnLogin"
-                            android:onClick="editTxtPassword"
                             android:layout_margin="5dp"
                             android:background="@drawable/button_bg"/>
 
@@ -248,23 +247,15 @@
 
                     <Button
                         android:layout_width="@dimen/login_layout_btn_forgot_w"
-                        android:layout_height="30dp"
+                        android:layout_height="40dp"
                         android:background="@drawable/round_button_bg"
                         android:text="Forgot Pass"
                         android:textSize="10dp"
+                        android:onClick="recoverPassword"
                         android:layout_marginTop="20dp"
                         android:textAllCaps="false"
-                        android:onClick="recoverPassword"
                         android:textColor="@color/colorPrimary"
                         android:layout_gravity="bottom|end"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/fragmentContainer"
-                    android:orientation="vertical">
 
                 </LinearLayout>
 

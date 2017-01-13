@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "13168061775",
+    "firebase_url": "https://posproject-173e0.firebaseio.com",
+    "project_id": "posproject-173e0",
+    "storage_bucket": "posproject-173e0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13168061775:android:ae05d2195776a45a",
+        "android_client_info": {
+          "package_name": "com.droidcoder.gdgcorp.posproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13168061775-3680j03vtf44c2jbm7vsgisvjdg2g5qe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.droidcoder.gdgcorp.posproject",
+            "certificate_hash": "D36BCED2BB2861E06F6CE871C1AA3E32C325AA91"
+          }
+        },
+        {
+          "client_id": "13168061775-h5u9oel45giqgnjf2higq2c5pisj12ie.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGlTuSwPfYKwxIoaI2ob2D-EN09EyRLaA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "13168061775-h5u9oel45giqgnjf2higq2c5pisj12ie.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
