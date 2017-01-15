@@ -8,19 +8,14 @@
 
     <TextView
         android:text="Initial Registration"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:textColor="@color/colorPrimary"
-        android:textAllCaps="true"
         android:id="@+id/textView2"
-        android:textStyle="bold"
+        style="@style/blue_title_txt"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12dp"
+        android:textSize="13sp"
         android:text="NOTE: Registration require internet and a valid email for password recovering purposes."/>
 
     <ScrollView
@@ -35,78 +30,43 @@
             android:padding="10dp">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="EMAIL"
-                android:textColor="@color/colorPrimary"
-                android:textAllCaps="true"
-                android:layout_marginTop="10dp"
+                style="@style/blue_normal_txt"
                 />
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:padding="5dp"
-                android:maxLines="1"
                 android:inputType="textEmailAddress"
-                android:background="@drawable/edittxt_bg"
                 android:id="@+id/etEmail"
-                />
+                style="@style/edittext_form" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="FIRST NAME"
-                android:textColor="@color/colorPrimary"
-                android:textAllCaps="true"
-                android:layout_marginTop="10dp"/>
+                style="@style/blue_normal_txt"/>
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:padding="5dp"
-                android:maxLines="1"
                 android:inputType="text"
-                android:background="@drawable/edittxt_bg"
                 android:id="@+id/etFname"
-                />
+                style="@style/edittext_form" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="LAST NAME"
-                android:textColor="@color/colorPrimary"
-                android:textAllCaps="true"
-                android:layout_marginTop="10dp"/>
+                style="@style/blue_normal_txt"/>
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:padding="5dp"
-                android:maxLines="1"
                 android:inputType="text"
-                android:background="@drawable/edittxt_bg"
                 android:id="@+id/etLname"
-                />
+                style="@style/edittext_form" />
 
             <Button
                 android:text="Send"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:id="@+id/btnSend"
-                android:background="@color/colorPrimaryDark"
-                android:textColor="@color/white"/>
+                style="@style/blue_form_btn" />
 
             <Button
                 android:text="Enter Code"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/btnEnterCode"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/colorPrimaryDark"
-                android:textColor="@color/white"/>
+                style="@style/blue_form_btn" />
 
 
         </LinearLayout>

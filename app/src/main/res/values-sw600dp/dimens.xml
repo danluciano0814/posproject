@@ -8,4 +8,10 @@
     <dimen name="login_layout_pane_w">550dp</dimen>
     <dimen name="login_layout_pane_h">500dp</dimen>
     <dimen name="login_layout_btn_forgot_w">100dp</dimen>
+
+    <!-- text and edittext sizes -->
+    <dimen name="txt_title">18sp</dimen>
+    <dimen name="txt_normal">13sp</dimen>
+
+
 </resources>

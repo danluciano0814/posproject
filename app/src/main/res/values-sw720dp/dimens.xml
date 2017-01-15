@@ -14,4 +14,8 @@
     <dimen name="txt_h">110dp</dimen>
     <dimen name="txt_size">110dp</dimen>
 
+    <!-- text and edittext sizes -->
+    <dimen name="txt_title">22sp</dimen>
+    <dimen name="txt_normal">16sp</dimen>
+
 </resources>

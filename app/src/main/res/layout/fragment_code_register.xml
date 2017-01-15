@@ -8,15 +8,13 @@
 
     <TextView
         android:text="Register Code"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary"
+        style="@style/blue_title_txt"
         android:id="@+id/textView2"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="10dp"
+        android:textSize="@dimen/txt_normal"
         android:text="NOTE: You can use the same code as login pin after you register the 4 digit code."/>
 
     <ScrollView
@@ -31,36 +29,22 @@
             android:padding="10dp">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/blue_normal_txt"
                 android:text="Code"
-                android:textColor="@color/colorPrimary"
-                android:textAllCaps="true"
-                android:layout_marginTop="10dp"
-                android:textSize="10sp"
-                android:textAlignment="center"/>
+                />
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:padding="5dp"
-                android:maxLines="1"
+                style="@style/edittext_form"
                 android:maxLength="4"
                 android:gravity="center"
                 android:inputType="numberPassword"
-                android:imeOptions="flagNoFullscreen"
-                android:background="@drawable/edittxt_bg"
                 android:id="@+id/etCode"
                 />
 
             <Button
                 android:text="ENTER"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:id="@+id/btnEnter"
-                android:background="@color/colorPrimaryDark"
-                android:textColor="@color/white"/>
+                style="@style/blue_form_btn"/>
 
 
         </LinearLayout>

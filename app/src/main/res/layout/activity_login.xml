@@ -16,10 +16,10 @@
         >
 
         <LinearLayout
-            android:layout_width="match_parent"
+            style="@style/activity_login_pane"
             android:layout_height="@dimen/login_layout_pane_h"
-            android:orientation="vertical"
-            android:weightSum="2">
+            android:weightSum="2"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -75,40 +75,21 @@
 
                         <Button
                             android:text="7"
-                            android:textSize="@dimen/login_layout_text_size"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/login_layout_btn_h"
-                            android:layout_weight="1"
-                            android:textColor="@color/colorPrimary"
                             android:id="@+id/btn7"
                             android:onClick="editTxtPassword"
-                            android:layout_margin="5dp"
-                            android:background="@drawable/button_bg"/>
+                            style="@style/login_button"/>
 
                         <Button
                             android:text="8"
-                            android:textSize="@dimen/login_layout_text_size"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/login_layout_btn_h"
-                            android:layout_weight="1"
-                            android:textColor="@color/colorPrimary"
                             android:id="@+id/btn8"
-                            android:layout_margin="5dp"
                             android:onClick="editTxtPassword"
-                            android:background="@drawable/button_bg"
-                            android:elevation="8dp"/>
+                            style="@style/login_button" />
 
                         <Button
                             android:text="9"
-                            android:textSize="@dimen/login_layout_text_size"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/login_layout_btn_h"
-                            android:textColor="@color/colorPrimary"
-                            android:layout_weight="1"
                             android:onClick="editTxtPassword"
                             android:id="@+id/btn9"
-                            android:layout_margin="5dp"
-                            android:background="@drawable/button_bg"/>
+                            style="@style/login_button"/>
 
                     </LinearLayout>
 
@@ -119,40 +100,21 @@
 
                         <Button
                             android:text="4"
-                            android:textSize="@dimen/login_layout_text_size"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/login_layout_btn_h"
-                            android:layout_weight="1"
-                            android:textColor="@color/colorPrimary"
                             android:id="@+id/btn4"
                             android:onClick="editTxtPassword"
-                            android:layout_margin="5dp"
-                            android:background="@drawable/button_bg"/>
+                            style="@style/login_button" />
 
                         <Button
                             android:text="5"
-                            android:textSize="@dimen/login_layout_text_size"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/login_layout_btn_h"
-                            android:layout_weight="1"
-                            android:textColor="@color/colorPrimary"
                             android:id="@+id/btn5"
-                            android:layout_margin="5dp"
                             android:onClick="editTxtPassword"
-                            android:background="@drawable/button_bg"
-                            android:elevation="8dp"/>
+                            style="@style/login_button" />
 
                         <Button
                             android:text="6"
-                            android:textSize="@dimen/login_layout_text_size"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/login_layout_btn_h"
-                            android:textColor="@color/colorPrimary"
-                            android:layout_weight="1"
                             android:id="@+id/btn6"
                             android:onClick="editTxtPassword"
-                            android:layout_margin="5dp"
-                            android:background="@drawable/button_bg"/>
+                            style="@style/login_button"/>
 
                     </LinearLayout>
 
@@ -163,40 +125,21 @@
 
                         <Button
                             android:text="1"
-                            android:textSize="@dimen/login_layout_text_size"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/login_layout_btn_h"
-                            android:layout_weight="1"
-                            android:textColor="@color/colorPrimary"
                             android:onClick="editTxtPassword"
                             android:id="@+id/btn1"
-                            android:layout_margin="5dp"
-                            android:background="@drawable/button_bg"/>
+                            style="@style/login_button"/>
 
                         <Button
                             android:text="2"
-                            android:textSize="@dimen/login_layout_text_size"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/login_layout_btn_h"
-                            android:layout_weight="1"
-                            android:textColor="@color/colorPrimary"
                             android:id="@+id/btn2"
                             android:onClick="editTxtPassword"
-                            android:layout_margin="5dp"
-                            android:background="@drawable/button_bg"
-                            android:elevation="8dp"/>
+                            style="@style/login_button" />
 
                         <Button
                             android:text="3"
-                            android:textSize="@dimen/login_layout_text_size"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/login_layout_btn_h"
-                            android:textColor="@color/colorPrimary"
-                            android:layout_weight="1"
                             android:id="@+id/btn3"
-                            android:layout_margin="5dp"
                             android:onClick="editTxtPassword"
-                            android:background="@drawable/button_bg"/>
+                            style="@style/login_button"/>
 
                     </LinearLayout>
 
@@ -207,42 +150,23 @@
 
                         <Button
                             android:text="Clear"
-                            android:textSize="@dimen/login_layout_text_size"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/login_layout_btn_h"
-                            android:layout_weight="1"
-                            android:textColor="@color/colorPrimary"
                             android:textAllCaps="false"
                             android:id="@+id/btnClear"
                             android:onClick="editTxtPassword"
-                            android:layout_margin="5dp"
-                            android:background="@drawable/button_bg"/>
+                            style="@style/login_button"/>
 
                         <Button
                             android:text="0"
-                            android:textSize="@dimen/login_layout_text_size"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/login_layout_btn_h"
-                            android:layout_weight="1"
-                            android:textColor="@color/colorPrimary"
                             android:id="@+id/btn0"
                             android:onClick="editTxtPassword"
-                            android:layout_margin="5dp"
-                            android:background="@drawable/button_bg"
-                            android:elevation="8dp"/>
+                            style="@style/login_button" />
 
                         <Button
                             android:text="Login"
-                            android:textSize="@dimen/login_layout_text_size"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/login_layout_btn_h"
-                            android:textColor="@color/colorPrimary"
-                            android:layout_weight="1"
                             android:textAllCaps="false"
                             android:id="@+id/btnLogin"
                             android:onClick="editTxtPassword"
-                            android:layout_margin="5dp"
-                            android:background="@drawable/button_bg"/>
+                            style="@style/login_button"/>
 
                     </LinearLayout>
 
@@ -256,7 +180,7 @@
                         android:textAllCaps="false"
                         android:onClick="recoverPassword"
                         android:textColor="@color/colorPrimary"
-                        android:layout_gravity="bottom|end"/>
+                        android:layout_gravity="bottom|start"/>
 
                 </LinearLayout>
 
