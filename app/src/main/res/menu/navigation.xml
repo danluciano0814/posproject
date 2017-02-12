@@ -3,7 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="100"
+        android:orderInCategory="300"
         android:title="@string/action_settings"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        android:visible="false"/>
+
+    <item
+        android:checkable="false"
+        android:icon="@drawable/ic_settings"
+        android:title="Settings"
+        android:id="@+id/nav_settings"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:checkable="false"
+        android:icon="@drawable/ic_help"
+        android:title="Help"
+        android:id="@+id/nav_help"
+        android:orderInCategory="200"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:checkable="false"
+        android:icon="@drawable/ic_logout"
+        android:title="Logout"
+        android:id="@+id/nav_logout"
+        android:orderInCategory="300"
+        app:showAsAction="ifRoom"
+        />
+
 </menu>

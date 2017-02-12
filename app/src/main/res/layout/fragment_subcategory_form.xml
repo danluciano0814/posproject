@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:minWidth="1100dp"
+    android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/side_nav_bar">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:background="@null"
+                android:src="@drawable/ic_dismiss"
+                android:padding="10dp"
+                android:id="@+id/btnDismiss"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:padding="@dimen/margin_10dp">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Save"
+                    android:drawableRight="@drawable/ic_save"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:background="@null"
+                    android:id="@+id/btnSave"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!--scrollview-->
+            <!--<ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="?attr/actionBarSize"
+                            android:orientation="horizontal"
+                            android:layout_marginRight="@dimen/margin_10dp">
+
+                            <TextView
+                                android:text="UPDATE SUB CATEGORY"
+                                android:id="@+id/txtTitle"
+                                style="@style/blue_title_txt"
+                                android:gravity="start"
+                                android:layout_height="match_parent"
+                                android:layout_width="wrap_content"
+                                />
+
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/cbxActive"
+                                android:textSize="@dimen/txt_normal"
+                                android:textColor="@color/colorPrimary"
+                                android:text="ACTIVE"
+                                android:focusable="false"
+                                android:buttonTint="@color/colorPrimary"
+                                android:focusableInTouchMode="false"
+                                android:layout_gravity="end|center" />
+
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/transparent_gray_bg"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:padding="10dp"
+                            android:layout_marginRight="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/subCategoryId"
+                                android:visibility="gone"/>
+
+                            <TextView
+                                android:text="SUB CATEGORY NAME"
+                                style="@style/blue_normal_txt" />
+
+                            <EditText
+                                android:inputType="text"
+                                android:id="@+id/editSubCategoryName"
+                                style="@style/edittext_form"
+                                />
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:text="Linked Category"
+                                    style="@style/blue_normal_txt" />
+
+                                <FrameLayout
+                                    style="@style/edittext_form"
+                                    android:layout_gravity="center">
+
+                                    <Spinner
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:id="@+id/spnrCategory"
+                                        android:background="@null"
+                                        />
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:src="@drawable/ic_drop_down"
+                                        android:background="@null"
+                                        android:layout_gravity="right|center"
+                                        android:layout_marginRight="5dp"
+                                        />
+
+                                </FrameLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight=".5"
+                        android:orientation="vertical">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="?attr/actionBarSize"
+                            android:orientation="horizontal"
+                            android:layout_marginLeft="@dimen/margin_10dp"
+                            >
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="45dp"
+                                android:background="@drawable/round_edittext"
+                                android:layout_gravity="center|end">
+
+                                <android.support.v7.widget.SearchView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    app:iconifiedByDefault="false"
+                                    android:id="@+id/search"
+                                    app:theme="@style/AppTheme.AppBarOverlay">
+
+                                </android.support.v7.widget.SearchView>
+
+                            </LinearLayout>
+
+
+
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:background="@drawable/transparent_gray_bg"
+                            android:padding="10dp"
+                            android:layout_marginLeft="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:text="Linked Products"
+                                    style="@style/blue_normal_txt"
+                                    android:layout_marginTop="10dp"/>
+
+                                <android.support.v7.widget.RecyclerView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:padding="@dimen/margin_10dp"
+                                    android:id="@+id/rvAttachedProduct">
+
+                                </android.support.v7.widget.RecyclerView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:text="Available Products"
+                                    style="@style/blue_normal_txt"
+                                    android:layout_marginTop="10dp"/>
+
+                                <android.support.v7.widget.RecyclerView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/rvAvailableProduct"
+                                    android:padding="@dimen/margin_10dp">
+
+                                </android.support.v7.widget.RecyclerView>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--</ScrollView>-->
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

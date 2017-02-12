@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="700dp"
+    android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/side_nav_bar">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:background="@null"
+                android:src="@drawable/ic_dismiss"
+                android:padding="10dp"
+                android:id="@+id/btnDismiss"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:padding="@dimen/margin_10dp">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Save"
+                    android:drawableRight="@drawable/ic_save"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:background="@null"
+                    android:id="@+id/btnSave"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!--scrollview-->
+            <!--<ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="?attr/actionBarSize"
+                                android:orientation="horizontal"
+                                android:layout_marginRight="@dimen/margin_10dp">
+
+                                <TextView
+                                    android:text="UPDATE CATEGORY"
+                                    android:id="@+id/txtTitle"
+                                    style="@style/blue_title_txt"
+                                    android:gravity="start"
+                                    android:layout_height="match_parent"
+                                    android:layout_width="wrap_content"
+                                    />
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/cbxActive"
+                                    android:textSize="@dimen/txt_normal"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="ACTIVE"
+                                    android:focusable="false"
+                                    android:buttonTint="@color/colorPrimary"
+                                    android:focusableInTouchMode="false"
+                                    android:layout_gravity="end|center" />
+
+                            </FrameLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/transparent_gray_bg"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:padding="10dp"
+                                android:layout_marginRight="10dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/categoryId"
+                                    android:visibility="gone"/>
+
+                                <TextView
+                                    android:text="CATEGORY NAME"
+                                    style="@style/blue_normal_txt" />
+
+                                <EditText
+                                    android:inputType="text"
+                                    android:id="@+id/editCategoryName"
+                                    style="@style/edittext_form"
+                                    />
+
+
+                                <TextView
+                                    android:text="MENU BUTTON COLOR"
+                                    style="@style/blue_normal_txt" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <RadioGroup
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:id="@+id/colorGroup"
+                                        android:orientation="horizontal"
+                                        android:gravity="center_vertical">
+
+                                        <RadioButton
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_weight="1"
+                                            android:background="@color/blue"
+                                            android:buttonTint="@color/white"
+                                            android:textColorHighlight="@color/white"
+                                            android:gravity="left|top"
+                                            android:layout_marginRight="10dp"
+                                            android:id="@+id/rbBlue"/>
+
+                                        <RadioButton
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_weight="1"
+                                            android:background="@color/red"
+                                            android:buttonTint="@color/white"
+                                            android:textColorHighlight="@color/white"
+                                            android:gravity="left|top"
+                                            android:layout_marginRight="10dp"
+                                            android:id="@+id/rbRed"/>
+
+                                        <RadioButton
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_weight="1"
+                                            android:background="@color/green"
+                                            android:buttonTint="@color/white"
+                                            android:textColorHighlight="@color/white"
+                                            android:gravity="left|top"
+                                            android:layout_marginRight="10dp"
+                                            android:id="@+id/rbGreen"/>
+
+                                        <RadioButton
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_weight="1"
+                                            android:background="@color/orange"
+                                            android:buttonTint="@color/white"
+                                            android:textColorHighlight="@color/white"
+                                            android:gravity="left|top"
+                                            android:layout_marginRight="10dp"
+                                            android:id="@+id/rbOrange"/>
+
+                                        <RadioButton
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_weight="1"
+                                            android:background="@color/teal"
+                                            android:buttonTint="@color/white"
+                                            android:textColorHighlight="@color/white"
+                                            android:gravity="left|top"
+                                            android:layout_marginRight="10dp"
+                                            android:id="@+id/rbTeal"/>
+
+                                        <RadioButton
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_weight="1"
+                                            android:background="@color/purple"
+                                            android:buttonTint="@color/white"
+                                            android:textColorHighlight="@color/white"
+                                            android:gravity="left|top"
+                                            android:layout_marginRight="10dp"
+                                            android:id="@+id/rbPurple"/>
+
+                                    </RadioGroup>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="?attr/actionBarSize"
+                                android:orientation="horizontal"
+                                android:layout_marginLeft="@dimen/margin_10dp"
+                                >
+
+                                <Button
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/colorPrimary"
+                                    android:drawableTop="@drawable/ic_add"
+                                    android:text="CREATE SUB-CATEGORY"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/txt_normal"
+                                    android:id="@+id/btnCreate"
+                                    android:layout_gravity="end|center" />
+
+                            </FrameLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:background="@drawable/transparent_gray_bg"
+                                android:padding="10dp"
+                                android:layout_marginLeft="10dp">
+
+                                <TextView
+                                    android:text="SUB CATEGORY NAME"
+                                    style="@style/blue_normal_txt" />
+
+                                <EditText
+                                    android:inputType="text"
+                                    android:id="@+id/editSubCategoryName"
+                                    style="@style/edittext_form"
+                                    />
+
+                                <TextView
+                                    android:text="SUB CATEGORY LIST"
+                                    style="@style/blue_normal_txt"
+                                    android:layout_marginTop="10dp"/>
+
+                                <ListView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:id="@+id/lvSubCategory">
+
+                                </ListView>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            <!--</ScrollView>-->
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

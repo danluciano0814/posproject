@@ -31,6 +31,11 @@
 
         </activity>
 
+        <activity android:name=".navactivities.InventoryActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".NavigationActivity"
+            android:label="Inventory"/>
+
         <activity android:name=".navactivities.CollectionsActivity"
             android:theme="@style/AppTheme"
             android:parentActivityName=".NavigationActivity"

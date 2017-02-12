@@ -16,7 +16,7 @@ public class ImageConverter {
         byte[] bitmapBytes;
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        getResizedBitmap(bitmap, 150, 200).compress(Bitmap.CompressFormat.PNG, 100, stream);
+        getResizedBitmap(bitmap, 150, 150).compress(Bitmap.CompressFormat.PNG, 100, stream);
         bitmapBytes = stream.toByteArray();
 
         return bitmapBytes;

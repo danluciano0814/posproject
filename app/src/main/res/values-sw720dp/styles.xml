@@ -51,10 +51,12 @@
 
     <style name="edittext_form">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_height">45dp</item>
         <item name="android:padding">5dp</item>
         <item name="android:maxLines">1</item>
         <item name="android:background">@drawable/edittxt_bg</item>
+        <item name="android:imeOptions">flagNoFullscreen</item>
+        <item name="android:selectAllOnFocus">true</item>
     </style>
 
     <style name="blue_form_btn">

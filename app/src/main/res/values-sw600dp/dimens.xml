@@ -13,5 +13,9 @@
     <dimen name="txt_title">18sp</dimen>
     <dimen name="txt_normal">13sp</dimen>
 
+    <dimen name="img_size_h">36dp</dimen>
+    <dimen name="img_size_w">36dp</dimen>
 
+    <!-- product form imageview size -->
+    <dimen name="product_image_h">130dp</dimen>
 </resources>

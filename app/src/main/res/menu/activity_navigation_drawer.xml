@@ -8,36 +8,61 @@
             android:icon="@drawable/ic_menu_dashboard"
             android:title="Dashboard" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_task"
-            android:title="Quests" />
-
-        <item
             android:checkable="false"
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_sale"
-            android:title="Collections" />
+            android:id="@+id/nav_sales"
+            android:icon="@drawable/ic_sales"
+            android:title="Sales" />
 
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_hold"
+            android:title="On Hold" />
+
+        <item
+            android:id="@+id/nav_reports"
             android:icon="@drawable/ic_menu_report"
             android:title="Reports" />
     </group>
 
 
-    <item android:title="Activities" android:checkableBehavior="single">
+    <item android:title="App Maintenance" android:checkableBehavior="single">
         <menu>
 
             <item
                 android:checkable="false"
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Settings" />
+                android:id="@+id/nav_inventory"
+                android:icon="@drawable/ic_inventory"
+                android:title="Inventory" />
 
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:checkable="true"
+                android:id="@+id/nav_customer"
+                android:icon="@drawable/ic_customer"
+                android:title="Customer" />
+
+            <item
+                android:checkable="true"
+                android:id="@+id/nav_employee"
+                android:icon="@drawable/ic_employee"
+                android:title="Employees" />
+
+        </menu>
+    </item>
+
+    <item android:title="Data" android:checkableBehavior="single">
+        <menu>
+            <item
+                android:checkable="false"
+                android:icon="@drawable/ic_data_migration"
+                android:title="Data Migration"
+                android:id="@+id/nav_dataMigration"/>
+
+            <item
+                android:checkable="false"
+                android:icon="@drawable/ic_storage"
+                android:title="Storage"
+                android:id="@+id/nav_storage"/>
+
         </menu>
     </item>
 

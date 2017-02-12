@@ -1,7 +1,9 @@
 package com.droidcoder.gdgcorp.posproject;
 
+import android.content.pm.ActivityInfo;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-
 import com.droidcoder.gdgcorp.posproject.log.AppLogger;
 
 /**
@@ -21,4 +23,9 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
         AppLogger.logI(msg);
     }
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+    }
 }

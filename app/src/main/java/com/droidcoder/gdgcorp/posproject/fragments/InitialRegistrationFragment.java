@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.droidcoder.gdgcorp.posproject.R;
 import com.droidcoder.gdgcorp.posproject.dataentity.User;
 import com.droidcoder.gdgcorp.posproject.dataentity.UserDao;
+import com.droidcoder.gdgcorp.posproject.datasystem.CheckRegistration;
 import com.droidcoder.gdgcorp.posproject.globals.GlobalConstants;
 import com.droidcoder.gdgcorp.posproject.navfragments.BaseFragment;
 import com.droidcoder.gdgcorp.posproject.utils.AsyncCheckEmail;
@@ -63,11 +64,6 @@ public class InitialRegistrationFragment extends BaseFragment {
         btnEnterCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String res = "";
-                for(User user : DBHelper.getDaoSession().getUserDao().loadAll()){
-                    res +=  "ID : " + user.getFirebaseId() + " / Code" + user.getPasswordCode() + "\n";
-                }
-                Toast.makeText(getActivity(), "" + res ,Toast.LENGTH_LONG).show();
 
                 CodeRegisterFragment codeRegisterFragment = new CodeRegisterFragment();
                 codeRegisterFragment.show(getActivity().getSupportFragmentManager(), "codeRegister");

@@ -84,7 +84,7 @@ public class AsyncCheckEmail extends AsyncTask<String, Void, Boolean> {
 
                 if(existing[0]){
                     //existing cancel saving
-                    ((OnCheckingEmail) context).onFinish(true, user.getEmail());
+                    ((OnCheckingEmail) context).onFinish(true, user.getEmail(), user.getPasswordCode());
 
                 }else{
                     //not existing continue saving
@@ -103,7 +103,7 @@ public class AsyncCheckEmail extends AsyncTask<String, Void, Boolean> {
 
                     DBHelper.getDaoSession().getUserDao().insert(user);
 
-                    ((OnCheckingEmail) context).onFinish(false, user.getEmail());
+                    ((OnCheckingEmail) context).onFinish(false, user.getEmail(), user.getPasswordCode());
 
                 }
             }
@@ -123,6 +123,6 @@ public class AsyncCheckEmail extends AsyncTask<String, Void, Boolean> {
     }
 
     public interface OnCheckingEmail{
-        void onFinish(boolean emailExist, String email);
+        void onFinish(boolean emailExist, String email, String passCode);
     }
 }

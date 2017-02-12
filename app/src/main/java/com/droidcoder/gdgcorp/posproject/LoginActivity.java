@@ -2,6 +2,7 @@ package com.droidcoder.gdgcorp.posproject;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,7 +13,12 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.droidcoder.gdgcorp.posproject.dataentity.User;
+import com.droidcoder.gdgcorp.posproject.dataentity.UserDao;
 import com.droidcoder.gdgcorp.posproject.datasystem.CheckRegistration;
+import com.droidcoder.gdgcorp.posproject.datasystem.CurrentUser;
+import com.droidcoder.gdgcorp.posproject.fragments.CodeRegisterFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.InitialRegistrationFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.ProgressFragment;
 import com.droidcoder.gdgcorp.posproject.utils.AsyncCheckEmail;
@@ -33,7 +39,7 @@ import butterknife.ButterKnife;
  * Created by DanLuciano on 12/30/2016.
  */
 
-public class LoginActivity extends BaseCompatActivity implements AsyncCheckEmail.OnCheckingEmail {
+public class LoginActivity extends BaseCompatActivity implements AsyncCheckEmail.OnCheckingEmail, CodeRegisterFragment.OnRegistration {
 
     @BindView(R.id.txtPassword) TextView txtPassword;
     @BindView(R.id.fragmentContainer) LinearLayout fragmentContainer;
@@ -43,8 +49,8 @@ public class LoginActivity extends BaseCompatActivity implements AsyncCheckEmail
     InitialRegistrationFragment initialRegistrationFragment;
 
     ProgressFragment progressFragment;
-
     Session session;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,21 +63,12 @@ public class LoginActivity extends BaseCompatActivity implements AsyncCheckEmail
         //if not initially register show fragment
         if(!CheckRegistration.isRegistered(this)){
             initialRegistrationFragment = new InitialRegistrationFragment();
-            getSupportFragmentManager().beginTransaction().add(fragmentContainer.getId(), initialRegistrationFragment).addToBackStack("initFrag").commit();
+            getSupportFragmentManager().beginTransaction().replace(fragmentContainer.getId(), initialRegistrationFragment).addToBackStack("initFrag").commit();
         }
 
-        Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.socketFactory.port", "465");
-        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.port", "465");
-
-        session = Session.getDefaultInstance(props, new Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("danluciano08@gmail.com", "eizenn1008");
-            }
-        });
+        if(savedInstanceState!=null){
+            setPasswordValue(savedInstanceState.getString("passCode"));
+        }
 
     }
 
@@ -86,14 +83,18 @@ public class LoginActivity extends BaseCompatActivity implements AsyncCheckEmail
     public void setPasswordValue(String value){
 
         txtPassword.setText(txtPassword.getText().toString().trim() + value);
-        password = txtPassword.getText().toString();
+        password = txtPassword.getText().toString().trim();
 
     }
 
     public void recoverPassword(View v){
 
+        CheckRegistration.saveRegister("", this);
         DBHelper.getDaoSession().getUserDao().deleteAll();
         DBHelper.getDaoSession().getFirebaseUserDao().deleteAll();
+        DBHelper.getDaoSession().getProductDao().deleteAll();
+
+        Toast.makeText(this, "deleted", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -147,7 +148,21 @@ public class LoginActivity extends BaseCompatActivity implements AsyncCheckEmail
                 break;
 
             case R.id.btnLogin:
-                Toast.makeText(this, "Logging in as " + password, Toast.LENGTH_SHORT).show();
+
+                if(CheckRegistration.isRegistered(this)){
+                    if(DBHelper.getDaoSession().getUserDao().queryBuilder()
+                            .where(UserDao.Properties.PasswordCode.eq(password))
+                            .where(UserDao.Properties.Deleted.isNull()).list().size() > 0){
+
+                        CurrentUser.initUser(password);
+                        startActivity(new Intent(this, NavigationActivity.class));
+
+                    }else{
+                        Toast.makeText(this, "Login pin is invalid", Toast.LENGTH_LONG).show();
+                    }
+                }else{
+                    Toast.makeText(this, "Register the 4 digit code first", Toast.LENGTH_LONG).show();
+                }
                 break;
 
         }
@@ -155,13 +170,19 @@ public class LoginActivity extends BaseCompatActivity implements AsyncCheckEmail
     }
 
     @Override
-    public void onFinish(boolean emailExist, String email) {
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("passCode", password);
+    }
+
+    @Override
+    public void onFinish(boolean emailExist, String email, String passCode) {
         if(emailExist){
             if(initialRegistrationFragment != null){
                 initialRegistrationFragment.setEmailInvalid(emailExist);
             }
         }else{
-            new AsyncSendToEmail(this, password).execute(email);
+            new AsyncSendToEmail(this, passCode).execute(email);
         }
     }
 
@@ -185,12 +206,25 @@ public class LoginActivity extends BaseCompatActivity implements AsyncCheckEmail
             bundle.putString("loadingMessage", "Sending Email...");
             progressFragment.setArguments(bundle);
             progressFragment.show(LoginActivity.this.getSupportFragmentManager(), "progress");
+
+            Properties props = new Properties();
+            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.socketFactory.port", "465");
+            props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.port", "465");
+
+            session = Session.getInstance(props, new Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication("danluciano08@gmail.com", "eizenn1008");
+                }
+            });
         }
 
         @Override
         protected String doInBackground(String... params) {
             String messageContent = "Your new password code for CHEAPPOS is " + passwordCode + ". " +
-                    "Please do not reply, this is only a automated email";
+                    "Please do not reply, this is only an automated email";
 
             String result = "Email sent successfully";
             try{
@@ -217,6 +251,14 @@ public class LoginActivity extends BaseCompatActivity implements AsyncCheckEmail
             Toast.makeText(context, res, Toast.LENGTH_LONG).show();
             progressFragment.dismiss();
             initialRegistrationFragment.setBtnEnabled();
+        }
+
+    }
+
+    @Override
+    public void onRegistrationSuccess() {
+        if(initialRegistrationFragment!=null){
+            getSupportFragmentManager().popBackStack("initFrag", FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
 
     }

@@ -17,7 +17,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
+import com.droidcoder.gdgcorp.posproject.datasystem.CurrentUser;
 import com.droidcoder.gdgcorp.posproject.navfragments.MissingPageFragment;
 import com.github.mikephil.charting.charts.BarChart;
 
@@ -26,14 +28,12 @@ import butterknife.ButterKnife;
 
 import static com.droidcoder.gdgcorp.posproject.log.AppLogger.logE;
 
-public class NavigationActivity extends AppCompatActivity
+public class NavigationActivity extends BaseCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     //butterknife sample init
-    @BindView(R.id.content_main)
-    FrameLayout content_main;
-    @BindView(R.id.bar_graph)
-    BarChart barChart;
+    @BindView(R.id.content_main) FrameLayout content_main;
+    @BindView(R.id.bar_graph) BarChart barChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +60,8 @@ public class NavigationActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Toast.makeText(this, "user name : " + CurrentUser.getUser().getFirstName(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

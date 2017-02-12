@@ -21,16 +21,17 @@ public class Category {
     @Id(autoincrement = true)
     private Long id;
 
-    @Unique
     private String name;
 
     private Date created;
 
     private Date deleted;
 
+    private String categoryColor;
+
     @ToMany(referencedJoinProperty = "categoryId")
     @OrderBy("created DESC")
-    private List<Product> products;
+    private List<SubCategory> subCategories;
 
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
@@ -40,12 +41,14 @@ public class Category {
     @Generated(hash = 40161530)
     private transient CategoryDao myDao;
 
-    @Generated(hash = 1414706552)
-    public Category(Long id, String name, Date created, Date deleted) {
+    @Generated(hash = 1357315664)
+    public Category(Long id, String name, Date created, Date deleted,
+            String categoryColor) {
         this.id = id;
         this.name = name;
         this.created = created;
         this.deleted = deleted;
+        this.categoryColor = categoryColor;
     }
 
     @Generated(hash = 1150634039)
@@ -84,32 +87,41 @@ public class Category {
         this.deleted = deleted;
     }
 
+    public String getCategoryColor() {
+        return this.categoryColor;
+    }
+
+    public void setCategoryColor(String categoryColor) {
+        this.categoryColor = categoryColor;
+    }
+
     /**
      * To-many relationship, resolved on first access (and after reset).
      * Changes to to-many relations are not persisted, make changes to the target entity.
      */
-    @Generated(hash = 1201024546)
-    public List<Product> getProducts() {
-        if (products == null) {
+    @Generated(hash = 239672464)
+    public List<SubCategory> getSubCategories() {
+        if (subCategories == null) {
             final DaoSession daoSession = this.daoSession;
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            ProductDao targetDao = daoSession.getProductDao();
-            List<Product> productsNew = targetDao._queryCategory_Products(id);
+            SubCategoryDao targetDao = daoSession.getSubCategoryDao();
+            List<SubCategory> subCategoriesNew = targetDao
+                    ._queryCategory_SubCategories(id);
             synchronized (this) {
-                if (products == null) {
-                    products = productsNew;
+                if (subCategories == null) {
+                    subCategories = subCategoriesNew;
                 }
             }
         }
-        return products;
+        return subCategories;
     }
 
     /** Resets a to-many relationship, making the next get call to query for a fresh result. */
-    @Generated(hash = 513498032)
-    public synchronized void resetProducts() {
-        products = null;
+    @Generated(hash = 832942771)
+    public synchronized void resetSubCategories() {
+        subCategories = null;
     }
 
     /**
@@ -154,5 +166,6 @@ public class Category {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getCategoryDao() : null;
     }
+
 
 }
