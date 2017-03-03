@@ -8,4 +8,7 @@
     <dimen name="login_layout_pane_w">600dp</dimen>
     <dimen name="login_layout_pane_h">500dp</dimen>
     <dimen name="login_layout_btn_forgot_w">100dp</dimen>
+
+    <dimen name="payment_layout_btn_h">90dp</dimen>
+
 </resources>

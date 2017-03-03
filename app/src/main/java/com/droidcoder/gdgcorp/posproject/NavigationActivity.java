@@ -93,6 +93,11 @@ public class NavigationActivity extends BaseCompatActivity
             return true;
         }
 
+        if (id == R.id.nav_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

@@ -14,7 +14,10 @@ import com.droidcoder.gdgcorp.posproject.Adapter.ProductRecyclerAdapter;
 import com.droidcoder.gdgcorp.posproject.Adapter.SubCategoryAdapter;
 import com.droidcoder.gdgcorp.posproject.BaseCompatActivity;
 import com.droidcoder.gdgcorp.posproject.R;
+import com.droidcoder.gdgcorp.posproject.dataentity.Discount;
 import com.droidcoder.gdgcorp.posproject.fragments.CategorySummaryFragment;
+import com.droidcoder.gdgcorp.posproject.fragments.DiscountFormFragment;
+import com.droidcoder.gdgcorp.posproject.fragments.DiscountSummaryFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.ProductFormFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.ProductSummaryFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.SubCategorySummaryFragment;
@@ -27,12 +30,13 @@ import butterknife.ButterKnife;
  */
 
 public class InventoryActivity extends BaseCompatActivity implements ProductFormFragment.OnTransactionFinish,
-        SubCategoryAdapter.OnSubCategoryRemove, ProductRecyclerAdapter.OnUpdateSubCategory{
+        SubCategoryAdapter.OnSubCategoryRemove, ProductRecyclerAdapter.OnUpdateSubCategory, DiscountFormFragment.OnTransactionFinish{
 
     @BindView(R.id.main_frame) FrameLayout mainFrame;
     @BindView(R.id.ln_product) LinearLayout lnProduct;
     @BindView(R.id.ln_category) LinearLayout lnCategory;
     @BindView(R.id.ln_sub_category) LinearLayout lnSubCategory;
+    @BindView(R.id.ln_discount) LinearLayout lnDiscount;
     @BindView(R.id.toolbar)Toolbar toolbar;
 
     Fragment productFragment;
@@ -74,6 +78,7 @@ public class InventoryActivity extends BaseCompatActivity implements ProductForm
                 lnProduct.setBackground(getResources().getDrawable(R.drawable.line_below));
                 lnCategory.setBackground(null);
                 lnSubCategory.setBackground(null);
+                lnDiscount.setBackground(null);
                 break;
 
             case R.id.ln_category:
@@ -83,6 +88,7 @@ public class InventoryActivity extends BaseCompatActivity implements ProductForm
                 lnProduct.setBackground(null);
                 lnCategory.setBackground(getResources().getDrawable(R.drawable.line_below));
                 lnSubCategory.setBackground(null);
+                lnDiscount.setBackground(null);
                 break;
 
             case R.id.ln_sub_category:
@@ -92,6 +98,17 @@ public class InventoryActivity extends BaseCompatActivity implements ProductForm
                 lnProduct.setBackground(null);
                 lnCategory.setBackground(null);
                 lnSubCategory.setBackground(getResources().getDrawable(R.drawable.line_below));
+                lnDiscount.setBackground(null);
+                break;
+
+            case R.id.ln_discount:
+                productFragment = new DiscountSummaryFragment();
+                getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), productFragment, "discountSummary").commit();
+
+                lnProduct.setBackground(null);
+                lnCategory.setBackground(null);
+                lnSubCategory.setBackground(null);
+                lnDiscount.setBackground(getResources().getDrawable(R.drawable.line_below));
                 break;
 
         }
@@ -101,6 +118,10 @@ public class InventoryActivity extends BaseCompatActivity implements ProductForm
     public void refresh() {
         if(productFragment != null && productFragment instanceof ProductSummaryFragment){
             ((ProductSummaryFragment)productFragment).refreshList();
+        }
+
+        if(productFragment != null && productFragment instanceof DiscountSummaryFragment){
+            ((DiscountSummaryFragment)productFragment).refreshList();
         }
     }
 

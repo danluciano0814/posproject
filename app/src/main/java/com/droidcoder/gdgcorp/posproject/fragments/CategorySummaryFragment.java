@@ -90,7 +90,7 @@ public class CategorySummaryFragment extends BaseFragment{
                     Category category = new Category();
                     category.setName(editCategoryName.getText().toString().trim().toUpperCase());
                     category.setCreated(new Date());
-                    category.setCategoryColor("#1976D2");
+                    category.setCategoryColor("#2196F3");
                     category.setDeleted(null);
                     DBHelper.getDaoSession().getCategoryDao().insert(category);
 

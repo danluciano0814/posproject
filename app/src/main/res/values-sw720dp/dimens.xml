@@ -23,4 +23,6 @@
 
     <!-- product form imageview size -->
     <dimen name="product_image_h">150dp</dimen>
+
+    <dimen name="payment_layout_btn_h">90dp</dimen>
 </resources>

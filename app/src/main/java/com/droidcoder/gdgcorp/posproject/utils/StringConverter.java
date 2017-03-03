@@ -9,7 +9,7 @@ import java.text.DecimalFormat;
 public class StringConverter {
 
     public static String doubleFormatter(double value){
-        return new DecimalFormat("#########.00").format(value);
+        return new DecimalFormat("#########0.00").format(value);
     }
 
 }

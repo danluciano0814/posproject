@@ -46,7 +46,6 @@ public class ProductFormFragment extends BaseDialogFragment{
     @BindView(R.id.editSellPrice)EditText editSellPrice;
     @BindView(R.id.editStocks)EditText editStocks;
     @BindView(R.id.txtTitle)TextView txtProductTitle;
-    @BindView(R.id.spnrSubCategory)Spinner spnrSubCategory;
     @BindView(R.id.btnOpen)Button btnOpen;
     @BindView(R.id.btnDelete)Button btnDelete;
     @BindView(R.id.btnSave)Button btnSave;
@@ -171,7 +170,7 @@ public class ProductFormFragment extends BaseDialogFragment{
                         }else{
                             product.setDeleted(new Date());
                         }
-                        DBHelper.getDaoSession().insert(product);
+                        DBHelper.getDaoSession().getProductDao().insert(product);
 
                         Toast.makeText(getActivity(), "Product has been saved", Toast.LENGTH_LONG).show();
                         ((OnTransactionFinish)getActivity()).refresh();
@@ -210,7 +209,7 @@ public class ProductFormFragment extends BaseDialogFragment{
                         }else{
                             productEdit.setDeleted(new Date());
                         }
-                        DBHelper.getDaoSession().update(productEdit);
+                        DBHelper.getDaoSession().getProductDao().update(productEdit);
 
                         Toast.makeText(getActivity(), "Product has been updated", Toast.LENGTH_SHORT).show();
                         ((OnTransactionFinish)getActivity()).refresh();

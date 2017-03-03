@@ -31,21 +31,22 @@
 
         </activity>
 
+        <activity android:name=".SettingsActivity"
+            android:parentActivityName=".NavigationActivity"
+            android:label="Settings"/>
+
         <activity android:name=".navactivities.InventoryActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".NavigationActivity"
             android:label="Inventory"/>
 
+        <activity android:name=".navactivities.SalesActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity android:name=".navactivities.CollectionsActivity"
             android:theme="@style/AppTheme"
             android:parentActivityName=".NavigationActivity"
             android:label="Collections"/>
-
-        <activity android:name=".navactivities.SettingsActivity"
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".NavigationActivity"
-            android:label="Settings" />
-
 
 
     </application>

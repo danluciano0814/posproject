@@ -78,7 +78,7 @@ public class CategoryFormFragment extends BaseDialogFragment {
                 case "#F44336":
                     rbRed.setChecked(true);
                     break;
-                case "#1976D2":
+                case "#2196F3":
                     rbBlue.setChecked(true);
                     break;
                 case "#009688":
@@ -93,6 +93,8 @@ public class CategoryFormFragment extends BaseDialogFragment {
                 case "#9C27B0":
                     rbPurple.setChecked(true);
                     break;
+                default:
+                    rbBlue.setChecked(true);
             }
 
             populateSubCategoryList();
@@ -118,7 +120,7 @@ public class CategoryFormFragment extends BaseDialogFragment {
                         categoryColor = "#F44336";
                         break;
                     case R.id.rbBlue:
-                        categoryColor = "#1976D2";
+                        categoryColor = "#2196F3";
                         break;
                     case R.id.rbGreen:
                         categoryColor = "#4CAF50";

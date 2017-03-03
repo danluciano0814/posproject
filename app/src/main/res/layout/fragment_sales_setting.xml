@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="Sales Setting"
+                    android:id="@+id/txtTitle"
+                    style="@style/blue_title_txt"
+                    android:gravity="start"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:drawableTop="@drawable/ic_save"
+                    android:text="SAVE SETTINGS"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txt_normal"
+                    android:layout_margin="1dp"
+                    android:id="@+id/btnSave"
+                    android:layout_gravity="end" />
+
+            </FrameLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/transparent_gray_bg"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:text="TAX PERCENT"
+                        style="@style/blue_normal_txt" />
+
+                    <EditText
+                        android:inputType="numberDecimal"
+                        android:id="@+id/editTax"
+                        style="@style/edittext_form"
+                        android:text="0"
+                        android:maxLength="10"
+                        />
+
+                    <TextView
+                        android:text="SERVICE CHARGE PERCENTAGE"
+                        style="@style/blue_normal_txt" />
+
+                    <EditText
+                        android:inputType="numberDecimal"
+                        android:id="@+id/editSC"
+                        style="@style/edittext_form"
+                        android:text="0"
+                        android:maxLength="10"
+                        />
+
+                    <TextView
+                        android:text="PAYMENT EDITABLE BUTTON 1"
+                        style="@style/blue_normal_txt" />
+
+                    <EditText
+                        android:inputType="number"
+                        android:id="@+id/editButton1"
+                        style="@style/edittext_form"
+                        android:maxLength="10"
+                        android:text="0"
+                        />
+
+                    <TextView
+                        android:text="PAYMENT EDITABLE BUTTON 2"
+                        style="@style/blue_normal_txt" />
+
+                    <EditText
+                        android:inputType="number"
+                        android:id="@+id/editButton2"
+                        style="@style/edittext_form"
+                        android:maxLength="10"
+                        android:text="0"
+                        />
+
+                    <TextView
+                        android:text="PAYMENT EDITABLE BUTTON 3"
+                        style="@style/blue_normal_txt" />
+
+                    <EditText
+                        android:inputType="number"
+                        android:id="@+id/editButton3"
+                        style="@style/edittext_form"
+                        android:maxLength="10"
+                        android:text="0"
+                        />
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
