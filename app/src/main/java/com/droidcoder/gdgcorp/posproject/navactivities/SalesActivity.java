@@ -32,6 +32,7 @@ import com.droidcoder.gdgcorp.posproject.BaseCompatActivity;
 import com.droidcoder.gdgcorp.posproject.R;
 import com.droidcoder.gdgcorp.posproject.dataentity.Category;
 import com.droidcoder.gdgcorp.posproject.dataentity.CategoryDao;
+import com.droidcoder.gdgcorp.posproject.dataentity.Customer;
 import com.droidcoder.gdgcorp.posproject.dataentity.OrderProduct;
 import com.droidcoder.gdgcorp.posproject.dataentity.OrderProductDao;
 import com.droidcoder.gdgcorp.posproject.dataentity.OrderReceipt;
@@ -43,6 +44,7 @@ import com.droidcoder.gdgcorp.posproject.dataentity.SubCategoryDao;
 import com.droidcoder.gdgcorp.posproject.dataentity.SubCategoryProduct;
 import com.droidcoder.gdgcorp.posproject.dataentity.SubCategoryProductDao;
 import com.droidcoder.gdgcorp.posproject.fragments.CancelAllFragment;
+import com.droidcoder.gdgcorp.posproject.fragments.CustomerFormFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.DiscountAllFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.EditItemFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.ItemOptionFragment;
@@ -182,7 +184,7 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
                     Toast.makeText(SalesActivity.this, "Unable to return, receipt id is not empty, cancel or hold the current transaction first", Toast.LENGTH_LONG).show();
 
                 }else{
-                    onBackPressed();
+                    SalesActivity.super.onBackPressed();
                 }
             }
         });
@@ -356,6 +358,16 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
                     Toast.makeText(SalesActivity.this, "No transaction to process", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+
+        btnAddCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CustomerFormFragment customerFormFragment = new CustomerFormFragment();
+                Bundle bundle = new Bundle();
+                customerFormFragment.setArguments(bundle);
+                customerFormFragment.show(fm, "customerForm");
             }
         });
 
@@ -1001,4 +1013,19 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
         return ids;
     }
 
+    @Override
+    public void onBackPressed() {
+        if(orderProductRecyclerAdapter.getOrderProductList().size() > 0 ){
+
+            Toast.makeText(SalesActivity.this, "Unable to return, order is not empty", Toast.LENGTH_LONG).show();
+
+        }else if(!txtReceiptId.getText().toString().equalsIgnoreCase("")){
+
+            Toast.makeText(SalesActivity.this, "Unable to return, receipt id is not empty, cancel or hold the current transaction first", Toast.LENGTH_LONG).show();
+
+        }else{
+            super.onBackPressed();
+        }
+
+    }
 }
