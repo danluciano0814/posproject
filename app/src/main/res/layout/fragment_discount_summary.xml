@@ -28,13 +28,17 @@
 
                 <TextView
                     android:text="Category Name"
-                    style="@style/blue_normal_txt" />
+                    style="@style/blue_normal_txt"
+                    android:enabled="false"
+                    android:visibility="invisible"/>
 
-                <EditText
+                <TextView
                     android:id="@+id/editCategoryName"
                     style="@style/edittext_form"
                     android:maxLength="50"
                     android:singleLine="true"
+                    android:enabled="false"
+                    android:visibility="invisible"
                     />
 
             </LinearLayout>

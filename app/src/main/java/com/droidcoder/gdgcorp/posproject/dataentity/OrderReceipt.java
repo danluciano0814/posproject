@@ -20,9 +20,17 @@ public class OrderReceipt {
     @Id(autoincrement = true)
     private Long id;
 
+    private long receiptId;
+
+    private String receiptIdentification;
+
     private Date created;
 
     private Date deleted;
+
+    private Date paidDate;
+
+    private String voidBy;
 
     private double totalCostPrice;
 
@@ -40,6 +48,12 @@ public class OrderReceipt {
 
     private double totalVat;
 
+    private double taxValue;
+
+    private double serviceChargeValue;
+
+    private double serviceChargeTotal;
+
     private boolean onHold;
 
     private boolean isPaid;
@@ -48,7 +62,9 @@ public class OrderReceipt {
 
     private String paymentType;
 
-    private double Cashtender;
+    private double cashTender;
+
+    private long userId;
 
     @ToMany(referencedJoinProperty = "orderReceiptId")
     @OrderBy("created DESC")
@@ -62,15 +78,20 @@ public class OrderReceipt {
     @Generated(hash = 424433010)
     private transient OrderReceiptDao myDao;
 
-    @Generated(hash = 340559159)
-    public OrderReceipt(Long id, Date created, Date deleted, double totalCostPrice,
-            double totalSellPrice, double totalDeductedPrice, double totalDiscount,
-            double totalTaxExempt, double totalVatSales, double totalNonVatSales,
-            double totalVat, boolean onHold, boolean isPaid, long customerId,
-            String paymentType, double Cashtender) {
+    @Generated(hash = 489551901)
+    public OrderReceipt(Long id, long receiptId, String receiptIdentification, Date created,
+            Date deleted, Date paidDate, String voidBy, double totalCostPrice, double totalSellPrice,
+            double totalDeductedPrice, double totalDiscount, double totalTaxExempt,
+            double totalVatSales, double totalNonVatSales, double totalVat, double taxValue,
+            double serviceChargeValue, double serviceChargeTotal, boolean onHold, boolean isPaid,
+            long customerId, String paymentType, double cashTender, long userId) {
         this.id = id;
+        this.receiptId = receiptId;
+        this.receiptIdentification = receiptIdentification;
         this.created = created;
         this.deleted = deleted;
+        this.paidDate = paidDate;
+        this.voidBy = voidBy;
         this.totalCostPrice = totalCostPrice;
         this.totalSellPrice = totalSellPrice;
         this.totalDeductedPrice = totalDeductedPrice;
@@ -79,11 +100,15 @@ public class OrderReceipt {
         this.totalVatSales = totalVatSales;
         this.totalNonVatSales = totalNonVatSales;
         this.totalVat = totalVat;
+        this.taxValue = taxValue;
+        this.serviceChargeValue = serviceChargeValue;
+        this.serviceChargeTotal = serviceChargeTotal;
         this.onHold = onHold;
         this.isPaid = isPaid;
         this.customerId = customerId;
         this.paymentType = paymentType;
-        this.Cashtender = Cashtender;
+        this.cashTender = cashTender;
+        this.userId = userId;
     }
 
     @Generated(hash = 55664174)
@@ -96,6 +121,22 @@ public class OrderReceipt {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public long getReceiptId() {
+        return this.receiptId;
+    }
+
+    public void setReceiptId(long receiptId) {
+        this.receiptId = receiptId;
+    }
+
+    public String getReceiptIdentification() {
+        return this.receiptIdentification;
+    }
+
+    public void setReceiptIdentification(String receiptIdentification) {
+        this.receiptIdentification = receiptIdentification;
     }
 
     public Date getCreated() {
@@ -112,6 +153,14 @@ public class OrderReceipt {
 
     public void setDeleted(Date deleted) {
         this.deleted = deleted;
+    }
+
+    public String getVoidBy() {
+        return this.voidBy;
+    }
+
+    public void setVoidBy(String voidBy) {
+        this.voidBy = voidBy;
     }
 
     public double getTotalCostPrice() {
@@ -178,6 +227,22 @@ public class OrderReceipt {
         this.totalVat = totalVat;
     }
 
+    public double getTaxValue() {
+        return this.taxValue;
+    }
+
+    public void setTaxValue(double taxValue) {
+        this.taxValue = taxValue;
+    }
+
+    public double getServiceChargeValue() {
+        return this.serviceChargeValue;
+    }
+
+    public void setServiceChargeValue(double serviceChargeValue) {
+        this.serviceChargeValue = serviceChargeValue;
+    }
+
     public boolean getOnHold() {
         return this.onHold;
     }
@@ -210,12 +275,12 @@ public class OrderReceipt {
         this.paymentType = paymentType;
     }
 
-    public double getCashtender() {
-        return this.Cashtender;
+    public double getCashTender() {
+        return this.cashTender;
     }
 
-    public void setCashtender(double Cashtender) {
-        this.Cashtender = Cashtender;
+    public void setCashTender(double cashTender) {
+        this.cashTender = cashTender;
     }
 
     /**
@@ -283,11 +348,37 @@ public class OrderReceipt {
         myDao.update(this);
     }
 
+    public double getServiceChargeTotal() {
+        return this.serviceChargeTotal;
+    }
+
+    public void setServiceChargeTotal(double serviceChargeTotal) {
+        this.serviceChargeTotal = serviceChargeTotal;
+    }
+
+    public long getUserId() {
+        return this.userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public Date getPaidDate() {
+        return this.paidDate;
+    }
+
+    public void setPaidDate(Date paidDate) {
+        this.paidDate = paidDate;
+    }
+
     /** called by internal mechanisms, do not call yourself. */
     @Generated(hash = 1858427806)
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getOrderReceiptDao() : null;
     }
+
+    
 
 }

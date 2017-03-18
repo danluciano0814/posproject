@@ -179,13 +179,6 @@
                     style="@style/edittext_form"
                     android:layout_gravity="center">
 
-                    <Spinner
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/spnrDiscount"
-                        android:background="@null"
-                        />
-
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -194,6 +187,12 @@
                         android:layout_gravity="right|center"
                         android:layout_marginRight="5dp"
                         />
+
+                    <Spinner
+                        android:id="@+id/spnrDiscount"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null" />
 
                 </FrameLayout>
 

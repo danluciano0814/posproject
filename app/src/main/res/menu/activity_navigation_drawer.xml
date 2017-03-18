@@ -15,8 +15,8 @@
 
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_hold"
-            android:title="On Hold" />
+            android:icon="@drawable/ic_invoices"
+            android:title="Invoices" />
 
         <item
             android:id="@+id/nav_reports"

@@ -1,9 +1,7 @@
 package com.droidcoder.gdgcorp.posproject.Adapter;
 
 import android.content.Context;
-import android.media.Image;
 import android.os.Bundle;
-import android.support.v4.app.BundleCompat;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,18 +11,19 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.droidcoder.gdgcorp.posproject.R;
+import com.droidcoder.gdgcorp.posproject.dataentity.Discount;
 import com.droidcoder.gdgcorp.posproject.dataentity.OrderProduct;
 import com.droidcoder.gdgcorp.posproject.fragments.EditItemFragment;
-import com.droidcoder.gdgcorp.posproject.fragments.PaymentFragment;
+import com.droidcoder.gdgcorp.posproject.globals.GlobalConstants;
 import com.droidcoder.gdgcorp.posproject.navactivities.SalesActivity;
+import com.droidcoder.gdgcorp.posproject.utils.DBHelper;
 import com.droidcoder.gdgcorp.posproject.utils.ImageConverter;
+import com.droidcoder.gdgcorp.posproject.utils.LFHelper;
 import com.droidcoder.gdgcorp.posproject.utils.StringConverter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by DanLuciano on 2/22/2017.
@@ -33,7 +32,7 @@ import java.util.List;
 public class OrderProductRecyclerAdapter extends RecyclerView.Adapter<OrderProductRecyclerAdapter.OrderVH>{
 
     LayoutInflater inflater;
-    List<OrderProduct> orderProductList;
+    ArrayList<OrderProduct> orderProductList;
     Context context;
     FrameLayout rightFrame;
     EditItemFragment editItemFragment;
@@ -69,10 +68,11 @@ public class OrderProductRecyclerAdapter extends RecyclerView.Adapter<OrderProdu
         holder.btnCancelOrderProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editItemFragment != null && !editItemFragment.isVisible()){
+                if(editItemFragment != null && !editItemFragment.isVisible()
+                        && ((SalesActivity) context).getSupportFragmentManager().findFragmentByTag("paymentFragment") == null){
                     int currentPos = position;
                     orderProductList.remove(position);
-                    ((OnItemRemove)context).notifyOrderRemove(currentPos);
+                    ((OnSummaryEdit)context).notifyOrderRemove(currentPos);
                 }
             }
         });
@@ -80,11 +80,14 @@ public class OrderProductRecyclerAdapter extends RecyclerView.Adapter<OrderProdu
         holder.btnAddQuantity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editItemFragment != null && !editItemFragment.isVisible()){
+                if(editItemFragment != null && !editItemFragment.isVisible()
+                        && ((SalesActivity) context).getSupportFragmentManager().findFragmentByTag("paymentFragment") == null){
                     double quantity = orderProductList.get(position).getProductQuantity();
                     quantity += 1;
                     orderProductList.get(position).setProductQuantity(quantity);
                     holder.txtOrderProductQuantity.setText(StringConverter.doubleFormatter(quantity));
+                    calculatePerOrder(position);
+                    ((OnSummaryEdit)context).notifyOrderEdit(position);
                 }
             }
         });
@@ -92,7 +95,8 @@ public class OrderProductRecyclerAdapter extends RecyclerView.Adapter<OrderProdu
         holder.btnMinusQuantitiy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editItemFragment != null && !editItemFragment.isVisible()){
+                if(editItemFragment != null && !editItemFragment.isVisible()
+                        && ((SalesActivity) context).getSupportFragmentManager().findFragmentByTag("paymentFragment") == null){
                     double quantity = orderProductList.get(position).getProductQuantity();
 
                     if(!(quantity <= 1)){
@@ -100,7 +104,11 @@ public class OrderProductRecyclerAdapter extends RecyclerView.Adapter<OrderProdu
                     }
                     orderProductList.get(position).setProductQuantity(quantity);
                     holder.txtOrderProductQuantity.setText(StringConverter.doubleFormatter(quantity));
+                    calculatePerOrder(position);
+                    ((OnSummaryEdit)context).notifyOrderEdit(position);
                 }
+
+
             }
         });
 
@@ -139,6 +147,10 @@ public class OrderProductRecyclerAdapter extends RecyclerView.Adapter<OrderProdu
         this.orderProductList = orderProductList;
     }
 
+    public ArrayList<OrderProduct> getOrderProductList(){
+        return orderProductList;
+    }
+
     public void addItem(OrderProduct orderProduct){
         orderProductList.add(0, orderProduct);
     }
@@ -148,6 +160,61 @@ public class OrderProductRecyclerAdapter extends RecyclerView.Adapter<OrderProdu
         orderProductList.get(position).setNote(note);
         orderProductList.get(position).setIsTaxExempt(isTaxExempt);
         orderProductList.get(position).setDiscountId(discountId);
+        calculatePerOrder(position);
+    }
+
+    public void calculatePerOrder(int position){
+        double sellPrice = (orderProductList.get(position).getProductQuantity() * orderProductList.get(position).getProductSellPrice());
+        double originalSellPrice = sellPrice;
+        double tax = Double.parseDouble(LFHelper.getLocalData(context, GlobalConstants.TAX_FILE));
+
+        //remove tax
+        if(orderProductList.get(position).getIsTaxExempt()){
+
+            sellPrice = (sellPrice - ((sellPrice / 100) * tax));
+
+        }
+
+        //if there is a discount
+        if(orderProductList.get(position).getDiscountId() > 0){
+
+            Discount discount = DBHelper.getDaoSession().getDiscountDao().load(orderProductList.get(position).getDiscountId());
+            orderProductList.get(position).setIsDiscountPercent(discount.getIsPercentage());
+            orderProductList.get(position).setDiscountValue(discount.getDiscountValue());
+
+            if(discount.getIsPercentage()){
+
+                sellPrice = (sellPrice - ((sellPrice / 100) * discount.getDiscountValue()));
+
+            }else{
+
+                sellPrice = (sellPrice - (discount.getDiscountValue() * orderProductList.get(position).getProductQuantity()));
+
+                //if discount value is greater than sell price then set it to 0
+                if(sellPrice < 0){
+                    sellPrice = 0;
+                }
+
+            }
+
+        }else{
+
+            orderProductList.get(position).setIsDiscountPercent(false);
+            orderProductList.get(position).setDiscountValue(0);
+
+        }
+
+        orderProductList.get(position).setProductDeductedPrice(sellPrice);
+        orderProductList.get(position).setDiscountTotal(originalSellPrice - sellPrice);
+
+    }
+
+    public boolean getEditItemVisibility(){
+        if(editItemFragment != null){
+            return editItemFragment.isVisible();
+        }else{
+            return false;
+        }
     }
 
     class OrderVH extends RecyclerView.ViewHolder {
@@ -182,8 +249,9 @@ public class OrderProductRecyclerAdapter extends RecyclerView.Adapter<OrderProdu
 
     }
 
-    public interface OnItemRemove{
+    public interface OnSummaryEdit {
         void notifyOrderRemove(int position);
+        void notifyOrderEdit(int position);
     }
 
 }

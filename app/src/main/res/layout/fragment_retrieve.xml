@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="horizontal"
+        android:background="@drawable/side_nav_bar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:text="ON HOLD RECEIPTS"
+            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/txt_title"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:padding="@dimen/margin_10dp">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="   "
+                android:drawableRight="@drawable/ic_cancel_red"
+                android:paddingRight="5dp"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:background="@null"
+                android:id="@+id/btnCancel"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="800dp"
+        android:layout_height="600dp"
+        android:minWidth="600dp"
+        android:minHeight="500dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fragmentContainer"
+            android:padding="5dp">
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

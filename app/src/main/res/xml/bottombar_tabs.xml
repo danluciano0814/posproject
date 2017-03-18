@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_on_hold"
+        icon="@drawable/ic_hold"
+        title="On Hold"
+        barColorWhenSelected="@color/colorPrimary"/>
+    <tab
+        id="@+id/tab_sales"
+        icon="@drawable/ic_sales"
+        title="Sales"
+        barColorWhenSelected="@color/green"/>
+    <tab
+        id="@+id/tab_credit"
+        icon="@drawable/ic_credit_tab"
+        title="Credit"
+        barColorWhenSelected="@color/purple"/>
+
+    <tab
+        id="@+id/tab_points"
+        icon="@drawable/ic_points_tab"
+        title="Points"
+        barColorWhenSelected="@color/orange"/>
+
+    <tab
+        id="@+id/tab_voided"
+        icon="@drawable/ic_delete_white"
+        title="Voided"
+        barColorWhenSelected="@color/red"/>
+
+
+</tabs>

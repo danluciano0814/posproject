@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/side_nav_bar">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:background="@null"
+                android:src="@drawable/ic_dismiss"
+                android:padding="10dp"
+                android:id="@+id/btnDismiss"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:padding="@dimen/margin_10dp">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Save"
+                    android:drawableRight="@drawable/ic_save"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:background="@null"
+                    android:id="@+id/btnSave"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="Product Form"
+                    android:id="@+id/txtTitle"
+                    style="@style/blue_title_txt"
+                    android:gravity="start"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"/>
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cbxActive"
+                    android:textSize="@dimen/txt_normal"
+                    android:textColor="@color/colorPrimary"
+                    android:text="ACTIVE"
+                    android:focusable="false"
+                    android:buttonTint="@color/colorPrimary"
+                    android:focusableInTouchMode="false"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="10dp"/>
+
+            </FrameLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/transparent_gray_bg"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginRight="5dp">
+
+                            <TextView
+                                android:text="Image"
+                                style="@style/blue_normal_txt" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/product_image_h"
+                                android:background="@drawable/edittxt_bg"
+                                android:id="@+id/imgProduct"
+                                android:scaleType="fitXY"
+                                />
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <Button
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/colorPrimary"
+                                    android:drawableTop="@drawable/ic_folder"
+                                    android:text="OPEN"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/txt_normal"
+                                    android:layout_weight="1"
+                                    android:layout_margin="3dp"
+                                    android:id="@+id/btnOpen"/>
+
+                                <Button
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/colorPrimary"
+                                    android:drawableTop="@drawable/ic_delete_white"
+                                    android:text="DELETE"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/txt_normal"
+                                    android:layout_weight="1"
+                                    android:layout_margin="3dp"
+                                    android:id="@+id/btnDelete"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="5dp">
+
+                            <TextView
+                                style="@style/blue_normal_txt"
+                                android:text="ADDRESS" />
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="start"
+                                android:background="@drawable/edittxt_bg"
+                                android:gravity="top|left"
+                                android:inputType="textMultiLine"
+                                android:overScrollMode="always"
+                                android:scrollbarStyle="insideInset"
+                                android:scrollbars="vertical"
+                                android:padding="5dp"
+                                android:id="@+id/editDescription"/>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/productId"
+                        android:visibility="gone"/>
+
+                    <TextView
+                        style="@style/blue_normal_txt"
+                        android:text="FIRSTNAME" />
+
+                    <EditText
+                        android:inputType="text"
+                        android:id="@+id/editProductName"
+                        style="@style/edittext_form"
+                        />
+
+                    <TextView
+                        style="@style/blue_normal_txt"
+                        android:text="LASTNAME" />
+
+                    <EditText
+                        android:inputType="numberDecimal"
+                        android:id="@+id/editCostPrice"
+                        style="@style/edittext_form"
+                        android:maxLength="9"
+                        />
+
+                    <TextView
+                        style="@style/blue_normal_txt"
+                        android:text="CONTACT" />
+
+                    <EditText
+                        android:inputType="numberDecimal"
+                        android:id="@+id/editSellPrice"
+                        style="@style/edittext_form"
+                        android:maxLength="10"
+                        />
+
+                    <TextView
+                        android:text="STOCKS"
+                        style="@style/blue_normal_txt" />
+
+                    <EditText
+                        android:inputType="numberDecimal"
+                        android:id="@+id/editStocks"
+                        style="@style/edittext_form"
+                        android:maxLength="10"
+                        />
+
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

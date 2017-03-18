@@ -55,6 +55,8 @@ public class EditItemFragment extends BaseFragment {
     int orderPosition;
     long discountId;
 
+    InputMethodManager imm;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_item, container, false);
@@ -65,6 +67,8 @@ public class EditItemFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+
+        imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
         List<SpinnerItem> spinnerItemList = new ArrayList<>();
         SpinnerItem spinnerItem = new SpinnerItem();
@@ -78,7 +82,8 @@ public class EditItemFragment extends BaseFragment {
 
             SpinnerItem item = new SpinnerItem();
             item.setId(discount.getId());
-            item.setName(discount.getName());
+            String label = discount.getIsPercentage()? "%":"";
+            item.setName(discount.getName() + " - less " + StringConverter.doubleFormatter(discount.getDiscountValue()) + label);
             spinnerItemList.add(item);
         }
 
@@ -109,7 +114,6 @@ public class EditItemFragment extends BaseFragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 discountId = Long.parseLong(((TextView)view.findViewById(R.id.txtId)).getText().toString());
-                Toast.makeText(getActivity(), "" + discountId, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -121,6 +125,8 @@ public class EditItemFragment extends BaseFragment {
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                imm.hideSoftInputFromWindow(editQuantity.getWindowToken(), 0);
+
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
                         .remove(EditItemFragment.this)

@@ -29,12 +29,9 @@ public class Discount {
 
     private double discountValue;
 
-    private boolean isTaxExempt;
-
-    @Generated(hash = 1835293930)
+    @Generated(hash = 1466914342)
     public Discount(Long id, Date created, Date deleted, String name,
-            String description, boolean isPercentage, double discountValue,
-            boolean isTaxExempt) {
+            String description, boolean isPercentage, double discountValue) {
         this.id = id;
         this.created = created;
         this.deleted = deleted;
@@ -42,7 +39,6 @@ public class Discount {
         this.description = description;
         this.isPercentage = isPercentage;
         this.discountValue = discountValue;
-        this.isTaxExempt = isTaxExempt;
     }
 
     @Generated(hash = 1777606421)
@@ -104,14 +100,5 @@ public class Discount {
     public void setDiscountValue(double discountValue) {
         this.discountValue = discountValue;
     }
-
-    public boolean getIsTaxExempt() {
-        return this.isTaxExempt;
-    }
-
-    public void setIsTaxExempt(boolean isTaxExempt) {
-        this.isTaxExempt = isTaxExempt;
-    }
-
 
 }

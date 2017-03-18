@@ -28,4 +28,7 @@
     <!-- product form imageview size -->
     <dimen name="product_image_h">100dp</dimen>
 
+    <!-- payment text size -->
+    <dimen name="payment_text_size">13sp</dimen>
+
 </resources>

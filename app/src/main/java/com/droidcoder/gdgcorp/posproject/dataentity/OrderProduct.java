@@ -45,20 +45,22 @@ public class OrderProduct {
 
     private double taxValue;
 
+    private double serviceCharge;
+
     private long orderReceiptId;
 
     private long discountId;
 
     private String note;
 
-    @Generated(hash = 1250102356)
+    @Generated(hash = 821338010)
     public OrderProduct(Long id, Date created, Date deleted, String productName,
             String productRemarks, byte[] productImage, long productId,
             double productQuantity, double productCostPrice,
             double productSellPrice, double productDeductedPrice,
             boolean isDiscountPercent, double discountValue, double discountTotal,
-            boolean isTaxExempt, double taxValue, long orderReceiptId,
-            long discountId, String note) {
+            boolean isTaxExempt, double taxValue, double serviceCharge,
+            long orderReceiptId, long discountId, String note) {
         this.id = id;
         this.created = created;
         this.deleted = deleted;
@@ -75,6 +77,7 @@ public class OrderProduct {
         this.discountTotal = discountTotal;
         this.isTaxExempt = isTaxExempt;
         this.taxValue = taxValue;
+        this.serviceCharge = serviceCharge;
         this.orderReceiptId = orderReceiptId;
         this.discountId = discountId;
         this.note = note;
@@ -238,5 +241,13 @@ public class OrderProduct {
 
     public void setProductId(long productId) {
         this.productId = productId;
+    }
+
+    public double getServiceCharge() {
+        return this.serviceCharge;
+    }
+
+    public void setServiceCharge(double serviceCharge) {
+        this.serviceCharge = serviceCharge;
     }
 }

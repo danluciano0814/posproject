@@ -25,4 +25,7 @@
     <dimen name="product_image_h">150dp</dimen>
 
     <dimen name="payment_layout_btn_h">90dp</dimen>
+
+    <!-- payment text size -->
+    <dimen name="payment_text_size">20sp</dimen>
 </resources>

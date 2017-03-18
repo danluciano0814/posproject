@@ -24,7 +24,8 @@
                 android:drawableTop="@drawable/ic_return"
                 android:textColor="@color/colorPrimaryDark"
                 android:text="return"
-                android:padding="10dp"/>
+                android:padding="10dp"
+                android:id="@+id/btnReturn"/>
 
         </LinearLayout>
 
@@ -43,21 +44,64 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="Customer : "
-                        android:layout_margin="5dp"/>
-
-                    <TextView
-                        style="@style/blue_title_txt"
-                        android:textAllCaps="false"
-                        android:text="Walk-in Customer"
-                        android:layout_gravity="center_vertical"
-                        android:layout_margin="5dp"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_weight="1"/>
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Receipt ID "
+                            android:textSize="10sp"
+                            android:layout_marginLeft="3dp"/>
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/blue"
+                            android:textAllCaps="false"
+                            android:text=""
+                            android:layout_gravity="center_vertical"
+                            android:maxLength="19"
+                            android:singleLine="true"
+                            android:maxLines="1"
+                            android:layout_marginLeft="3dp"
+                            android:textSize="14sp"
+                            android:id="@+id/txtReceiptId"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Customer "
+                            android:textSize="10sp"
+                            android:layout_marginLeft="3dp"/>
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/blue"
+                            android:textAllCaps="false"
+                            android:text="Walk-in Customer"
+                            android:layout_gravity="center_vertical"
+                            android:maxLength="19"
+                            android:singleLine="true"
+                            android:maxLines="1"
+                            android:layout_marginLeft="3dp"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
 
                     <Button
                         android:layout_width="50dp"
@@ -151,7 +195,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:padding="5dp">
+                        android:padding="2dp">
 
                         <android.support.v7.widget.RecyclerView
                             android:layout_width="match_parent"
@@ -203,7 +247,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:text="3500" />
+                            android:text="0.00"
+                            android:id="@+id/txtVatSales"/>
 
                     </LinearLayout>
 
@@ -224,7 +269,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:text="3500" />
+                            android:text="0.00"
+                            android:id="@+id/txtNonVatSales"/>
 
                     </LinearLayout>
 
@@ -245,7 +291,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:text="3500" />
+                            android:text="0.00"
+                            android:id="@+id/txtVatExempt"/>
 
                     </LinearLayout>
 
@@ -266,7 +313,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:text="3500" />
+                            android:text="0.00"
+                            android:id="@+id/txtDiscount"/>
 
                     </LinearLayout>
 
@@ -295,7 +343,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:text="3500" />
+                            android:text="0.00"
+                            android:id="@+id/txtVat"/>
 
                     </LinearLayout>
 
@@ -317,7 +366,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:text="3500" />
+                            android:text="0.00"
+                            android:id="@+id/txt"/>
 
                     </LinearLayout>
 
@@ -342,7 +392,8 @@
                             android:textColor="@color/white"
                             android:textStyle="bold"
                             android:textSize="25dp"
-                            android:text="3500" />
+                            android:text="0.00"
+                            android:id="@+id/txtTotal"/>
 
                     </LinearLayout>
 
@@ -368,7 +419,8 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="9sp"
                     android:text="Cancel"
-                    android:textAllCaps="false"/>
+                    android:textAllCaps="false"
+                    android:id="@+id/btnCancelAll"/>
 
                 <Button
                     android:layout_width="60dp"
@@ -379,7 +431,8 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="9sp"
                     android:text="Hold"
-                    android:textAllCaps="false"/>
+                    android:textAllCaps="false"
+                    android:id="@+id/btnHold"/>
 
                 <Button
                     android:layout_width="60dp"
@@ -390,7 +443,8 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="9sp"
                     android:text="Retrieve"
-                    android:textAllCaps="false"/>
+                    android:textAllCaps="false"
+                    android:id="@+id/btnRetrieve"/>
 
                 <Button
                     android:layout_width="60dp"
@@ -401,7 +455,8 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="9sp"
                     android:text="Discount"
-                    android:textAllCaps="false"/>
+                    android:textAllCaps="false"
+                    android:id="@+id/btnDiscountAll"/>
 
                 <Button
                     android:layout_width="60dp"
@@ -412,7 +467,8 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="9sp"
                     android:text="Less Tax"
-                    android:textAllCaps="false"/>
+                    android:textAllCaps="false"
+                    android:id="@+id/btnTaxExemptAll"/>
 
                 <Button
                     android:layout_marginLeft="45dp"
@@ -551,14 +607,21 @@
                             android:layout_gravity="center|end"
                             android:layout_marginRight="5dp">
 
-                            <android.support.v7.widget.SearchView
-                                android:layout_width="180dp"
+                            <AutoCompleteTextView
+                                android:layout_width="170dp"
                                 android:layout_height="match_parent"
-                                app:iconifiedByDefault="false"
                                 android:id="@+id/search"
-                                app:theme="@style/AppTheme.AppBarOverlay">
+                                android:background="@android:color/transparent"
+                                android:gravity="center_vertical"
+                                android:drawableLeft="@drawable/ic_search"
+                                android:selectAllOnFocus="true"
+                                android:textColor="@color/white"
+                                android:paddingLeft="5dp"
+                                android:drawablePadding="5dp"
+                                android:inputType="text|textNoSuggestions"
+                                android:focusableInTouchMode="true">
 
-                            </android.support.v7.widget.SearchView>
+                            </AutoCompleteTextView>
 
                         </LinearLayout>
 

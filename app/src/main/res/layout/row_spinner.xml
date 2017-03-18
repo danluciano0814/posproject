@@ -13,7 +13,7 @@
         android:maxLines="1"
         android:maxLength="20"
         android:textAlignment="viewStart"
-        android:padding="5dp"
+        android:padding="4dp"
         />
 
     <TextView

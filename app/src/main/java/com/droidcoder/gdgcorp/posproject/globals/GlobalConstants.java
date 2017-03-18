@@ -16,6 +16,10 @@ public class GlobalConstants {
     public  static  final String BUTTON_TWO_FILE = "btnTwoFile.txt";
     public  static  final String BUTTON_THREE_FILE = "btnThreeFile.txt";
 
+    public  static  final String PAYMENT_TYPE_CASH = "CASH";
+    public  static  final String PAYMENT_TYPE_CREDIT = "CREDIT";
+    public  static  final String PAYMENT_TYPE_POINTS = "POINTS";
+
     public static int[] getConnectivityTypes(){
         int[] connectivityTypes = {ConnectivityManager.TYPE_MOBILE, ConnectivityManager.TYPE_WIFI};
         return connectivityTypes;
