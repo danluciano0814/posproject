@@ -60,6 +60,10 @@ public class OrderReceipt {
 
     private long customerId;
 
+    private double purchaseSetting;
+
+    private double rewardSetting;
+
     private String paymentType;
 
     private double cashTender;
@@ -78,13 +82,14 @@ public class OrderReceipt {
     @Generated(hash = 424433010)
     private transient OrderReceiptDao myDao;
 
-    @Generated(hash = 489551901)
+    @Generated(hash = 692803724)
     public OrderReceipt(Long id, long receiptId, String receiptIdentification, Date created,
             Date deleted, Date paidDate, String voidBy, double totalCostPrice, double totalSellPrice,
             double totalDeductedPrice, double totalDiscount, double totalTaxExempt,
             double totalVatSales, double totalNonVatSales, double totalVat, double taxValue,
             double serviceChargeValue, double serviceChargeTotal, boolean onHold, boolean isPaid,
-            long customerId, String paymentType, double cashTender, long userId) {
+            long customerId, double purchaseSetting, double rewardSetting, String paymentType,
+            double cashTender, long userId) {
         this.id = id;
         this.receiptId = receiptId;
         this.receiptIdentification = receiptIdentification;
@@ -106,6 +111,8 @@ public class OrderReceipt {
         this.onHold = onHold;
         this.isPaid = isPaid;
         this.customerId = customerId;
+        this.purchaseSetting = purchaseSetting;
+        this.rewardSetting = rewardSetting;
         this.paymentType = paymentType;
         this.cashTender = cashTender;
         this.userId = userId;
@@ -370,6 +377,22 @@ public class OrderReceipt {
 
     public void setPaidDate(Date paidDate) {
         this.paidDate = paidDate;
+    }
+
+    public double getPurchaseSetting() {
+        return this.purchaseSetting;
+    }
+
+    public void setPurchaseSetting(double purchaseSetting) {
+        this.purchaseSetting = purchaseSetting;
+    }
+
+    public double getRewardSetting() {
+        return this.rewardSetting;
+    }
+
+    public void setRewardSetting(double rewardSetting) {
+        this.rewardSetting = rewardSetting;
     }
 
     /** called by internal mechanisms, do not call yourself. */

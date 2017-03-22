@@ -19,12 +19,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.droidcoder.gdgcorp.posproject.NavigationActivity;
 import com.droidcoder.gdgcorp.posproject.R;
 import com.droidcoder.gdgcorp.posproject.dataentity.Customer;
 import com.droidcoder.gdgcorp.posproject.dataentity.CustomerDao;
 import com.droidcoder.gdgcorp.posproject.dataentity.Product;
 import com.droidcoder.gdgcorp.posproject.dataentity.ProductDao;
 import com.droidcoder.gdgcorp.posproject.navactivities.SalesActivity;
+import com.droidcoder.gdgcorp.posproject.navfragments.CustomerFragment;
 import com.droidcoder.gdgcorp.posproject.utils.DBHelper;
 import com.droidcoder.gdgcorp.posproject.utils.ImageConverter;
 import com.droidcoder.gdgcorp.posproject.utils.StringConverter;
@@ -183,6 +185,10 @@ public class CustomerFormFragment extends BaseDialogFragment {
                         customerUpdate.setCode(new Date().getTime() + "" + customerId);
                         DBHelper.getDaoSession().getCustomerDao().update(customerUpdate);
 
+                        if(getActivity() instanceof NavigationActivity){
+                            ((NavigationActivity)getActivity()).refreshList();
+                        }
+
                         Toast.makeText(getActivity(), "Customer has been saved", Toast.LENGTH_LONG).show();
                         dismiss();
 
@@ -224,9 +230,13 @@ public class CustomerFormFragment extends BaseDialogFragment {
                             customerEdit.setDeleted(new Date());
                         }
                         DBHelper.getDaoSession().getCustomerDao().update(customerEdit);
-
                         Toast.makeText(getActivity(), "Customer has been updated", Toast.LENGTH_SHORT).show();
                         //((ProductFormFragment.OnTransactionFinish)getActivity()).refresh();
+
+                        if(getActivity() instanceof NavigationActivity){
+                            ((NavigationActivity)getActivity()).refreshList();
+                        }
+
                         dismiss();
                     }
 

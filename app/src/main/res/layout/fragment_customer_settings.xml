@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="Customer Setting"
+                    android:id="@+id/txtTitle"
+                    style="@style/blue_title_txt"
+                    android:gravity="start"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:drawableTop="@drawable/ic_save"
+                    android:text="SAVE SETTINGS"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txt_normal"
+                    android:layout_margin="1dp"
+                    android:id="@+id/btnSave"
+                    android:layout_gravity="end" />
+
+            </FrameLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/transparent_gray_bg"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:text="ENABLE CUSTOMER REWARDING FEATURE"
+                        style="@style/blue_normal_txt" />
+
+                    <Switch
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/switchCustomer"/>
+
+                    <TextView
+                        android:text="FOR EVERY PURCHASE OF"
+                        style="@style/blue_normal_txt" />
+
+                    <EditText
+                        android:inputType="numberDecimal"
+                        android:id="@+id/editPurchase"
+                        style="@style/edittext_form"
+                        android:text="0"
+                        android:maxLength="10"
+                        />
+
+                    <TextView
+                        android:text="REWARD A CUSTOMER POINTS EQUIVALENT TO"
+                        style="@style/blue_normal_txt" />
+
+                    <EditText
+                        android:inputType="numberDecimal"
+                        android:id="@+id/editPoints"
+                        style="@style/edittext_form"
+                        android:text="0"
+                        android:maxLength="10"
+                        />
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

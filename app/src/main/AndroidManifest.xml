@@ -3,6 +3,7 @@
     package="com.droidcoder.gdgcorp.posproject">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <supports-screens android:smallScreens="false"
@@ -53,6 +54,10 @@
             android:theme="@style/AppTheme"
             android:parentActivityName=".NavigationActivity"
             android:label="Collections"/>
+
+        <activity
+            android:name=".barcode.BarcodeCaptureActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
 
     </application>

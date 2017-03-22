@@ -7,9 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-
+import com.droidcoder.gdgcorp.posproject.fragments.CustomerSettingFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.SalesSettingFragment;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -21,6 +20,7 @@ public class SettingsActivity extends BaseCompatActivity {
 
     @BindView(R.id.main_frame)FrameLayout mainFrame;
     @BindView(R.id.salesComputation)LinearLayout salesComputation;
+    @BindView(R.id.customerSettings)LinearLayout customerSettings;
 
     Fragment settingsFragment;
 
@@ -51,10 +51,16 @@ public class SettingsActivity extends BaseCompatActivity {
         switch(v.getId()){
             case R.id.salesComputation:
                 settingsFragment = new SalesSettingFragment();
-                getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), settingsFragment, "saleSetting").commit();
+                getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), settingsFragment, "salesSetting").commit();
                 salesComputation.setBackground(getResources().getDrawable(R.drawable.line_below));
-                //lnDiscount.setBackground(null);
+                customerSettings.setBackground(null);
                 break;
+
+            case R.id.customerSettings:
+                settingsFragment = new CustomerSettingFragment();
+                getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), settingsFragment, "customerSetting").commit();
+                salesComputation.setBackground(null);
+                customerSettings.setBackground(getResources().getDrawable(R.drawable.line_below));
 
         }
     }

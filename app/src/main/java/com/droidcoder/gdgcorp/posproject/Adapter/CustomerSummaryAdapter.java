@@ -87,15 +87,15 @@ public class CustomerSummaryAdapter extends BaseAdapter {
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
                     if(holder.cbxActive.isChecked()){
                         holder.cbxActive.setChecked(false);
-                        Product product = DBHelper.getDaoSession().getProductDao().load(customerList.get(position).getId());
-                        product.setDeleted(new Date());
-                        DBHelper.getDaoSession().getProductDao().update(product);
+                        Customer customer = DBHelper.getDaoSession().getCustomerDao().load(customerList.get(position).getId());
+                        customer.setDeleted(new Date());
+                        DBHelper.getDaoSession().getCustomerDao().update(customer);
                         //((InventoryActivity)context).refresh();
                     }else{
                         holder.cbxActive.setChecked(true);
-                        Product product = DBHelper.getDaoSession().getProductDao().load(customerList.get(position).getId());
-                        product.setDeleted(null);
-                        DBHelper.getDaoSession().getProductDao().update(product);
+                        Customer customer = DBHelper.getDaoSession().getCustomerDao().load(customerList.get(position).getId());
+                        customer.setDeleted(null);
+                        DBHelper.getDaoSession().getCustomerDao().update(customer);
                         //((InventoryActivity)context).refresh();
                     }
                 }

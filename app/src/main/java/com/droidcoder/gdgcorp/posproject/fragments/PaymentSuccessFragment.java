@@ -22,6 +22,7 @@ public class PaymentSuccessFragment extends BaseDialogFragment {
     @BindView(R.id.txtTotal)TextView txtTotal;
     @BindView(R.id.txtChange)TextView txtChange;
     @BindView(R.id.imageDone)ImageView imageDone;
+    @BindView(R.id.txtEmail)TextView txtEmail;
 
     @Nullable
     @Override
@@ -36,8 +37,11 @@ public class PaymentSuccessFragment extends BaseDialogFragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
+        setCancelable(false);
+
         txtChange.setText(getArguments().getString("change"));
         txtTotal.setText(getArguments().getString("total"));
+        txtEmail.setText(getArguments().getString("email"));
 
         imageDone.setOnClickListener(new View.OnClickListener() {
             @Override

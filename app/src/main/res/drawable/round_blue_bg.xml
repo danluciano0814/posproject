@@ -12,5 +12,22 @@
         </shape>
     </item>
 
+    <item
+        android:state_pressed="true"
+        >
+        <shape>
+
+            <stroke
+                android:width="5dp"
+                android:color="@color/light_green"/>
+
+            <solid
+                android:color="@color/colorPrimary"/>
+
+            <corners android:radius="1000dp" />
+
+        </shape>
+    </item>
+
 
 </selector>

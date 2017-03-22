@@ -9,7 +9,14 @@
         android:orientation="vertical"
         android:layout_centerHorizontal="true"
         android:id="@+id/topFrame"
-        android:background="#ffffff">
+        android:background="#ffffff"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/blue_normal_txt"
+            android:text="Payment Success, press check button to end the transaction"/>
 
     </LinearLayout>
 
@@ -105,11 +112,14 @@
                     android:text="Email" />
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/txtEmail"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/txt_normal"
                     android:background="@drawable/edittxt_bg"/>
 
             </LinearLayout>
@@ -118,12 +128,12 @@
             <Button
                 android:layout_width="60dp"
                 android:layout_height="50dp"
-                android:drawableTop="@drawable/ic_hold_order"
+                android:drawableTop="@drawable/ic_mail"
                 android:background="@drawable/sales_button_bg"
                 android:padding="10dp"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="10sp"
-                android:text="Hold"
+                android:text="Send"
                 android:textAllCaps="false"
                 android:id="@+id/btnEmail"/>
 

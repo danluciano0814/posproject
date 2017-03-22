@@ -130,7 +130,7 @@ public class CustomerFragment extends BaseFragment {
 
     public void searchProduct(String value){
         customerList = DBHelper.getDaoSession().getCustomerDao().queryBuilder()
-                .where(CustomerDao.Properties.FirstName.like("%"+value+"%"))
+                .whereOr(CustomerDao.Properties.FirstName.like("%"+value+"%"), CustomerDao.Properties.LastName.like("%"+value+"%"))
                 .orderAsc(CustomerDao.Properties.FirstName).list();
         lvCustomerSummary.setAdapter(new CustomerSummaryAdapter(getActivity(), customerList));
     }

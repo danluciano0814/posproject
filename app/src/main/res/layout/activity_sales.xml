@@ -99,9 +99,23 @@
                             android:singleLine="true"
                             android:maxLines="1"
                             android:layout_marginLeft="3dp"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:id="@+id/txtCustomerName"/>
 
                     </LinearLayout>
+
+                    <Button
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/sales_button_bg"
+                        android:drawableTop="@drawable/ic_cancel_red"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="9sp"
+                        android:textColor="@color/blue"
+                        android:text="remove"
+                        android:padding="5dp"
+                        android:visibility="gone"
+                        android:id="@+id/btnRemoveCustomer"/>
 
                     <Button
                         android:layout_width="50dp"
@@ -112,7 +126,8 @@
                         android:textSize="9sp"
                         android:textColor="@color/blue"
                         android:text="scan"
-                        android:padding="5dp"/>
+                        android:padding="5dp"
+                        android:id="@+id/btnScanCustomer"/>
 
                     <Button
                         android:layout_width="50dp"

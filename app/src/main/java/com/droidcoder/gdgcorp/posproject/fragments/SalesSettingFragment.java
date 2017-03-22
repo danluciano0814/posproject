@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.droidcoder.gdgcorp.posproject.R;
 import com.droidcoder.gdgcorp.posproject.globals.GlobalConstants;
@@ -66,6 +67,7 @@ public class SalesSettingFragment extends BaseFragment{
                     saveToLocalData(getActivity(), GlobalConstants.BUTTON_ONE_FILE, editBtn1.getText().toString().trim());
                     saveToLocalData(getActivity(), GlobalConstants.BUTTON_TWO_FILE, editBtn2.getText().toString().trim());
                     saveToLocalData(getActivity(), GlobalConstants.BUTTON_THREE_FILE, editBtn3.getText().toString().trim());
+                    Toast.makeText(getActivity(), "Sale Setting was saved successfully", Toast.LENGTH_SHORT).show();
                 }
 
             }

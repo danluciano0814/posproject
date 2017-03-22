@@ -129,13 +129,34 @@ public class PaymentFragment extends BaseFragment implements View.OnClickListene
                     tender = Double.parseDouble(txtTender.getText().toString());
                 }
 
-                if(tender < total || change < 0){
+                if(!txtPaymentType.getText().toString().equalsIgnoreCase(GlobalConstants.PAYMENT_TYPE_POINTS)){
+                    if(tender < total || change < 0){
+                        isValid = false;
+                        Toast.makeText(getActivity(), "Invalid payment, cash tender should be greater than total", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                if(!txtPaymentType.getText().toString().equalsIgnoreCase(GlobalConstants.PAYMENT_TYPE_CASH) &&
+                        ((SalesActivity)getActivity()).getCustomer() == null ){
                     isValid = false;
-                    Toast.makeText(getActivity(), "Invalid payment, cash tender should be greater than total", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Invalid payment type, customer must be registered to allow payment type for credit and points", Toast.LENGTH_LONG).show();
+                }
+
+                if(txtPaymentType.getText().toString().equalsIgnoreCase(GlobalConstants.PAYMENT_TYPE_POINTS) && ((SalesActivity)getActivity()).getCustomer() != null){
+
+                    if(total > ((SalesActivity)getActivity()).getCustomer().getPoints()){
+                        isValid = false;
+                        Toast.makeText(getActivity(), "Invalid payment, customer points is short by (" + (total - ((SalesActivity)getActivity()).getCustomer().getPoints()) + ")", Toast.LENGTH_LONG).show();
+                    }
+
                 }
 
                 if(isValid){
-                    ((SalesActivity)getActivity()).saveToSales(txtPaymentType.getText().toString(), tender, sc);
+                    if(txtPaymentType.getText().toString().equalsIgnoreCase(GlobalConstants.PAYMENT_TYPE_POINTS)){
+                        ((SalesActivity)getActivity()).saveToSales(txtPaymentType.getText().toString(), total - sc, 0);
+                    }else{
+                        ((SalesActivity)getActivity()).saveToSales(txtPaymentType.getText().toString(), tender, sc);
+                    }
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
                             .remove(PaymentFragment.this)
@@ -235,12 +256,18 @@ public class PaymentFragment extends BaseFragment implements View.OnClickListene
                 break;
             case R.id.btnCash:
                 txtPaymentType.setText(GlobalConstants.PAYMENT_TYPE_CASH);
+                txtSC.setText(StringConverter.doubleFormatter(sc));
+                txtTotal.setText(StringConverter.doubleFormatter(total));
                 break;
             case R.id.btnCredit:
                 txtPaymentType.setText(GlobalConstants.PAYMENT_TYPE_CREDIT);
+                txtSC.setText(StringConverter.doubleFormatter(sc));
+                txtTotal.setText(StringConverter.doubleFormatter(total));
                 break;
             case R.id.btnPoints:
                 txtPaymentType.setText(GlobalConstants.PAYMENT_TYPE_POINTS);
+                txtSC.setText("0.00");
+                txtTotal.setText(StringConverter.doubleFormatter(total - sc));
                 break;
 
         }

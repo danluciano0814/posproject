@@ -211,6 +211,7 @@
                             <TextView
                                 android:id="@+id/txtCode"
                                 style="@style/edittext_form"
+                                android:textSize="@dimen/txt_title"
                                 android:gravity="center_vertical"
                                 android:maxLength="20" />
 
@@ -230,6 +231,7 @@
                             <TextView
                                 android:id="@+id/txtPoints"
                                 style="@style/edittext_form"
+                                android:textSize="@dimen/txt_title"
                                 android:gravity="center_vertical"
                                 android:text="0.00"
                                 android:maxLength="12" />

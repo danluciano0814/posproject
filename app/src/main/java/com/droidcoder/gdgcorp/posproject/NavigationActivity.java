@@ -20,6 +20,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.droidcoder.gdgcorp.posproject.datasystem.CurrentUser;
+import com.droidcoder.gdgcorp.posproject.navfragments.CustomerFragment;
 import com.droidcoder.gdgcorp.posproject.navfragments.MissingPageFragment;
 import com.github.mikephil.charting.charts.BarChart;
 
@@ -35,6 +36,8 @@ public class NavigationActivity extends BaseCompatActivity
     @BindView(R.id.content_main) FrameLayout content_main;
     @BindView(R.id.bar_graph) BarChart barChart;
 
+    FragmentManager fm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,8 @@ public class NavigationActivity extends BaseCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
+
+        fm = getSupportFragmentManager();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -122,13 +127,14 @@ public class NavigationActivity extends BaseCompatActivity
                 Fragment fragment = (Fragment) cls.getConstructor().newInstance();
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(content_main.getId(), fragment);
+                ft.replace(content_main.getId(), fragment, name.concat("Fragment"));
+                Toast.makeText(this, "" + name.concat("Fragment"), Toast.LENGTH_SHORT).show();
                 ft.commit();
             } catch (ClassNotFoundException ex) {
                 Fragment fragment = new MissingPageFragment();
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(content_main.getId(), fragment);
+                ft.replace(content_main.getId(), fragment, name.concat("Fragment"));
                 ft.commit();
             } catch (NoSuchMethodException ex) {
                 logE("No such method. " + ex.getMessage());
@@ -151,5 +157,14 @@ public class NavigationActivity extends BaseCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void refreshList(){
+
+        if(fm.findFragmentByTag("CustomerFragment") != null){
+            Toast.makeText(this, "this code runs", Toast.LENGTH_SHORT).show();
+            ((CustomerFragment)fm.findFragmentByTag("CustomerFragment")).refreshList();
+        }
+
     }
 }

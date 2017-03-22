@@ -1,7 +1,9 @@
 package com.droidcoder.gdgcorp.posproject.navactivities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +14,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -30,9 +33,11 @@ import com.droidcoder.gdgcorp.posproject.Adapter.SpinnerAdapter;
 import com.droidcoder.gdgcorp.posproject.Adapter.SubPagerAdapter;
 import com.droidcoder.gdgcorp.posproject.BaseCompatActivity;
 import com.droidcoder.gdgcorp.posproject.R;
+import com.droidcoder.gdgcorp.posproject.barcode.BarcodeCaptureActivity;
 import com.droidcoder.gdgcorp.posproject.dataentity.Category;
 import com.droidcoder.gdgcorp.posproject.dataentity.CategoryDao;
 import com.droidcoder.gdgcorp.posproject.dataentity.Customer;
+import com.droidcoder.gdgcorp.posproject.dataentity.CustomerDao;
 import com.droidcoder.gdgcorp.posproject.dataentity.OrderProduct;
 import com.droidcoder.gdgcorp.posproject.dataentity.OrderProductDao;
 import com.droidcoder.gdgcorp.posproject.dataentity.OrderReceipt;
@@ -58,6 +63,8 @@ import com.droidcoder.gdgcorp.posproject.globals.GlobalConstants;
 import com.droidcoder.gdgcorp.posproject.utils.DBHelper;
 import com.droidcoder.gdgcorp.posproject.utils.LFHelper;
 import com.droidcoder.gdgcorp.posproject.utils.StringConverter;
+import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.vision.barcode.Barcode;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -69,6 +76,8 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.github.mikephil.charting.charts.Chart.LOG_TAG;
 
 /**
  * Created by DanLuciano on 2/14/2017.
@@ -104,6 +113,9 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
     @BindView(R.id.txtSubIndicator)TextView txtSubIndicator;
 
     @BindView(R.id.btnAddCustomer)Button btnAddCustomer;
+    @BindView(R.id.btnScanCustomer)Button btnScanCustomer;
+    @BindView(R.id.btnRemoveCustomer)Button btnRemoveCustomer;
+    @BindView(R.id.txtCustomerName)TextView txtCustomerName;
 
     @BindView(R.id.rvOrder)RecyclerView rvOrder;
     @BindView(R.id.search)AutoCompleteTextView search;
@@ -120,9 +132,12 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
     FragmentManager fm;
     PaymentFragment paymentFragment = null;
 
-    OrderReceipt orderReceipt;
+    OrderReceipt orderReceipt = null;
+    Customer customer = null;
 
     RetrieveFragment retrieveFragment = null;
+
+    public static final int BARCODE_READER_REQUEST_CODE = 143;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -371,6 +386,24 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
             }
         });
 
+        btnScanCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), BarcodeCaptureActivity.class);
+                startActivityForResult(intent, BARCODE_READER_REQUEST_CODE);
+            }
+        });
+
+        btnRemoveCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                customer = null;
+                txtCustomerName.setText("Walk-in Customer");
+                btnScanCustomer.setVisibility(View.VISIBLE);
+                btnRemoveCustomer.setVisibility(View.GONE);
+            }
+        });
+
     }
 
     public void retrieveFromOnhold(long id){
@@ -379,6 +412,17 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
 
         orderReceipt = retrievedReceipt;
         orderReceipt.setId(retrievedReceipt.getId());
+        if(orderReceipt.getCustomerId() > 0){
+            customer = DBHelper.getDaoSession().getCustomerDao().load(orderReceipt.getCustomerId());
+            txtCustomerName.setText(customer.getFirstName() + " " + customer.getLastName());
+            btnScanCustomer.setVisibility(View.GONE);
+            btnRemoveCustomer.setVisibility(View.VISIBLE);
+        }else{
+            customer = null;
+            txtCustomerName.setText("Walk-in Customer");
+            btnScanCustomer.setVisibility(View.VISIBLE);
+            btnRemoveCustomer.setVisibility(View.GONE);
+        }
 
         txtReceiptId.setText(retrievedReceipt.getReceiptId() + "");
 
@@ -429,6 +473,11 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
                 onHoldReceipt.setReceiptIdentification(receiptIdentification);
                 onHoldReceipt.setVoidBy("");
                 onHoldReceipt.setPaidDate(null);
+                if(customer != null){
+                    onHoldReceipt.setCustomerId(customer.getId());
+                }else{
+                    onHoldReceipt.setCustomerId(0);
+                }
 
                 onHoldReceipt.setTotalDeductedPrice(orderReceipt.getTotalDeductedPrice());
                 onHoldReceipt.setTotalCostPrice(orderReceipt.getTotalCostPrice());
@@ -460,6 +509,11 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
                 onHoldReceipt.setPaymentType("");
                 onHoldReceipt.setReceiptIdentification(receiptIdentification);
                 onHoldReceipt.setVoidBy("");
+                if(customer != null){
+                    onHoldReceipt.setCustomerId(customer.getId());
+                }else{
+                    onHoldReceipt.setCustomerId(0);
+                }
 
                 onHoldReceipt.setTotalDeductedPrice(orderReceipt.getTotalDeductedPrice());
                 onHoldReceipt.setTotalCostPrice(orderReceipt.getTotalCostPrice());
@@ -477,6 +531,9 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
             }
 
             txtReceiptId.setText("");
+            txtCustomerName.setText("Walk-in Customer");
+            btnScanCustomer.setVisibility(View.VISIBLE);
+            btnRemoveCustomer.setVisibility(View.GONE);
 
         }
 
@@ -489,14 +546,18 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
 
         if(isValid) {
 
+
             PaymentSuccessFragment paymentSuccessFragment = new PaymentSuccessFragment();
             Bundle bundle = new Bundle();
             bundle.putString("total", StringConverter.doubleFormatter(orderReceipt.getTotalDeductedPrice() + scTotal));
             bundle.putString("change", StringConverter.doubleFormatter(tender - (orderReceipt.getTotalDeductedPrice() + scTotal)));
+            if(customer != null){
+                bundle.putString("email", customer.getEmail());
+            }else{
+                bundle.putString("email", "");
+            }
             paymentSuccessFragment.setArguments(bundle);
             paymentSuccessFragment.show(fm, "paymentSuccess");
-
-            Toast.makeText(this, "" + tender, Toast.LENGTH_SHORT).show();
 
             if (isSave) {
 
@@ -509,6 +570,49 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
                 onHoldReceipt.setReceiptIdentification("");
                 onHoldReceipt.setVoidBy("");
                 onHoldReceipt.setPaidDate(new Date());
+                if(customer != null){
+                    onHoldReceipt.setCustomerId(customer.getId());
+
+                    //customer points computation if payment is cash and customer fature is enabled
+                    if(!paymentType.equalsIgnoreCase(GlobalConstants.PAYMENT_TYPE_POINTS)
+                            && !LFHelper.getLocalData(this, GlobalConstants.CUSTOMER_FEATURE).equals("0")){
+
+                        double purchaseSetting = Double.parseDouble(LFHelper.getLocalData(this, GlobalConstants.CUSTOMER_PURCHASE));
+                        double rewardSetting = Double.parseDouble(LFHelper.getLocalData(this, GlobalConstants.CUSTOMER_PURCHASE_POINTS));
+                        onHoldReceipt.setRewardSetting(rewardSetting);
+                        onHoldReceipt.setPurchaseSetting(purchaseSetting);
+
+                        double totalPurchase = orderReceipt.getTotalDeductedPrice() + scTotal;
+                        double points = 0;
+
+                        points = ((totalPurchase / purchaseSetting) * rewardSetting);
+                        Toast.makeText(this, "Points accumulate " + points, Toast.LENGTH_SHORT).show();
+
+                        Customer customerRewarded = DBHelper.getDaoSession().getCustomerDao().load(customer.getId());
+                        customerRewarded.setPoints(customerRewarded.getPoints() + points);
+                        DBHelper.getDaoSession().getCustomerDao().update(customerRewarded);
+
+                    }else{
+
+                        double purchaseSetting = Double.parseDouble(LFHelper.getLocalData(this, GlobalConstants.CUSTOMER_PURCHASE));
+                        double rewardSetting = Double.parseDouble(LFHelper.getLocalData(this, GlobalConstants.CUSTOMER_PURCHASE_POINTS));
+                        onHoldReceipt.setRewardSetting(rewardSetting);
+                        onHoldReceipt.setPurchaseSetting(purchaseSetting);
+
+                        double totalPurchase = orderReceipt.getTotalDeductedPrice() + scTotal;
+                        double points = 0;
+
+                        points = ((totalPurchase / purchaseSetting) * rewardSetting);
+                        Toast.makeText(this, "Points accumulate " + points, Toast.LENGTH_SHORT).show();
+
+                        Customer customerClaim = DBHelper.getDaoSession().getCustomerDao().load(customer.getId());
+                        customerClaim.setPoints(customerClaim.getPoints() - totalPurchase);
+                        DBHelper.getDaoSession().getCustomerDao().update(customerClaim);
+
+                    }
+                }else{
+                    onHoldReceipt.setCustomerId(0);
+                }
 
                 onHoldReceipt.setCashTender(tender);
                 onHoldReceipt.setServiceChargeTotal(scTotal);
@@ -542,6 +646,49 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
                 onHoldReceipt.setPaymentType(paymentType);
                 onHoldReceipt.setVoidBy("");
                 onHoldReceipt.setPaidDate(new Date());
+                if(customer != null){
+                    onHoldReceipt.setCustomerId(customer.getId());
+
+                    //customer points computation if payment is cash and customer fature is enabled
+                    if(!paymentType.equalsIgnoreCase(GlobalConstants.PAYMENT_TYPE_POINTS)
+                            && !LFHelper.getLocalData(this, GlobalConstants.CUSTOMER_FEATURE).equals("0")){
+
+                        double purchaseSetting = Double.parseDouble(LFHelper.getLocalData(this, GlobalConstants.CUSTOMER_PURCHASE));
+                        double rewardSetting = Double.parseDouble(LFHelper.getLocalData(this, GlobalConstants.CUSTOMER_PURCHASE_POINTS));
+                        onHoldReceipt.setRewardSetting(rewardSetting);
+                        onHoldReceipt.setPurchaseSetting(purchaseSetting);
+
+                        double totalPurchase = orderReceipt.getTotalDeductedPrice() + scTotal;
+                        double points = 0;
+
+                        points = ((totalPurchase / purchaseSetting) * rewardSetting);
+                        Toast.makeText(this, "Points accumulate " + points, Toast.LENGTH_SHORT).show();
+
+                        Customer customerRewarded = DBHelper.getDaoSession().getCustomerDao().load(customer.getId());
+                        customerRewarded.setPoints(customerRewarded.getPoints() + points);
+                        DBHelper.getDaoSession().getCustomerDao().update(customerRewarded);
+
+                    }else{
+
+                        double purchaseSetting = Double.parseDouble(LFHelper.getLocalData(this, GlobalConstants.CUSTOMER_PURCHASE));
+                        double rewardSetting = Double.parseDouble(LFHelper.getLocalData(this, GlobalConstants.CUSTOMER_PURCHASE_POINTS));
+                        onHoldReceipt.setRewardSetting(rewardSetting);
+                        onHoldReceipt.setPurchaseSetting(purchaseSetting);
+
+                        double totalPurchase = orderReceipt.getTotalDeductedPrice() + scTotal;
+                        double points = 0;
+
+                        points = ((totalPurchase / purchaseSetting) * rewardSetting);
+                        Toast.makeText(this, "Points accumulate " + points, Toast.LENGTH_SHORT).show();
+
+                        Customer customerClaim = DBHelper.getDaoSession().getCustomerDao().load(customer.getId());
+                        customerClaim.setPoints(customerClaim.getPoints() - totalPurchase);
+                        DBHelper.getDaoSession().getCustomerDao().update(customerClaim);
+
+                    }
+                }else{
+                    onHoldReceipt.setCustomerId(0);
+                }
 
                 onHoldReceipt.setCashTender(tender);
                 onHoldReceipt.setServiceChargeTotal(scTotal);
@@ -561,6 +708,9 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
             }
 
             txtReceiptId.setText("");
+            txtCustomerName.setText("Walk-in Customer");
+            btnScanCustomer.setVisibility(View.VISIBLE);
+            btnRemoveCustomer.setVisibility(View.GONE);
 
         }
     }
@@ -1011,6 +1161,36 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
         }
 
         return ids;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == BARCODE_READER_REQUEST_CODE) {
+            if (resultCode == CommonStatusCodes.SUCCESS) {
+                if (data != null) {
+                    Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
+                    Point[] p = barcode.cornerPoints;
+
+                    customer = DBHelper.getDaoSession().getCustomerDao().queryBuilder().where(CustomerDao.Properties.Code.eq(barcode.displayValue)).unique();
+
+                    if(customer != null){
+                        txtCustomerName.setText(customer.getFirstName() + " " + customer.getLastName());
+                        btnScanCustomer.setVisibility(View.GONE);
+                        btnRemoveCustomer.setVisibility(View.VISIBLE);
+                    }else{
+                        Toast.makeText(this, "invalid customer code", Toast.LENGTH_LONG).show();
+
+                    }
+
+                } else Toast.makeText(this, "" + R.string.no_barcode_captured, Toast.LENGTH_SHORT).show();
+            } else Log.e(LOG_TAG, String.format(getString(R.string.barcode_error_format),
+                    CommonStatusCodes.getStatusCodeString(resultCode)));
+        } else super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Nullable
+    public Customer getCustomer(){
+        return customer;
     }
 
     @Override

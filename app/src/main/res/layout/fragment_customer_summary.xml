@@ -105,16 +105,16 @@
                 android:padding="5dp">
 
                 <Button
+                    android:id="@+id/btnCreate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
                     android:background="@color/colorPrimary"
                     android:drawableTop="@drawable/ic_add"
-                    android:text="CREATE PRODUCT"
+                    android:gravity="center"
+                    android:text="CREATE CUSTOMER"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/txt_normal"
-                    android:layout_margin="1dp"
-                    android:id="@+id/btnCreate"
-                    android:gravity="center"/>
+                    android:textSize="@dimen/txt_normal" />
 
             </LinearLayout>
 
