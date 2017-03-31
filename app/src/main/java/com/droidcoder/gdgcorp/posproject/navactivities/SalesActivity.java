@@ -48,6 +48,7 @@ import com.droidcoder.gdgcorp.posproject.dataentity.SubCategory;
 import com.droidcoder.gdgcorp.posproject.dataentity.SubCategoryDao;
 import com.droidcoder.gdgcorp.posproject.dataentity.SubCategoryProduct;
 import com.droidcoder.gdgcorp.posproject.dataentity.SubCategoryProductDao;
+import com.droidcoder.gdgcorp.posproject.datasystem.CurrentUser;
 import com.droidcoder.gdgcorp.posproject.fragments.CancelAllFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.CustomerFormFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.DiscountAllFragment;
@@ -473,6 +474,7 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
                 onHoldReceipt.setReceiptIdentification(receiptIdentification);
                 onHoldReceipt.setVoidBy("");
                 onHoldReceipt.setPaidDate(null);
+                onHoldReceipt.setUserId(CurrentUser.getUser().getId());
                 if(customer != null){
                     onHoldReceipt.setCustomerId(customer.getId());
                 }else{
@@ -509,6 +511,7 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
                 onHoldReceipt.setPaymentType("");
                 onHoldReceipt.setReceiptIdentification(receiptIdentification);
                 onHoldReceipt.setVoidBy("");
+                onHoldReceipt.setUserId(CurrentUser.getUser().getId());
                 if(customer != null){
                     onHoldReceipt.setCustomerId(customer.getId());
                 }else{
@@ -565,15 +568,20 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
                 onHoldReceipt.setCreated(new Date());
                 onHoldReceipt.setDeleted(null);
                 onHoldReceipt.setOnHold(false);
-                onHoldReceipt.setIsPaid(true);
+                if(paymentType.equalsIgnoreCase(GlobalConstants.PAYMENT_TYPE_CREDIT)){
+                    onHoldReceipt.setIsPaid(false);
+                }else{
+                    onHoldReceipt.setIsPaid(true);
+                    onHoldReceipt.setPaidDate(new Date());
+                }
                 onHoldReceipt.setPaymentType(paymentType);
                 onHoldReceipt.setReceiptIdentification("");
                 onHoldReceipt.setVoidBy("");
-                onHoldReceipt.setPaidDate(new Date());
+                onHoldReceipt.setUserId(CurrentUser.getUser().getId());
                 if(customer != null){
                     onHoldReceipt.setCustomerId(customer.getId());
 
-                    //customer points computation if payment is cash and customer fature is enabled
+                    //customer points computation if payment is cash and customer feature is enabled
                     if(!paymentType.equalsIgnoreCase(GlobalConstants.PAYMENT_TYPE_POINTS)
                             && !LFHelper.getLocalData(this, GlobalConstants.CUSTOMER_FEATURE).equals("0")){
 
@@ -642,10 +650,15 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
                 OrderReceipt onHoldReceipt = orderReceipt;
                 onHoldReceipt.setDeleted(null);
                 onHoldReceipt.setOnHold(false);
-                onHoldReceipt.setIsPaid(true);
+                if(paymentType.equalsIgnoreCase(GlobalConstants.PAYMENT_TYPE_CREDIT)){
+                    onHoldReceipt.setIsPaid(false);
+                }else{
+                    onHoldReceipt.setIsPaid(true);
+                    onHoldReceipt.setPaidDate(new Date());
+                }
                 onHoldReceipt.setPaymentType(paymentType);
                 onHoldReceipt.setVoidBy("");
-                onHoldReceipt.setPaidDate(new Date());
+                onHoldReceipt.setUserId(CurrentUser.getUser().getId());
                 if(customer != null){
                     onHoldReceipt.setCustomerId(customer.getId());
 
@@ -723,6 +736,10 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
 
             Product product = DBHelper.getDaoSession().getProductDao().load(orderProductList.get(x).getProductId());
             product.setStocks(product.getStocks() - orderProductList.get(x).getProductQuantity());
+
+            if(removeFromProduct){
+                DBHelper.getDaoSession().getProductDao().update(product);
+            }
         }
 
         if(isSave){
@@ -730,6 +747,8 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
         }else{
             DBHelper.getDaoSession().getOrderProductDao().insertOrReplaceInTx(orderProductList);
         }
+
+
 
         orderProductRecyclerAdapter.setOrderProductList(new ArrayList<OrderProduct>());
         orderProductRecyclerAdapter.notifyDataSetChanged();

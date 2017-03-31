@@ -92,6 +92,7 @@ public class CustomerFragment extends BaseFragment {
 
         MenuItem myActionMenuItem = menu.findItem(R.id.action_search);
         searchView = (SearchView) myActionMenuItem.getActionView();
+        searchView.setQueryHint("Search Customer");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -100,13 +101,13 @@ public class CustomerFragment extends BaseFragment {
                 if( ! searchView.isIconified()) {
                     searchView.setIconified(true);
                 }
-                searchProduct(query);
+                searchCustomer(query);
                 searchView.clearFocus();
                 return false;
             }
             @Override
             public boolean onQueryTextChange(String s) {
-                searchProduct(s);
+                searchCustomer(s);
                 return false;
             }
         });
@@ -128,7 +129,7 @@ public class CustomerFragment extends BaseFragment {
         lvCustomerSummary.setAdapter(new CustomerSummaryAdapter(getActivity(), customerList));
     }
 
-    public void searchProduct(String value){
+    public void searchCustomer(String value){
         customerList = DBHelper.getDaoSession().getCustomerDao().queryBuilder()
                 .whereOr(CustomerDao.Properties.FirstName.like("%"+value+"%"), CustomerDao.Properties.LastName.like("%"+value+"%"))
                 .orderAsc(CustomerDao.Properties.FirstName).list();

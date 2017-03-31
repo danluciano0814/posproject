@@ -1,5 +1,6 @@
 package com.droidcoder.gdgcorp.posproject.fragments;
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -14,6 +15,7 @@ import com.droidcoder.gdgcorp.posproject.R;
 import com.droidcoder.gdgcorp.posproject.dataentity.User;
 import com.droidcoder.gdgcorp.posproject.datasystem.CheckRegistration;
 import com.droidcoder.gdgcorp.posproject.utils.DBHelper;
+import com.droidcoder.gdgcorp.posproject.utils.ImageConverter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,8 +52,11 @@ public class CodeRegisterFragment extends DialogFragment {
                 if(DBHelper.getDaoSession().getUserDao().loadAll().size()<=0){
                     User user = new User();
                     user.setPasswordCode("0000");
-                    user.setFirstName("admin");
+                    user.setFirstName("system");
                     user.setLastName("admin");
+                    user.setUserRoleId(0);
+                    user.setImage(ImageConverter.bitmapToBytes(BitmapFactory.decodeResource(getResources(), R.drawable.noimage)));
+
                     DBHelper.getDaoSession().getUserDao().insert(user);
                     CheckRegistration.saveRegister("true", getActivity());
                 }

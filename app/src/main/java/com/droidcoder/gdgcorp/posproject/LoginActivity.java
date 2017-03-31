@@ -216,7 +216,7 @@ public class LoginActivity extends BaseCompatActivity implements AsyncCheckEmail
 
             session = Session.getInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("danluciano08@gmail.com", "eizenn1008");
+                    return new PasswordAuthentication("danluciano08@gmail.com", "eizenn1008gaviel");
                 }
             });
         }

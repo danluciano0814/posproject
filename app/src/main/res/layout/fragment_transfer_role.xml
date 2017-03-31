@@ -40,7 +40,7 @@
                     android:background="@null"
                     android:drawableRight="@drawable/ic_done"
                     android:gravity="center"
-                    android:text="OK"
+                    android:text="CONTINUE"
                     android:textAllCaps="false"
                     android:textColor="@color/white" />
 
@@ -69,7 +69,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     android:gravity="start"
-                    android:text="UNIQUE ID EXAMPLE (TABLE NO.) THIS FIELD WILL HELP YOU IDENTIFY THE ORDER WHEN RETRIEVING." />
+                    android:text="THIS ROLE HAS A USER, TRANSFER THE USER FIRST BEFORE DELETING THIS ROLE." />
 
             </FrameLayout>
 
@@ -88,14 +88,27 @@
 
                     <TextView
                         style="@style/blue_normal_txt"
-                        android:text="Unique Identification" />
+                        android:text="TRANSFER TO ROLE" />
 
-                    <EditText
-                        android:inputType="textEmailSubject"
-                        android:id="@+id/editIdentification"
+                    <FrameLayout
                         style="@style/edittext_form"
-                        android:maxLength="30"
-                        />
+                        android:layout_gravity="center">
+
+                        <Spinner
+                            android:id="@+id/spnrUserRole"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center"
+                            android:layout_marginRight="5dp"
+                            android:background="@null"
+                            android:src="@drawable/ic_drop_down" />
+
+                    </FrameLayout>
 
                 </LinearLayout>
 

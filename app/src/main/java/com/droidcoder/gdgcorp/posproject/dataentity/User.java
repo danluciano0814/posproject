@@ -33,6 +33,8 @@ public class User {
 
     private String passwordCode;
 
+    private String remarks;
+
     @Unique
     private String firstName;
 
@@ -40,20 +42,24 @@ public class User {
 
     private byte[] image;
 
+    private long userRoleId;
 
-    @Generated(hash = 1999980792)
+
+    @Generated(hash = 875656602)
     public User(Long id, String firebaseId, Date created, Date deleted,
-            String email, String passwordCode, String firstName, String lastName,
-            byte[] image) {
+            String email, String passwordCode, String remarks, String firstName,
+            String lastName, byte[] image, long userRoleId) {
         this.id = id;
         this.firebaseId = firebaseId;
         this.created = created;
         this.deleted = deleted;
         this.email = email;
         this.passwordCode = passwordCode;
+        this.remarks = remarks;
         this.firstName = firstName;
         this.lastName = lastName;
         this.image = image;
+        this.userRoleId = userRoleId;
     }
 
     @Generated(hash = 586692638)
@@ -130,6 +136,22 @@ public class User {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public long getUserRoleId() {
+        return this.userRoleId;
+    }
+
+    public void setUserRoleId(long userRoleId) {
+        this.userRoleId = userRoleId;
+    }
+
+    public String getRemarks() {
+        return this.remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 
 

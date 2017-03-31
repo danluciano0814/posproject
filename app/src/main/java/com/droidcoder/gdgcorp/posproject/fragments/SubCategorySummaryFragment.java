@@ -182,6 +182,7 @@ public class SubCategorySummaryFragment extends BaseFragment {
 
         MenuItem myActionMenuItem = menu.findItem(R.id.action_search);
         searchView = (SearchView) myActionMenuItem.getActionView();
+        searchView.setQueryHint("Search Sub Category");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

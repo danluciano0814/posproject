@@ -17,7 +17,7 @@ public class CurrentUser {
 
         user = DBHelper.getDaoSession().getUserDao().queryBuilder()
                 .where(UserDao.Properties.PasswordCode.eq(password))
-                .where(UserDao.Properties.Deleted.isNull()).list().get(0);
+                .where(UserDao.Properties.Deleted.isNull()).unique();
 
     }
 

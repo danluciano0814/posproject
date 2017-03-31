@@ -129,7 +129,7 @@ public class PaymentFragment extends BaseFragment implements View.OnClickListene
                     tender = Double.parseDouble(txtTender.getText().toString());
                 }
 
-                if(!txtPaymentType.getText().toString().equalsIgnoreCase(GlobalConstants.PAYMENT_TYPE_POINTS)){
+                if(txtPaymentType.getText().toString().equalsIgnoreCase(GlobalConstants.PAYMENT_TYPE_CASH)){
                     if(tender < total || change < 0){
                         isValid = false;
                         Toast.makeText(getActivity(), "Invalid payment, cash tender should be greater than total", Toast.LENGTH_LONG).show();
@@ -146,7 +146,7 @@ public class PaymentFragment extends BaseFragment implements View.OnClickListene
 
                     if(total > ((SalesActivity)getActivity()).getCustomer().getPoints()){
                         isValid = false;
-                        Toast.makeText(getActivity(), "Invalid payment, customer points is short by (" + (total - ((SalesActivity)getActivity()).getCustomer().getPoints()) + ")", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Invalid payment, customer points is short by (" + ((total - sc) - ((SalesActivity)getActivity()).getCustomer().getPoints()) + ")", Toast.LENGTH_LONG).show();
                     }
 
                 }
@@ -154,6 +154,8 @@ public class PaymentFragment extends BaseFragment implements View.OnClickListene
                 if(isValid){
                     if(txtPaymentType.getText().toString().equalsIgnoreCase(GlobalConstants.PAYMENT_TYPE_POINTS)){
                         ((SalesActivity)getActivity()).saveToSales(txtPaymentType.getText().toString(), total - sc, 0);
+                    }else if(txtPaymentType.getText().toString().equalsIgnoreCase(GlobalConstants.PAYMENT_TYPE_CREDIT)){
+                        ((SalesActivity)getActivity()).saveToSales(txtPaymentType.getText().toString(), 0, sc);
                     }else{
                         ((SalesActivity)getActivity()).saveToSales(txtPaymentType.getText().toString(), tender, sc);
                     }

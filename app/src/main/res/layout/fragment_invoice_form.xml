@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="850dp"
+    android:layout_height="350dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="horizontal"
+        android:background="@drawable/side_nav_bar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:text="ON HOLD RECEIPTS"
+            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/txt_title"
+            android:textStyle="bold"
+            android:id="@+id/txtReceiptId"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:padding="@dimen/margin_10dp">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="   "
+                android:drawableRight="@drawable/ic_cancel_red"
+                android:paddingRight="5dp"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:background="@null"
+                android:id="@+id/btnCancel"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:minHeight="350dp"
+        android:minWidth="850dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title"
+                        android:visibility="gone"
+                        android:id="@+id/txtId"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Process date :"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Cashier :"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Customer :"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Paid Date :"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Payment remarks :"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Void date :"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Voided by :"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Reward points :"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Total discount :"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Total payment :"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Cash tender  :"
+                        android:visibility="gone"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Process date :"
+                        android:id="@+id/txtCreated"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Cashier :"
+                        android:id="@+id/txtUserName"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Customer :"
+                        android:id="@+id/txtCustomerName"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Void date :"
+                        android:id="@+id/txtPaidDate"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Payment remarks :"
+                        android:id="@+id/txtRemarks"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Void date :"
+                        android:id="@+id/txtVoidDate"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Voided by :"
+                        android:id="@+id/txtVoidBy"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Reward points :"
+                        android:id="@+id/txtReward"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Total discount :"
+                        android:id="@+id/txtDiscount"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Total payment :"
+                        android:id="@+id/txtTotal"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Cash tender  :"
+                        android:id="@+id/txtCashTender"
+                        android:visibility="gone"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp">
+
+                <Button
+                    android:id="@+id/btnVoid"
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/sales_button_bg"
+                    android:drawableTop="@drawable/ic_cancel_all_order"
+                    android:padding="10dp"
+                    android:text="VOID"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="9sp" />
+
+                <Button
+                    android:id="@+id/btnCash"
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/sales_button_bg"
+                    android:drawableTop="@drawable/ic_cash"
+                    android:padding="10dp"
+                    android:text="PAY"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="9sp" />
+
+                <Button
+                    android:id="@+id/btnCredit"
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/sales_button_bg"
+                    android:drawableTop="@drawable/ic_credit"
+                    android:padding="10dp"
+                    android:text="CREDIT"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="9sp" />
+
+                <Button
+                    android:id="@+id/btnMail"
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/sales_button_bg"
+                    android:drawableTop="@drawable/ic_mail"
+                    android:padding="10dp"
+                    android:text="MAIL"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="9sp" />
+
+                <Button
+                    android:id="@+id/btnPrint"
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/sales_button_bg"
+                    android:drawableTop="@drawable/ic_print"
+                    android:padding="10dp"
+                    android:text="PRINT"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="9sp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/txt_title"
+                android:text="--ORDER SUMMARY--"
+                android:layout_marginBottom="10dp"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/txt_normal"
+                            android:text="x3   Potato Salad     300"
+                            android:id="@+id/txtOrderSummary"/>
+
+
+                </ScrollView>
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/voided"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    android:id="@+id/imageVoided"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

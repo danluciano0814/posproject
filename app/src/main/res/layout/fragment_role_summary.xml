@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_gray"
+            android:paddingLeft="10dp"
+            android:paddingBottom="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:paddingTop="10dp">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:drawableTop="@drawable/ic_return"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="return"
+                    android:padding="10dp"
+                    android:id="@+id/btnReturn"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp">
+
+                <TextView
+                    android:text="Role Name"
+                    style="@style/blue_normal_txt" />
+
+                <EditText
+                    android:id="@+id/editRoleName"
+                    style="@style/edittext_form"
+                    android:maxLength="50"
+                    android:singleLine="true"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:padding="5dp">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:drawableTop="@drawable/ic_add"
+                    android:text="CREATE ROLE"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txt_normal"
+                    android:layout_margin="1dp"
+                    android:id="@+id/btnCreate"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:background="@drawable/line_below">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Role Name"
+                android:textSize="@dimen/txt_title"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                android:gravity="center|start"
+                android:layout_weight="1"
+                />
+
+            <LinearLayout
+                android:layout_width="@dimen/role_text_width"
+                android:layout_height="@dimen/role_text_height"
+                android:gravity="center"
+                android:background="@drawable/transparent_blueline_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Allow Sales Transaction"
+                    android:textSize="@dimen/txt_normal"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textAllCaps="false"
+                    android:padding="3dp"
+                    android:gravity="center"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/role_text_width"
+                android:layout_height="@dimen/role_text_height"
+                android:gravity="center"
+                android:background="@drawable/transparent_blueline_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Allow Invoices Management"
+                    android:textSize="@dimen/txt_normal"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textAllCaps="false"
+                    android:padding="3dp"
+                    android:gravity="center"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/role_text_width"
+                android:layout_height="@dimen/role_text_height"
+                android:gravity="center"
+                android:background="@drawable/transparent_blueline_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Allow Report Management"
+                    android:textSize="@dimen/txt_normal"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textAllCaps="false"
+                    android:padding="3dp"
+                    android:gravity="center"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/role_text_width"
+                android:layout_height="@dimen/role_text_height"
+                android:gravity="center"
+                android:background="@drawable/transparent_blueline_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Allow Inventory Management"
+                    android:textSize="@dimen/txt_normal"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textAllCaps="false"
+                    android:padding="3dp"
+                    android:gravity="center"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/role_text_width"
+                android:layout_height="@dimen/role_text_height"
+                android:gravity="center"
+                android:background="@drawable/transparent_blueline_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Allow Customer Management"
+                    android:textSize="@dimen/txt_normal"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textAllCaps="false"
+                    android:padding="3dp"
+                    android:gravity="center"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/role_text_width"
+                android:layout_height="@dimen/role_text_height"
+                android:gravity="center"
+                android:background="@drawable/transparent_blueline_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Allow Employee Management"
+                    android:textSize="@dimen/txt_normal"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textAllCaps="false"
+                    android:padding="3dp"
+                    android:gravity="center"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/role_text_width"
+                android:layout_height="@dimen/role_text_height"
+                android:gravity="center"
+                android:background="@drawable/transparent_blueline_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Allow Data Migration"
+                    android:textSize="@dimen/txt_normal"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textAllCaps="false"
+                    android:padding="3dp"
+                    android:gravity="center"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/role_text_width"
+                android:layout_height="@dimen/role_text_height"
+                android:gravity="center"
+                android:background="@drawable/transparent_blueline_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Allow Storage Management"
+                    android:textSize="@dimen/txt_normal"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textAllCaps="false"
+                    android:padding="3dp"
+                    android:gravity="center"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/role_text_width"
+                android:layout_height="@dimen/role_text_height"
+                android:gravity="center"
+                android:background="@drawable/transparent_blueline_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Allow Settings Management"
+                    android:textSize="@dimen/txt_normal"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textAllCaps="false"
+                    android:padding="3dp"
+                    android:gravity="center"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@drawable/transparent_blueline_bg">
+
+                <TextView
+                    android:layout_width="36dp"
+                    android:layout_height="@dimen/role_text_height"
+                    android:text=""
+                    android:textSize="@dimen/txt_normal"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textAllCaps="false"
+                    android:padding="3dp"
+                    android:gravity="center"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/txt_title"
+                android:id="@+id/txtRoleName"
+                android:gravity="center|start"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:maxLength="16"
+                android:text="ADMIN"
+                />
+
+            <CheckBox
+                android:layout_width="@dimen/role_text_width"
+                android:layout_height="@dimen/role_cbx_height"
+                android:id="@+id/cbxSales"
+                android:textSize="@dimen/txt_title"
+                android:padding="5dp"
+                android:focusable="false"
+                android:buttonTint="@color/colorPrimary"
+                android:focusableInTouchMode="false"
+                android:layout_gravity="center"
+                android:enabled="false"
+                />
+
+            <CheckBox
+                android:layout_width="@dimen/role_text_width"
+                android:layout_height="@dimen/role_cbx_height"
+                android:id="@+id/cbxInvoice"
+                android:textSize="@dimen/txt_title"
+                android:paddingLeft="5dp"
+                android:focusable="false"
+                android:buttonTint="@color/colorPrimary"
+                android:focusableInTouchMode="false"
+                android:layout_gravity="center"
+                android:checked="true"
+                android:enabled="false"
+                />
+
+            <CheckBox
+                android:layout_width="@dimen/role_text_width"
+                android:layout_height="@dimen/role_cbx_height"
+                android:id="@+id/cbxReport"
+                android:textSize="@dimen/txt_title"
+                android:padding="5dp"
+                android:focusable="false"
+                android:buttonTint="@color/colorPrimary"
+                android:focusableInTouchMode="false"
+                android:layout_gravity="center"
+                android:checked="true"
+                android:enabled="false"
+                />
+
+            <CheckBox
+                android:layout_width="@dimen/role_text_width"
+                android:layout_height="@dimen/role_cbx_height"
+                android:id="@+id/cbxInventory"
+                android:textSize="@dimen/txt_title"
+                android:padding="5dp"
+                android:focusable="false"
+                android:buttonTint="@color/colorPrimary"
+                android:focusableInTouchMode="false"
+                android:layout_gravity="center"
+                android:checked="true"
+                android:enabled="false"
+                />
+
+            <CheckBox
+                android:layout_width="@dimen/role_text_width"
+                android:layout_height="@dimen/role_cbx_height"
+                android:id="@+id/cbxCustomer"
+                android:textSize="@dimen/txt_title"
+                android:padding="5dp"
+                android:focusable="false"
+                android:buttonTint="@color/colorPrimary"
+                android:focusableInTouchMode="false"
+                android:layout_gravity="center"
+                android:checked="true"
+                android:enabled="false"
+                />
+
+            <CheckBox
+                android:layout_width="@dimen/role_text_width"
+                android:layout_height="@dimen/role_cbx_height"
+                android:id="@+id/cbxEmployee"
+                android:textSize="@dimen/txt_title"
+                android:padding="5dp"
+                android:focusable="false"
+                android:buttonTint="@color/colorPrimary"
+                android:focusableInTouchMode="false"
+                android:layout_gravity="center"
+                android:checked="true"
+                android:enabled="false"
+                />
+
+            <CheckBox
+                android:layout_width="@dimen/role_text_width"
+                android:layout_height="@dimen/role_cbx_height"
+                android:id="@+id/cbxData"
+                android:textSize="@dimen/txt_title"
+                android:padding="5dp"
+                android:focusable="false"
+                android:buttonTint="@color/colorPrimary"
+                android:focusableInTouchMode="false"
+                android:layout_gravity="center"
+                android:checked="true"
+                android:enabled="false"
+                />
+
+            <CheckBox
+                android:layout_width="@dimen/role_text_width"
+                android:layout_height="@dimen/role_cbx_height"
+                android:id="@+id/cbxStorage"
+                android:textSize="@dimen/txt_title"
+                android:padding="5dp"
+                android:focusable="false"
+                android:buttonTint="@color/colorPrimary"
+                android:focusableInTouchMode="false"
+                android:layout_gravity="center"
+                android:checked="true"
+                android:enabled="false"
+                />
+
+            <CheckBox
+                android:layout_width="@dimen/role_text_width"
+                android:layout_height="@dimen/role_cbx_height"
+                android:id="@+id/cbxSetting"
+                android:textSize="@dimen/txt_title"
+                android:padding="5dp"
+                android:focusable="false"
+                android:buttonTint="@color/colorPrimary"
+                android:focusableInTouchMode="false"
+                android:layout_gravity="center"
+                android:checked="true"
+                android:enabled="false"
+                />
+
+            <TextView
+                android:layout_width="36dp"
+                android:layout_height="@dimen/role_cbx_height"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtRoleId"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lv_role_summary">
+
+        </ListView>
+
+    </LinearLayout>
+
+</LinearLayout>

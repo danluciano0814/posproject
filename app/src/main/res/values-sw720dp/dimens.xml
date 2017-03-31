@@ -28,4 +28,8 @@
 
     <!-- payment text size -->
     <dimen name="payment_text_size">20sp</dimen>
+
+    <dimen name="role_text_height">80dp</dimen>
+    <dimen name="role_text_width">100dp</dimen>
+    <dimen name="role_cbx_height">45dp</dimen>
 </resources>

@@ -123,6 +123,7 @@ public class CategorySummaryFragment extends BaseFragment{
 
         MenuItem myActionMenuItem = menu.findItem(R.id.action_search);
         searchView = (SearchView) myActionMenuItem.getActionView();
+        searchView.setQueryHint("Search Category");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

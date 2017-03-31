@@ -93,6 +93,7 @@ public class ProductSummaryFragment extends BaseFragment {
 
         MenuItem myActionMenuItem = menu.findItem(R.id.action_search);
         searchView = (SearchView) myActionMenuItem.getActionView();
+        searchView.setQueryHint("Search Product");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

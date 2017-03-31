@@ -1,6 +1,8 @@
 package com.droidcoder.gdgcorp.posproject;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,9 +22,25 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.droidcoder.gdgcorp.posproject.datasystem.CurrentUser;
+import com.droidcoder.gdgcorp.posproject.fragments.EmployeeFormFragment;
+import com.droidcoder.gdgcorp.posproject.fragments.ProgressFragment;
+import com.droidcoder.gdgcorp.posproject.fragments.RoleSummaryFragment;
 import com.droidcoder.gdgcorp.posproject.navfragments.CustomerFragment;
+import com.droidcoder.gdgcorp.posproject.navfragments.EmployeesFragment;
 import com.droidcoder.gdgcorp.posproject.navfragments.MissingPageFragment;
+import com.droidcoder.gdgcorp.posproject.utils.AsyncCheckEmail;
 import com.github.mikephil.charting.charts.BarChart;
+
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,13 +48,14 @@ import butterknife.ButterKnife;
 import static com.droidcoder.gdgcorp.posproject.log.AppLogger.logE;
 
 public class NavigationActivity extends BaseCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, AsyncCheckEmail.OnCheckingEmail {
 
     //butterknife sample init
     @BindView(R.id.content_main) FrameLayout content_main;
     @BindView(R.id.bar_graph) BarChart barChart;
 
     FragmentManager fm;
+    ProgressFragment progressFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +66,6 @@ public class NavigationActivity extends BaseCompatActivity
         ButterKnife.bind(this);
 
         fm = getSupportFragmentManager();
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -161,9 +171,117 @@ public class NavigationActivity extends BaseCompatActivity
 
     public void refreshList(){
 
-        if(fm.findFragmentByTag("CustomerFragment") != null){
-            Toast.makeText(this, "this code runs", Toast.LENGTH_SHORT).show();
+        if(fm.findFragmentByTag("CustomerFragment") != null && fm.findFragmentByTag("CustomerFragment").isVisible()){
             ((CustomerFragment)fm.findFragmentByTag("CustomerFragment")).refreshList();
+        }
+
+        if(fm.findFragmentByTag("EmployeesFragment") != null && fm.findFragmentByTag("EmployeesFragment").isVisible()){
+            ((EmployeesFragment)fm.findFragmentByTag("EmployeesFragment")).refreshEmployeeList();
+        }
+
+        if(fm.findFragmentByTag("roleSummary") != null && fm.findFragmentByTag("roleSummary").isVisible()){
+            ((RoleSummaryFragment)fm.findFragmentByTag("roleSummary")).refreshList();
+        }
+
+    }
+
+    public void showRoleMaintenance(){
+
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+
+        RoleSummaryFragment roleSummaryFragment = new RoleSummaryFragment();
+        ft.replace(content_main.getId(), roleSummaryFragment, "roleSummary");
+        ft.commit();
+    }
+
+    public void showEmployeeMaintenance(){
+
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+
+        EmployeesFragment employeesFragment = new EmployeesFragment();
+        ft.replace(content_main.getId(), employeesFragment, "EmployeesFragment");
+        ft.commit();
+    }
+
+    @Override
+    public void onFinish(boolean emailExist, String email, String passCode) {
+        if(emailExist){
+            if(fm.findFragmentByTag("employeeForm")!=null && ((EmployeeFormFragment)fm.findFragmentByTag("employeeForm")).isVisible()){
+                ((EmployeeFormFragment)fm.findFragmentByTag("employeeForm")).setEmailInvalid(emailExist);
+            }
+        }else{
+            new AsyncSendToEmail(this, passCode).execute(email);
+            ((EmployeeFormFragment)fm.findFragmentByTag("employeeForm")).setEmailInvalid(emailExist);
+
+        }
+    }
+
+    public class AsyncSendToEmail extends AsyncTask<String, Void, String> {
+
+        Session session = null;
+        Context context;
+        String passwordCode;
+
+        public AsyncSendToEmail(Context context, String passwordCode){
+            this.context = context;
+            this.passwordCode = passwordCode;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressFragment = new ProgressFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("loadingMessage", "Sending Email...");
+            progressFragment.setArguments(bundle);
+            progressFragment.show(getSupportFragmentManager(), "progress");
+
+            Properties props = new Properties();
+            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.socketFactory.port", "465");
+            props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.port", "465");
+
+            session = Session.getInstance(props, new Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication("danluciano08@gmail.com", "eizenn1008gaviel");
+                }
+            });
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String messageContent = "Your new password code for CHEAPPOS is " + passwordCode + ". " +
+                    "Please do not reply, this is only an automated email";
+
+            String result = "Email sent successfully";
+            try{
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress("danluciano08@gmail.com"));
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(params[0]));
+                message.setSubject("CHEAPPOS PASSWORD CODE");
+                message.setContent(messageContent, "text/html; charset=utf-8");
+                Transport.send(message);
+            } catch(MessagingException e) {
+                e.printStackTrace();
+
+            } catch(Exception e) {
+                e.printStackTrace();
+
+            }
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String res) {
+            super.onPostExecute(res);
+            Toast.makeText(context, res, Toast.LENGTH_LONG).show();
+            progressFragment.dismiss();
         }
 
     }

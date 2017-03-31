@@ -1,5 +1,7 @@
 package com.droidcoder.gdgcorp.posproject.fragments;
 
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -17,10 +19,13 @@ import com.droidcoder.gdgcorp.posproject.navfragments.BaseFragment;
 import com.droidcoder.gdgcorp.posproject.utils.AsyncCheckEmail;
 import com.droidcoder.gdgcorp.posproject.utils.ConnectionHelper;
 import com.droidcoder.gdgcorp.posproject.utils.DBHelper;
+import com.droidcoder.gdgcorp.posproject.utils.ImageConverter;
 
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.mail.Quota;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -120,6 +125,8 @@ public class InitialRegistrationFragment extends BaseFragment {
                 user.setFirstName(etFname.getText().toString().trim().toUpperCase());
                 user.setLastName(etLname.getText().toString().trim().toUpperCase());
                 user.setPasswordCode(passCode);
+                user.setUserRoleId(0);
+                user.setImage(ImageConverter.bitmapToBytes(BitmapFactory.decodeResource(getResources(), R.drawable.noimage)));
 
                 email = etEmail.getText().toString().trim().toUpperCase();
 
@@ -139,7 +146,7 @@ public class InitialRegistrationFragment extends BaseFragment {
     public void setEmailInvalid(boolean emailExist){
 
         if(emailExist){
-            etEmail.setError("Already Used");
+            etEmail.setError("Email was already Used");
             btnSend.setEnabled(true);
         }
 

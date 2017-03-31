@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:padding="5dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Receipt"
+        android:textSize="@dimen/txt_title"
+        android:id="@+id/txtReceiptId"
+        android:gravity="center|start"
+        android:layout_weight="1"
+        android:maxLines="1"
+        android:maxLength="25"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="TransDate"
+        android:textSize="@dimen/txt_title"
+        android:id="@+id/txtTransDate"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:maxLines="1"
+        android:maxLength="25"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Total"
+        android:textSize="@dimen/txt_title"
+        android:id="@+id/txtTotal"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:maxLines="1"
+        android:maxLength="16"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/txtCustomer"
+        android:text="Customer"
+        android:gravity="center"
+        android:textSize="@dimen/txt_title"
+        android:layout_weight="1"
+        android:maxLines="1"
+        android:maxLength="16"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/txtUser"
+        android:text="User"
+        android:gravity="center"
+        android:textSize="@dimen/txt_title"
+        android:layout_weight="1"
+        android:maxLines="1"
+        android:maxLength="16"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtId"
+        android:visibility="gone"/>
+
+</LinearLayout>
