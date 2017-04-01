@@ -21,6 +21,7 @@ import com.droidcoder.gdgcorp.posproject.datasystem.CurrentUser;
 import com.droidcoder.gdgcorp.posproject.fragments.CodeRegisterFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.InitialRegistrationFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.ProgressFragment;
+import com.droidcoder.gdgcorp.posproject.globals.GlobalConstants;
 import com.droidcoder.gdgcorp.posproject.utils.AsyncCheckEmail;
 import com.droidcoder.gdgcorp.posproject.utils.DBHelper;
 import java.util.Properties;
@@ -216,7 +217,7 @@ public class LoginActivity extends BaseCompatActivity implements AsyncCheckEmail
 
             session = Session.getInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("danluciano08@gmail.com", "eizenn1008gaviel");
+                    return new PasswordAuthentication(GlobalConstants.EMAIL_SENDER, GlobalConstants.EMAIL_PASSWORD);
                 }
             });
         }
@@ -229,7 +230,7 @@ public class LoginActivity extends BaseCompatActivity implements AsyncCheckEmail
             String result = "Email sent successfully";
             try{
                 Message message = new MimeMessage(session);
-                message.setFrom(new InternetAddress("danluciano08@gmail.com"));
+                message.setFrom(new InternetAddress(GlobalConstants.EMAIL_SENDER));
                 message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(params[0]));
                 message.setSubject("CHEAPPOS PASSWORD CODE");
                 message.setContent(messageContent, "text/html; charset=utf-8");

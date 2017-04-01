@@ -19,16 +19,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.droidcoder.gdgcorp.posproject.datasystem.CurrentUser;
 import com.droidcoder.gdgcorp.posproject.fragments.EmployeeFormFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.ProgressFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.RoleSummaryFragment;
+import com.droidcoder.gdgcorp.posproject.fragments.UserFormFragment;
+import com.droidcoder.gdgcorp.posproject.globals.GlobalConstants;
 import com.droidcoder.gdgcorp.posproject.navfragments.CustomerFragment;
 import com.droidcoder.gdgcorp.posproject.navfragments.EmployeesFragment;
 import com.droidcoder.gdgcorp.posproject.navfragments.MissingPageFragment;
 import com.droidcoder.gdgcorp.posproject.utils.AsyncCheckEmail;
+import com.droidcoder.gdgcorp.posproject.utils.DBHelper;
+import com.droidcoder.gdgcorp.posproject.utils.ImageConverter;
 import com.github.mikephil.charting.charts.BarChart;
 
 import java.util.Properties;
@@ -54,6 +61,14 @@ public class NavigationActivity extends BaseCompatActivity
     @BindView(R.id.content_main) FrameLayout content_main;
     @BindView(R.id.bar_graph) BarChart barChart;
 
+    //user
+    NavigationView navigationView;
+
+    LinearLayout userMain;
+    ImageView imageUser;
+    TextView userRole;
+    TextView userEmail;
+
     FragmentManager fm;
     ProgressFragment progressFragment;
 
@@ -73,10 +88,41 @@ public class NavigationActivity extends BaseCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Toast.makeText(this, "user name : " + CurrentUser.getUser().getFirstName(), Toast.LENGTH_SHORT).show();
+        View header = navigationView.getHeaderView(0);
+        userMain = (LinearLayout) header.findViewById(R.id.userMainLayout);
+        userEmail = (TextView) header.findViewById(R.id.txtUserEmail);
+        userRole = (TextView) header.findViewById(R.id.txtUserRole);
+        imageUser = (ImageView) header.findViewById(R.id.imageUser);
+
+        //populate user
+        imageUser.setImageBitmap(ImageConverter.bytesToBitmap(CurrentUser.getUser().getImage()));
+        if(CurrentUser.getUser().getUserRoleId() > 0){
+            userRole.setText(DBHelper.getDaoSession().getUserRoleDao().load(CurrentUser.getUser().getUserRoleId()).getRoleName());
+
+        }else{
+            userRole.setText("ADMIN");
+        }
+        userEmail.setText(CurrentUser.getUser().getEmail());
+        userMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = fm.beginTransaction();
+
+                UserFormFragment userFormFragment = new UserFormFragment();
+                Bundle bundle = new Bundle();
+                bundle.putLong("userId", CurrentUser.getUser().getId());
+                userFormFragment.setArguments(bundle);
+                ft.replace(content_main.getId(), userFormFragment, "userForm");
+                ft.commit();
+
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+            }
+        });
+
     }
 
     @Override
@@ -135,14 +181,12 @@ public class NavigationActivity extends BaseCompatActivity
             try {
                 Class<?> cls = Class.forName(getPackageName().concat(".navfragments.").concat(name.concat("Fragment")));
                 Fragment fragment = (Fragment) cls.getConstructor().newInstance();
-                FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(content_main.getId(), fragment, name.concat("Fragment"));
                 Toast.makeText(this, "" + name.concat("Fragment"), Toast.LENGTH_SHORT).show();
                 ft.commit();
             } catch (ClassNotFoundException ex) {
                 Fragment fragment = new MissingPageFragment();
-                FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(content_main.getId(), fragment, name.concat("Fragment"));
                 ft.commit();
@@ -187,7 +231,6 @@ public class NavigationActivity extends BaseCompatActivity
 
     public void showRoleMaintenance(){
 
-        FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
         RoleSummaryFragment roleSummaryFragment = new RoleSummaryFragment();
@@ -197,7 +240,6 @@ public class NavigationActivity extends BaseCompatActivity
 
     public void showEmployeeMaintenance(){
 
-        FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
         EmployeesFragment employeesFragment = new EmployeesFragment();
@@ -248,7 +290,7 @@ public class NavigationActivity extends BaseCompatActivity
 
             session = Session.getInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("danluciano08@gmail.com", "eizenn1008gaviel");
+                    return new PasswordAuthentication(GlobalConstants.EMAIL_SENDER, GlobalConstants.EMAIL_PASSWORD);
                 }
             });
         }
@@ -261,7 +303,7 @@ public class NavigationActivity extends BaseCompatActivity
             String result = "Email sent successfully";
             try{
                 Message message = new MimeMessage(session);
-                message.setFrom(new InternetAddress("danluciano08@gmail.com"));
+                message.setFrom(new InternetAddress(GlobalConstants.EMAIL_SENDER));
                 message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(params[0]));
                 message.setSubject("CHEAPPOS PASSWORD CODE");
                 message.setContent(messageContent, "text/html; charset=utf-8");

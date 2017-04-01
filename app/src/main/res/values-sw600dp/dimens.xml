@@ -18,4 +18,5 @@
 
     <!-- product form imageview size -->
     <dimen name="product_image_h">130dp</dimen>
+    <dimen name="product_image_w">200dp</dimen>
 </resources>

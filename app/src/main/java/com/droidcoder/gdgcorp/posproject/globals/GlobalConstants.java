@@ -10,6 +10,10 @@ public class GlobalConstants {
 
     public static final String DB_NAME = "cheappos-db";
 
+    //emails
+    public static final String EMAIL_SENDER = "danluciano08@gmail.com";
+    public static final String EMAIL_PASSWORD = "eizenn1008gaviel";
+
     //Sales settings
     public static final String TAX_FILE = "tax.txt";
     public static final String SC_FILE = "serviceCharge.txt";
