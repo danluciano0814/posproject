@@ -25,10 +25,12 @@ import com.droidcoder.gdgcorp.posproject.dataentity.Customer;
 import com.droidcoder.gdgcorp.posproject.dataentity.CustomerDao;
 import com.droidcoder.gdgcorp.posproject.dataentity.Product;
 import com.droidcoder.gdgcorp.posproject.dataentity.ProductDao;
+import com.droidcoder.gdgcorp.posproject.globals.GlobalConstants;
 import com.droidcoder.gdgcorp.posproject.navactivities.SalesActivity;
 import com.droidcoder.gdgcorp.posproject.navfragments.CustomerFragment;
 import com.droidcoder.gdgcorp.posproject.utils.DBHelper;
 import com.droidcoder.gdgcorp.posproject.utils.ImageConverter;
+import com.droidcoder.gdgcorp.posproject.utils.LFHelper;
 import com.droidcoder.gdgcorp.posproject.utils.StringConverter;
 
 import java.io.IOException;
@@ -59,6 +61,7 @@ public class CustomerFormFragment extends BaseDialogFragment {
     @BindView(R.id.cbxActive)CheckBox cbxActive;
     @BindView(R.id.customerFrame)LinearLayout customerFrame;
     @BindView(R.id.editContact)EditText editContact;
+    @BindView(R.id.btnCode)Button btnCode;
 
     private int PICK_IMAGE_REQUEST = 1;
     private Bitmap bitmap;
@@ -100,6 +103,7 @@ public class CustomerFormFragment extends BaseDialogFragment {
             txtProductTitle.setText("UPDATE PRODUCT");
             cbxActive.setChecked(customer.getDeleted() == null);
             imageCustomer.setImageBitmap(ImageConverter.bytesToBitmap(customer.getImage()));
+            btnCode.setVisibility(View.VISIBLE);
         }
 
         btnDismiss.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +129,21 @@ public class CustomerFormFragment extends BaseDialogFragment {
             @Override
             public void onClick(View v) {
                 imageCustomer.setImageResource(R.drawable.noimage);
+            }
+        });
+
+        btnCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!LFHelper.getLocalData(getActivity(), GlobalConstants.CUSTOMER_FEATURE).equals("0")){
+                    CustomerQRCodeFragment customerQRCodeFragment = new CustomerQRCodeFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putLong("customerId", Long.parseLong(txtCustomerId.getText().toString()));
+                    customerQRCodeFragment.setArguments(bundle);
+                    customerQRCodeFragment.show(getActivity().getSupportFragmentManager(), "customerQRCode");
+                }else{
+                    Toast.makeText(getActivity(), "Customer Rewarding Feature was off", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -188,6 +207,15 @@ public class CustomerFormFragment extends BaseDialogFragment {
                         if(getActivity() instanceof NavigationActivity){
                             ((NavigationActivity)getActivity()).refreshList();
                         }
+
+                        if(!LFHelper.getLocalData(getActivity(), GlobalConstants.CUSTOMER_FEATURE).equals("0")){
+                            CustomerQRCodeFragment customerQRCodeFragment = new CustomerQRCodeFragment();
+                            Bundle bundle = new Bundle();
+                            bundle.putLong("customerId", customerId);
+                            customerQRCodeFragment.setArguments(bundle);
+                            customerQRCodeFragment.show(getActivity().getSupportFragmentManager(), "customerQRCode");
+                        }
+
 
                         Toast.makeText(getActivity(), "Customer has been saved", Toast.LENGTH_LONG).show();
                         dismiss();

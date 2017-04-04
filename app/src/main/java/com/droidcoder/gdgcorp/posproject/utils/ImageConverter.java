@@ -1,10 +1,22 @@
 package com.droidcoder.gdgcorp.posproject.utils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 
+import com.droidcoder.gdgcorp.posproject.R;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
+
 import java.io.ByteArrayOutputStream;
+
+import static android.R.attr.width;
+import static android.graphics.Color.BLACK;
+import static android.graphics.Color.WHITE;
 
 /**
  * Created by DanLuciano on 1/11/2017.
@@ -44,6 +56,21 @@ public class ImageConverter {
                 matrix, false);
         return resizedBitmap;
 
+    }
+
+    public static Bitmap encodeAsBitmap(Context context, String str) throws WriterException {
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.noimage);
+
+        try {
+            BitMatrix bitMatrix = multiFormatWriter.encode(str, BarcodeFormat.QR_CODE, 300, 300);
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            bitmap = barcodeEncoder.createBitmap(bitMatrix);
+        } catch (WriterException e) {
+
+        }
+
+        return bitmap;
     }
 
 }

@@ -9,6 +9,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import com.droidcoder.gdgcorp.posproject.fragments.CustomerSettingFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.SalesSettingFragment;
+import com.droidcoder.gdgcorp.posproject.fragments.StoreSettingFragment;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -21,6 +23,7 @@ public class SettingsActivity extends BaseCompatActivity {
     @BindView(R.id.main_frame)FrameLayout mainFrame;
     @BindView(R.id.salesComputation)LinearLayout salesComputation;
     @BindView(R.id.customerSettings)LinearLayout customerSettings;
+    @BindView(R.id.storeSettings)LinearLayout storeSettings;
 
     Fragment settingsFragment;
 
@@ -54,6 +57,7 @@ public class SettingsActivity extends BaseCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), settingsFragment, "salesSetting").commit();
                 salesComputation.setBackground(getResources().getDrawable(R.drawable.line_below));
                 customerSettings.setBackground(null);
+                storeSettings.setBackground(null);
                 break;
 
             case R.id.customerSettings:
@@ -61,7 +65,16 @@ public class SettingsActivity extends BaseCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), settingsFragment, "customerSetting").commit();
                 salesComputation.setBackground(null);
                 customerSettings.setBackground(getResources().getDrawable(R.drawable.line_below));
+                storeSettings.setBackground(null);
+                break;
 
+            case R.id.storeSettings:
+                settingsFragment = new StoreSettingFragment();
+                getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), settingsFragment, "storeSetting").commit();
+                salesComputation.setBackground(null);
+                customerSettings.setBackground(null);
+                storeSettings.setBackground(getResources().getDrawable(R.drawable.line_below));
+                break;
         }
     }
 

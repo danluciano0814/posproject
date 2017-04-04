@@ -25,6 +25,38 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/storeSettings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:onClick="selectLeftNavigation"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_10dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="10dp"
+                            android:src="@drawable/ic_store" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text="Store Setting"
+                            android:textSize="@dimen/txt_title" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/salesComputation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -87,6 +119,8 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
+
 
 
             </LinearLayout>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:gravity="center_horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtTitle"
+                    style="@style/blue_title_txt"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="start"
+                    android:text="STORE SETTING" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:drawableTop="@drawable/ic_save"
+                    android:text="SAVE CHANGES"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txt_normal"
+                    android:layout_margin="1dp"
+                    android:id="@+id/btnSave"
+                    android:gravity="end"
+                    android:layout_gravity="end" />
+
+            </FrameLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/transparent_gray_bg"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="200dp"
+                            android:layout_height="230dp"
+                            android:layout_marginRight="5dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/blue_normal_txt"
+                                android:text="Store Logo" />
+
+                            <ImageView
+                                android:id="@+id/imgStore"
+                                android:layout_width="@dimen/product_image_w"
+                                android:layout_height="@dimen/product_image_h"
+                                android:background="@drawable/edittxt_bg"
+                                android:scaleType="fitXY" />
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <Button
+                                    android:id="@+id/btnOpen"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="3dp"
+                                    android:layout_weight="1"
+                                    android:background="@color/colorPrimary"
+                                    android:drawableTop="@drawable/ic_folder"
+                                    android:text="OPEN"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/txt_normal" />
+
+                                <Button
+                                    android:id="@+id/btnDelete"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="3dp"
+                                    android:layout_weight="1"
+                                    android:background="@color/colorPrimary"
+                                    android:drawableTop="@drawable/ic_delete_white"
+                                    android:text="DELETE"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/txt_normal" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+
+                    <TextView
+                        style="@style/blue_normal_txt"
+                        android:text="STORE NAME" />
+
+                    <EditText
+                        android:id="@+id/editName"
+                        style="@style/edittext_form"
+                        android:maxLength="42"/>
+
+                    <TextView
+                        style="@style/blue_normal_txt"
+                        android:text="Address 1" />
+
+                    <EditText
+                        android:id="@+id/editAddress1"
+                        style="@style/edittext_form"
+                        android:maxLength="42"/>
+
+                    <TextView
+                        style="@style/blue_normal_txt"
+                        android:text="Address 2" />
+
+                    <EditText
+                        android:id="@+id/editAddress2"
+                        style="@style/edittext_form"
+                        android:maxLength="42"/>
+
+                    <TextView
+                        style="@style/blue_normal_txt"
+                        android:text="STORE EMAIL" />
+
+                    <EditText
+                        android:id="@+id/editEmail"
+                        style="@style/edittext_form"
+                        android:maxLength="42"/>
+
+                    <TextView
+                        style="@style/blue_normal_txt"
+                        android:text="EMAIL PASSWORD" />
+
+                    <EditText
+                        android:id="@+id/editEmailPassword"
+                        style="@style/edittext_form"
+                        android:maxLength="42"/>
+
+                    <TextView
+                        style="@style/blue_normal_txt"
+                        android:text="Mobile #" />
+
+                    <EditText
+                        android:id="@+id/editMobile"
+                        style="@style/edittext_form"
+                        android:maxLength="42"/>
+
+                    <TextView
+                        style="@style/blue_normal_txt"
+                        android:text="Landline #" />
+
+                    <EditText
+                        android:id="@+id/editLandline"
+                        style="@style/edittext_form"
+                        android:maxLength="42"/>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

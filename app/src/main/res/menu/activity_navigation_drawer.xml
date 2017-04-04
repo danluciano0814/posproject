@@ -52,13 +52,13 @@
     <item android:title="Data" android:checkableBehavior="single">
         <menu>
             <item
-                android:checkable="false"
+                android:checkable="true"
                 android:icon="@drawable/ic_data_migration"
                 android:title="Data Migration"
                 android:id="@+id/nav_dataMigration"/>
 
             <item
-                android:checkable="false"
+                android:checkable="true"
                 android:icon="@drawable/ic_storage"
                 android:title="Storage"
                 android:id="@+id/nav_storage"/>

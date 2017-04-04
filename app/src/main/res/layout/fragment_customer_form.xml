@@ -211,9 +211,9 @@
                             <TextView
                                 android:id="@+id/txtCode"
                                 style="@style/edittext_form"
-                                android:textSize="@dimen/txt_title"
                                 android:gravity="center_vertical"
-                                android:maxLength="20" />
+                                android:maxLength="20"
+                                android:textSize="@dimen/txt_title" />
 
                         </LinearLayout>
 
@@ -231,12 +231,34 @@
                             <TextView
                                 android:id="@+id/txtPoints"
                                 style="@style/edittext_form"
-                                android:textSize="@dimen/txt_title"
                                 android:gravity="center_vertical"
+                                android:maxLength="12"
                                 android:text="0.00"
-                                android:maxLength="12" />
+                                android:textSize="@dimen/txt_title" />
 
                         </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:orientation="vertical"
+                            android:gravity="bottom">
+
+                            <Button
+                                android:id="@+id/btnCode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@color/colorPrimary"
+                                android:drawableTop="@drawable/ic_mail"
+                                android:text="SEND CODE"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/txt_normal"
+                                android:visibility="gone"/>
+
+                        </LinearLayout>
+
+
 
                     </LinearLayout>
 
@@ -257,8 +279,8 @@
                     <EditText
                         android:id="@+id/editFirstName"
                         style="@style/edittext_form"
-                        android:maxLength="50"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:maxLength="50" />
 
                     <TextView
                         style="@style/blue_normal_txt"
