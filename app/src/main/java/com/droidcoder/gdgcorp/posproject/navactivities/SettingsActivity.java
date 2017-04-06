@@ -1,4 +1,4 @@
-package com.droidcoder.gdgcorp.posproject;
+package com.droidcoder.gdgcorp.posproject.navactivities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +7,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+
+import com.droidcoder.gdgcorp.posproject.BaseCompatActivity;
+import com.droidcoder.gdgcorp.posproject.R;
 import com.droidcoder.gdgcorp.posproject.fragments.CustomerSettingFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.SalesSettingFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.StoreSettingFragment;

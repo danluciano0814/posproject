@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -14,7 +12,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,6 +27,7 @@ import com.droidcoder.gdgcorp.posproject.fragments.ProgressFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.RoleSummaryFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.UserFormFragment;
 import com.droidcoder.gdgcorp.posproject.globals.GlobalConstants;
+import com.droidcoder.gdgcorp.posproject.navactivities.SettingsActivity;
 import com.droidcoder.gdgcorp.posproject.navfragments.CustomerFragment;
 import com.droidcoder.gdgcorp.posproject.navfragments.EmployeesFragment;
 import com.droidcoder.gdgcorp.posproject.navfragments.MissingPageFragment;
@@ -51,8 +49,6 @@ import javax.mail.internet.MimeMessage;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.droidcoder.gdgcorp.posproject.log.AppLogger.logE;
 
 public class NavigationActivity extends BaseCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, AsyncCheckEmail.OnCheckingEmail {

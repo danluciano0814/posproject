@@ -35,6 +35,8 @@ import com.droidcoder.gdgcorp.posproject.utils.StringConverter;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -153,6 +155,8 @@ public class CustomerFormFragment extends BaseDialogFragment {
                 boolean isValid = true;
                 boolean isSave = txtCustomerId.getText().toString().trim().equals("");
                 double quantity;
+                Pattern pattern = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
+                Matcher matcher = pattern.matcher(editEmail.getText().toString().trim());
 
                 if(editFirstName.getText().toString().trim().equalsIgnoreCase("")){
                     editFirstName.setError("First name is required");
@@ -166,6 +170,11 @@ public class CustomerFormFragment extends BaseDialogFragment {
 
                 if(editEmail.getText().toString().trim().equalsIgnoreCase("")){
                     editEmail.setError("Email is required");
+                    isValid = false;
+                }
+
+                if(!matcher.matches()){
+                    editEmail.setError("Please input a valid email");
                     isValid = false;
                 }
 

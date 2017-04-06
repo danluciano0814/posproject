@@ -40,16 +40,14 @@ public class Product {
     @NotNull
     double sellPrice;
 
-    long promoSaleId;
-
     byte[] image;
 
     double stocks;
 
-    @Generated(hash = 2064516014)
+    @Generated(hash = 964303972)
     public Product(Long id, @NotNull Date created, Date deleted, String name,
-            String description, double costPrice, double sellPrice,
-            long promoSaleId, byte[] image, double stocks) {
+            String description, double costPrice, double sellPrice, byte[] image,
+            double stocks) {
         this.id = id;
         this.created = created;
         this.deleted = deleted;
@@ -57,7 +55,6 @@ public class Product {
         this.description = description;
         this.costPrice = costPrice;
         this.sellPrice = sellPrice;
-        this.promoSaleId = promoSaleId;
         this.image = image;
         this.stocks = stocks;
     }
@@ -122,14 +119,6 @@ public class Product {
         this.sellPrice = sellPrice;
     }
 
-    public long getPromoSaleId() {
-        return this.promoSaleId;
-    }
-
-    public void setPromoSaleId(long promoSaleId) {
-        this.promoSaleId = promoSaleId;
-    }
-
     public byte[] getImage() {
         return this.image;
     }
@@ -145,6 +134,5 @@ public class Product {
     public void setStocks(double stocks) {
         this.stocks = stocks;
     }
-
 
 }

@@ -58,10 +58,10 @@
                 android:id="@+id/nav_dataMigration"/>
 
             <item
-                android:checkable="true"
-                android:icon="@drawable/ic_storage"
-                android:title="Storage"
-                android:id="@+id/nav_storage"/>
+                android:checkable="false"
+                android:icon="@drawable/ic_settings_black"
+                android:title="Settings"
+                android:id="@+id/nav_settings"/>
 
         </menu>
     </item>
