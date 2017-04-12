@@ -22,7 +22,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.droidcoder.gdgcorp.posproject.datasystem.CurrentUser;
+import com.droidcoder.gdgcorp.posproject.fragments.CustomerSettingFragment;
+import com.droidcoder.gdgcorp.posproject.fragments.DateFilterFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.EmployeeFormFragment;
+import com.droidcoder.gdgcorp.posproject.fragments.GraphSalesFragment;
+import com.droidcoder.gdgcorp.posproject.fragments.GraphTransactionFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.ProgressFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.RoleSummaryFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.UserFormFragment;
@@ -34,8 +38,8 @@ import com.droidcoder.gdgcorp.posproject.navfragments.MissingPageFragment;
 import com.droidcoder.gdgcorp.posproject.utils.AsyncCheckEmail;
 import com.droidcoder.gdgcorp.posproject.utils.DBHelper;
 import com.droidcoder.gdgcorp.posproject.utils.ImageConverter;
-import com.github.mikephil.charting.charts.BarChart;
 
+import java.util.Date;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -51,11 +55,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class NavigationActivity extends BaseCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, AsyncCheckEmail.OnCheckingEmail {
+        implements NavigationView.OnNavigationItemSelectedListener, AsyncCheckEmail.OnCheckingEmail, DateFilterFragment.SetOnDateFilter {
 
     //butterknife sample init
     @BindView(R.id.content_main) FrameLayout content_main;
-    @BindView(R.id.bar_graph) BarChart barChart;
+    @BindView(R.id.main_frame) FrameLayout mainFrame;
+    @BindView(R.id.yearlySales)LinearLayout yearlySales;
+    @BindView(R.id.topItems)LinearLayout topItems;
 
     //user
     NavigationView navigationView;
@@ -67,6 +73,7 @@ public class NavigationActivity extends BaseCompatActivity
 
     FragmentManager fm;
     ProgressFragment progressFragment;
+    Fragment settingsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +125,43 @@ public class NavigationActivity extends BaseCompatActivity
                 drawer.closeDrawer(GravityCompat.START);
             }
         });
+
+        settingsFragment = new GraphSalesFragment();
+        getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), settingsFragment, "salesSetting").commit();
+        yearlySales.setBackground(getResources().getDrawable(R.drawable.line_below));
+
+    }
+
+    public void selectLeftNavigation(View v){
+
+        switch(v.getId()){
+            case R.id.yearlySales:
+                settingsFragment = new GraphSalesFragment();
+                getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), settingsFragment, "salesSetting").commit();
+                yearlySales.setBackground(getResources().getDrawable(R.drawable.line_below));
+                topItems.setBackground(null);
+                //storeSettings.setBackground(null);
+                break;
+
+            case R.id.topItems:
+                settingsFragment = new GraphTransactionFragment();
+                getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), settingsFragment, "customerSetting").commit();
+                yearlySales.setBackground(null);
+                topItems.setBackground(getResources().getDrawable(R.drawable.line_below));
+                //storeSettings.setBackground(null);
+                break;
+
+        }
+    }
+
+    @Override
+    public void onDateFilter(Date startDate, Date endDate) {
+
+        if(settingsFragment != null && settingsFragment instanceof GraphTransactionFragment){
+
+            ((GraphTransactionFragment)settingsFragment).createPieChart(startDate, endDate);
+
+        }
 
     }
 

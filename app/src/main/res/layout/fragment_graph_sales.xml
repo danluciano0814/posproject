@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:background="@drawable/plain_border">
+
+            <Spinner
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:id="@+id/spinnerYear"
+                android:layout_marginLeft="20dp"
+                android:layout_margin="2dp" />
+
+            <TextView
+                android:text="SALES"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@color/colorPrimary"
+                android:layout_gravity="center"/>
+
+
+            <TextView
+                android:text="PROFIT"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@color/green"
+                android:layout_gravity="center"/>
+
+
+            <TextView
+                android:text="YEARLY SALES"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:id="@+id/userName"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Cash Sales"
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="5dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/txt_title"
+                        android:layout_marginBottom="5dp"
+                        android:id="@+id/txtCash"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Credit Sales"
+                        android:layout_marginBottom="5dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/txt_title"
+                        android:layout_marginBottom="5dp"
+                        android:id="@+id/txtCredit"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/txt_title"
+                        android:text="Points Sales"
+                        android:layout_marginBottom="5dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/txt_title"
+                        android:layout_marginBottom="5dp"
+                        android:id="@+id/txtPoints"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/barChartSales"
+                android:padding="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp">
+
+            </com.github.mikephil.charting.charts.BarChart>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

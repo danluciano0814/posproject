@@ -146,6 +146,7 @@ public class PaymentFragment extends BaseFragment implements View.OnClickListene
 
                     if(total > ((SalesActivity)getActivity()).getCustomer().getPoints()){
                         isValid = false;
+                        Toast.makeText(getActivity(), "Total = " + total + "  sc =" + sc + "  points = " + ((SalesActivity)getActivity()).getCustomer().getPoints(), Toast.LENGTH_SHORT).show();
                         Toast.makeText(getActivity(), "Invalid payment, customer points is short by (" + ((total - sc) - ((SalesActivity)getActivity()).getCustomer().getPoints()) + ")", Toast.LENGTH_LONG).show();
                     }
 

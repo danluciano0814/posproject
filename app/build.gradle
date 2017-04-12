@@ -58,8 +58,9 @@ dependencies {
     //qr code library
     compile 'com.google.zxing:core:3.2.1'
     compile 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
-
     compile 'org.apache.commons:commons-lang3:3.0'
+    //time picker
+    compile 'com.kovachcode:timePickerWithSeconds:1.0.1'
 
     testCompile 'junit:junit:4.12'
 }

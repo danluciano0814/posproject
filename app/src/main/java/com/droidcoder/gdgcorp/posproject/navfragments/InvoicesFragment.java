@@ -262,7 +262,6 @@ public class InvoicesFragment extends BaseFragment {
         }else if(status.equalsIgnoreCase(GlobalConstants.PAYMENT_TYPE_CREDIT)){
 
             orderReceiptList = DBHelper.getDaoSession().getOrderReceiptDao().queryBuilder()
-                    .where(OrderReceiptDao.Properties.IsPaid.eq(false))
                     .where(OrderReceiptDao.Properties.PaymentType.eq(GlobalConstants.PAYMENT_TYPE_CREDIT))
                     .where(OrderReceiptDao.Properties.Deleted.isNull())
                     .where(OrderReceiptDao.Properties.Created.between(fromDate, toDate))

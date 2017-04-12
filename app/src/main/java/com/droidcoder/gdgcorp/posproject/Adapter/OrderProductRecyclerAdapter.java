@@ -165,6 +165,7 @@ public class OrderProductRecyclerAdapter extends RecyclerView.Adapter<OrderProdu
 
     public void calculatePerOrder(int position){
         double sellPrice = (orderProductList.get(position).getProductQuantity() * orderProductList.get(position).getProductSellPrice());
+        double costPrice = (orderProductList.get(position).getProductQuantity() * DBHelper.getDaoSession().getProductDao().load(orderProductList.get(position).getProductId()).getCostPrice());
         double originalSellPrice = sellPrice;
         double tax = Double.parseDouble(LFHelper.getLocalData(context, GlobalConstants.TAX_FILE));
 
@@ -205,6 +206,8 @@ public class OrderProductRecyclerAdapter extends RecyclerView.Adapter<OrderProdu
         }
 
         orderProductList.get(position).setProductDeductedPrice(sellPrice);
+        //orderProductList.get(position).setProductSellPrice(originalSellPrice);
+        orderProductList.get(position).setProductCostPrice(costPrice);
         orderProductList.get(position).setDiscountTotal(originalSellPrice - sellPrice);
 
     }

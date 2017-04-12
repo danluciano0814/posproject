@@ -78,7 +78,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:text="3-9-2017 3:30:10 PM"
+                        android:text=""
                         android:id="@+id/txtCreated"/>
 
                 </LinearLayout>

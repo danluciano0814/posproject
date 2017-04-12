@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/filterContainer"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="450dp"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:layout_height="350dp"
+                android:layout_width="350dp"
+                android:id="@+id/pieChartTransaction"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_margin="20dp">
+
+                <TextView
+                    style="@style/blue_title_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="TRANSACTION COUNT"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_margin="5dp"
+                android:background="#3498db"
+                android:gravity="center|top">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txt_normal"
+                    android:text="CASH"
+                    android:layout_margin="3dp"
+                    android:gravity="left"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txt_title"
+                    android:textAlignment="center"
+                    android:text="CASH"
+                    android:layout_margin="3dp"
+                    android:id="@+id/txtCash"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_margin="5dp"
+                android:background="#f1c40f">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txt_normal"
+                    android:text="CASH"
+                    android:layout_margin="3dp"
+                    android:gravity="left"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txt_title"
+                    android:textAlignment="center"
+                    android:text="CREDIT"
+                    android:layout_margin="3dp"
+                    android:id="@+id/txtCredit"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_margin="5dp"
+                android:background="#2ecc71">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txt_normal"
+                    android:text="POINTS"
+                    android:layout_margin="3dp"
+                    android:gravity="left"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txt_title"
+                    android:textAlignment="center"
+                    android:text="CASH"
+                    android:layout_margin="3dp"
+                    android:id="@+id/txtPoints"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_margin="5dp"
+                android:background="#e74c3c">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txt_normal"
+                    android:text="VOIDED"
+                    android:layout_margin="3dp"
+                    android:gravity="left"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txt_title"
+                    android:textAlignment="center"
+                    android:text="CASH"
+                    android:layout_margin="3dp"
+                    android:id="@+id/txtVoided"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

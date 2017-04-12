@@ -186,6 +186,7 @@ public class InvoiceFormFragment extends BaseDialogFragment {
                                 }
                                 DBHelper.getDaoSession().getOrderReceiptDao().update(orderReceipt);
                                 Toast.makeText(getActivity(), "Receipt was voided successfully, Product stocks are returned", Toast.LENGTH_LONG).show();
+                                dismiss();
 
                             }
                         })
@@ -222,6 +223,7 @@ public class InvoiceFormFragment extends BaseDialogFragment {
 
                                 DBHelper.getDaoSession().getOrderReceiptDao().update(orderReceipt);
                                 Toast.makeText(getActivity(), "Receipt was voided successfully, Product stocks are returned", Toast.LENGTH_LONG).show();
+                                dismiss();
 
                             }
                         })

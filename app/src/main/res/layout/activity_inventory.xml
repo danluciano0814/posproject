@@ -40,26 +40,27 @@
                     android:id="@+id/ln_product"
                     android:onClick="selectLeftNavigation">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_10dp"
-                        android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@color/colorPrimary"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_product" />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_product"
-                            android:paddingRight="10dp"
-                            android:id="@+id/imageProduct"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="5dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Product"
                             android:textSize="@dimen/txt_title"
-                            android:id="@+id/txtProduct"
-                            />
+                            android:textColor="@color/green"
+                            android:background="@null"/>
 
                     </LinearLayout>
 
@@ -73,26 +74,27 @@
                     android:id="@+id/ln_category"
                     android:onClick="selectLeftNavigation">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="@dimen/margin_10dp">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@color/colorPrimary"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_category" />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_category"
-                            android:paddingRight="10dp"
-                            android:id="@+id/imageCategory"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="5dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Category"
                             android:textSize="@dimen/txt_title"
-                            android:id="@+id/txtCategory"
-                            />
+                            android:textColor="@color/green"
+                            android:background="@null"/>
 
                     </LinearLayout>
 
@@ -106,24 +108,27 @@
                     android:id="@+id/ln_sub_category"
                     android:onClick="selectLeftNavigation">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_10dp"
-                        android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@color/colorPrimary"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_subcategory" />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_subcategory"
-                            android:paddingRight="10dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="5dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Sub Category"
                             android:textSize="@dimen/txt_title"
-                            />
+                            android:textColor="@color/green"
+                            android:background="@null"/>
 
                     </LinearLayout>
 
@@ -137,24 +142,27 @@
                     android:id="@+id/ln_discount"
                     android:onClick="selectLeftNavigation">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_10dp"
-                        android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@color/colorPrimary"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_discount_black" />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_discount_black"
-                            android:paddingRight="10dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="5dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Discount"
                             android:textSize="@dimen/txt_title"
-                            />
+                            android:textColor="@color/green"
+                            android:background="@null"/>
 
                     </LinearLayout>
 

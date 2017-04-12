@@ -466,7 +466,7 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
             if(isSave){
 
                 OrderReceipt onHoldReceipt = new OrderReceipt();
-                onHoldReceipt.setCreated(new Date());
+                onHoldReceipt.setCreated(Calendar.getInstance().getTime());
                 onHoldReceipt.setDeleted(null);
                 onHoldReceipt.setOnHold(true);
                 onHoldReceipt.setIsPaid(false);
@@ -844,6 +844,7 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
 
         Product product = DBHelper.getDaoSession().getProductDao().load(id);
         OrderProduct orderProduct = new OrderProduct();
+        orderProduct.setCreated(new Date());
         orderProduct.setProductId(product.getId());
         orderProduct.setProductName(product.getName());
         orderProduct.setProductImage(product.getImage());

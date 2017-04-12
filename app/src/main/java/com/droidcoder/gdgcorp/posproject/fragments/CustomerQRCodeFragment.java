@@ -1,8 +1,6 @@
 package com.droidcoder.gdgcorp.posproject.fragments;
 
 import android.Manifest;
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -20,7 +18,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.droidcoder.gdgcorp.posproject.R;
 import com.droidcoder.gdgcorp.posproject.dataentity.Customer;
 import com.droidcoder.gdgcorp.posproject.globals.GlobalConstants;
@@ -123,7 +120,6 @@ public class CustomerQRCodeFragment extends BaseDialogFragment {
                     Toast.makeText(getActivity(), "email sending fail", Toast.LENGTH_SHORT).show();
                 }
 
-
             }
         });
     }
@@ -133,7 +129,7 @@ public class CustomerQRCodeFragment extends BaseDialogFragment {
         File file = null;
 
         try {
-            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS + "/CustomerQR");
+            File path = Environment.getExternalStoragePublicDirectory("/CheapposCSV" + "/ProductCSV");
             if(!path.exists()){
                 path.mkdirs();
             }

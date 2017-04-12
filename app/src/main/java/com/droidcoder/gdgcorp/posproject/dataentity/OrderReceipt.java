@@ -402,6 +402,6 @@ public class OrderReceipt {
         myDao = daoSession != null ? daoSession.getOrderReceiptDao() : null;
     }
 
-    
+
 
 }

@@ -12,4 +12,8 @@ public class StringConverter {
         return new DecimalFormat("#########0.00").format(value);
     }
 
+    public static String doubleCommaFormatter(double value){
+        return new DecimalFormat("#,###,###,##0.00").format(value);
+    }
+
 }

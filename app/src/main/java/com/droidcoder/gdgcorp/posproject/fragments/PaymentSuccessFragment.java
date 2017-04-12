@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.droidcoder.gdgcorp.posproject.R;
+import com.droidcoder.gdgcorp.posproject.utils.StringConverter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,8 +40,8 @@ public class PaymentSuccessFragment extends BaseDialogFragment {
 
         setCancelable(false);
 
-        txtChange.setText(getArguments().getString("change"));
-        txtTotal.setText(getArguments().getString("total"));
+        txtChange.setText(StringConverter.doubleCommaFormatter(Double.parseDouble(getArguments().getString("change"))));
+        txtTotal.setText(StringConverter.doubleCommaFormatter(Double.parseDouble(getArguments().getString("total"))));
         txtEmail.setText(getArguments().getString("email"));
 
         imageDone.setOnClickListener(new View.OnClickListener() {

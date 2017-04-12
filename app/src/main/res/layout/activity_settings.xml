@@ -32,25 +32,27 @@
                     android:onClick="selectLeftNavigation"
                     android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_10dp"
-                        android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@color/colorPrimary"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_store" />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingRight="10dp"
-                            android:src="@drawable/ic_store" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="5dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxLines="1"
-                            android:singleLine="true"
                             android:text="Store Setting"
-                            android:textSize="@dimen/txt_title" />
+                            android:textSize="@dimen/txt_title"
+                            android:textColor="@color/green"
+                            android:background="@null"/>
 
                     </LinearLayout>
 
@@ -64,25 +66,27 @@
                     android:onClick="selectLeftNavigation"
                     android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_10dp"
-                        android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@color/colorPrimary"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_computation" />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingRight="10dp"
-                            android:src="@drawable/ic_computation" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="5dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxLines="1"
-                            android:singleLine="true"
                             android:text="Sales Setting"
-                            android:textSize="@dimen/txt_title" />
+                            android:textSize="@dimen/txt_title"
+                            android:textColor="@color/green"
+                            android:background="@null"/>
 
                     </LinearLayout>
 
@@ -96,25 +100,27 @@
                     android:onClick="selectLeftNavigation"
                     android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_10dp"
-                        android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@color/colorPrimary"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_face_settings" />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingRight="10dp"
-                            android:src="@drawable/ic_face_settings" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="5dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxLines="1"
-                            android:singleLine="true"
                             android:text="Customer Setting"
-                            android:textSize="@dimen/txt_title" />
+                            android:textSize="@dimen/txt_title"
+                            android:textColor="@color/green"
+                            android:background="@null"/>
 
                     </LinearLayout>
 

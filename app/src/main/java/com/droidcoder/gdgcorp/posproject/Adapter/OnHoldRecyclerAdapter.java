@@ -20,6 +20,7 @@ import com.droidcoder.gdgcorp.posproject.navactivities.SalesActivity;
 import com.droidcoder.gdgcorp.posproject.utils.DBHelper;
 import com.droidcoder.gdgcorp.posproject.utils.StringConverter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,6 +56,7 @@ public class OnHoldRecyclerAdapter extends RecyclerView.Adapter<OnHoldRecyclerAd
 
         holder.txtReceiptId.setText(orderReceiptList.get(position).getReceiptId() + "");
         holder.txtUniqueId.setText(orderReceiptList.get(position).getReceiptIdentification());
+        holder.txtCreated.setText(new SimpleDateFormat("MM-dd-yy HH:mm").format(orderReceiptList.get(position).getCreated()));
 
         List<OrderProduct> orderProductList = null;
 
