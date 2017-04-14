@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:textSize="@dimen/txt_normal"
-                    android:text="CASH"
+                    android:text="CREDIT"
                     android:layout_margin="3dp"
                     android:gravity="left"/>
 

@@ -21,10 +21,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.droidcoder.gdgcorp.posproject.dataentity.User;
+import com.droidcoder.gdgcorp.posproject.dataentity.UserRole;
 import com.droidcoder.gdgcorp.posproject.datasystem.CurrentUser;
 import com.droidcoder.gdgcorp.posproject.fragments.CustomerSettingFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.DateFilterFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.EmployeeFormFragment;
+import com.droidcoder.gdgcorp.posproject.fragments.GraphAveCustomerFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.GraphSalesFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.GraphTransactionFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.ProgressFragment;
@@ -62,6 +65,7 @@ public class NavigationActivity extends BaseCompatActivity
     @BindView(R.id.main_frame) FrameLayout mainFrame;
     @BindView(R.id.yearlySales)LinearLayout yearlySales;
     @BindView(R.id.topItems)LinearLayout topItems;
+    @BindView(R.id.averageCustomer)LinearLayout averageCustomer;
 
     //user
     NavigationView navigationView;
@@ -99,11 +103,21 @@ public class NavigationActivity extends BaseCompatActivity
         userEmail = (TextView) header.findViewById(R.id.txtUserEmail);
         userRole = (TextView) header.findViewById(R.id.txtUserRole);
         imageUser = (ImageView) header.findViewById(R.id.imageUser);
+        
 
         //populate user
         imageUser.setImageBitmap(ImageConverter.bytesToBitmap(CurrentUser.getUser().getImage()));
         if(CurrentUser.getUser().getUserRoleId() > 0){
-            userRole.setText(DBHelper.getDaoSession().getUserRoleDao().load(CurrentUser.getUser().getUserRoleId()).getRoleName());
+            UserRole role = DBHelper.getDaoSession().getUserRoleDao().load(CurrentUser.getUser().getUserRoleId());
+            userRole.setText(role.getRoleName());
+            navigationView.getMenu().findItem(R.id.nav_sales).setVisible(role.getAllowSales());
+            navigationView.getMenu().findItem(R.id.nav_invoice).setVisible(role.getAllowInvoice());
+            navigationView.getMenu().findItem(R.id.nav_reports).setVisible(role.getAllowReport());
+            navigationView.getMenu().findItem(R.id.nav_inventory).setVisible(role.getAllowInventory());
+            navigationView.getMenu().findItem(R.id.nav_customer).setVisible(role.getAllowInventory());
+            navigationView.getMenu().findItem(R.id.nav_employee).setVisible(role.getAllowEmployee());
+            navigationView.getMenu().findItem(R.id.nav_dataMigration).setVisible(role.getAllowData());
+            navigationView.getMenu().findItem(R.id.nav_settings).setVisible(role.getAllowSetting());
 
         }else{
             userRole.setText("ADMIN");
@@ -137,18 +151,26 @@ public class NavigationActivity extends BaseCompatActivity
         switch(v.getId()){
             case R.id.yearlySales:
                 settingsFragment = new GraphSalesFragment();
-                getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), settingsFragment, "salesSetting").commit();
+                getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), settingsFragment, "graphSales").commit();
                 yearlySales.setBackground(getResources().getDrawable(R.drawable.line_below));
                 topItems.setBackground(null);
-                //storeSettings.setBackground(null);
+                averageCustomer.setBackground(null);
                 break;
 
             case R.id.topItems:
                 settingsFragment = new GraphTransactionFragment();
-                getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), settingsFragment, "customerSetting").commit();
+                getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), settingsFragment, "praphTransaction").commit();
                 yearlySales.setBackground(null);
                 topItems.setBackground(getResources().getDrawable(R.drawable.line_below));
-                //storeSettings.setBackground(null);
+                averageCustomer.setBackground(null);
+                break;
+
+            case R.id.averageCustomer:
+                settingsFragment = new GraphAveCustomerFragment();
+                getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), settingsFragment, "graphAveCustomer").commit();
+                yearlySales.setBackground(null);
+                topItems.setBackground(null);
+                averageCustomer.setBackground(getResources().getDrawable(R.drawable.line_below));
                 break;
 
         }
@@ -179,6 +201,12 @@ public class NavigationActivity extends BaseCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.navigation, menu);
+
+        if(CurrentUser.getUser().getUserRoleId() > 0) {
+            UserRole role = DBHelper.getDaoSession().getUserRoleDao().load(CurrentUser.getUser().getUserRoleId());
+            menu.findItem(R.id.nav_settings).setVisible(role.getAllowSetting());
+        }
+
         return true;
     }
 
