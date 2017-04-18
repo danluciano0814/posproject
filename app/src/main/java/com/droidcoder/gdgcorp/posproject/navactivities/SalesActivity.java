@@ -64,6 +64,8 @@ import com.droidcoder.gdgcorp.posproject.globals.GlobalConstants;
 import com.droidcoder.gdgcorp.posproject.utils.DBHelper;
 import com.droidcoder.gdgcorp.posproject.utils.LFHelper;
 import com.droidcoder.gdgcorp.posproject.utils.StringConverter;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
 
@@ -146,6 +148,10 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_sales);
         ButterKnife.bind(this);
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         txtMenuIndicator.setVisibility(View.INVISIBLE);
         txtSubIndicator.setVisibility(View.INVISIBLE);

@@ -107,7 +107,7 @@
         android:layout_gravity="center_vertical">
 
         <Button
-            android:layout_width="100dp"
+            android:layout_width="90dp"
             android:layout_height="match_parent"
             android:drawableTop="@drawable/ic_search_blue"
             android:background="@drawable/sales_button_bg"

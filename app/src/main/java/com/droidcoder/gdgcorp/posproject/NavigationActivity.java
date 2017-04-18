@@ -20,15 +20,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.droidcoder.gdgcorp.posproject.dataentity.User;
 import com.droidcoder.gdgcorp.posproject.dataentity.UserRole;
 import com.droidcoder.gdgcorp.posproject.datasystem.CurrentUser;
-import com.droidcoder.gdgcorp.posproject.fragments.CustomerSettingFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.DateFilterFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.EmployeeFormFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.GraphAveCustomerFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.GraphSalesFragment;
+import com.droidcoder.gdgcorp.posproject.fragments.GraphTopItems;
 import com.droidcoder.gdgcorp.posproject.fragments.GraphTransactionFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.ProgressFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.RoleSummaryFragment;
@@ -41,10 +39,8 @@ import com.droidcoder.gdgcorp.posproject.navfragments.MissingPageFragment;
 import com.droidcoder.gdgcorp.posproject.utils.AsyncCheckEmail;
 import com.droidcoder.gdgcorp.posproject.utils.DBHelper;
 import com.droidcoder.gdgcorp.posproject.utils.ImageConverter;
-
 import java.util.Date;
 import java.util.Properties;
-
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -53,7 +49,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -65,6 +60,7 @@ public class NavigationActivity extends BaseCompatActivity
     @BindView(R.id.main_frame) FrameLayout mainFrame;
     @BindView(R.id.yearlySales)LinearLayout yearlySales;
     @BindView(R.id.topItems)LinearLayout topItems;
+    @BindView(R.id.transType)LinearLayout transType;
     @BindView(R.id.averageCustomer)LinearLayout averageCustomer;
 
     //user
@@ -153,24 +149,37 @@ public class NavigationActivity extends BaseCompatActivity
                 settingsFragment = new GraphSalesFragment();
                 getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), settingsFragment, "graphSales").commit();
                 yearlySales.setBackground(getResources().getDrawable(R.drawable.line_below));
-                topItems.setBackground(null);
+                transType.setBackground(null);
                 averageCustomer.setBackground(null);
+                topItems.setBackground(null);
                 break;
 
-            case R.id.topItems:
+            case R.id.transType:
                 settingsFragment = new GraphTransactionFragment();
-                getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), settingsFragment, "praphTransaction").commit();
+                getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), settingsFragment, "graphTransaction").commit();
                 yearlySales.setBackground(null);
-                topItems.setBackground(getResources().getDrawable(R.drawable.line_below));
+                transType.setBackground(getResources().getDrawable(R.drawable.line_below));
                 averageCustomer.setBackground(null);
+                topItems.setBackground(null);
                 break;
 
             case R.id.averageCustomer:
                 settingsFragment = new GraphAveCustomerFragment();
                 getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), settingsFragment, "graphAveCustomer").commit();
                 yearlySales.setBackground(null);
-                topItems.setBackground(null);
+                transType.setBackground(null);
                 averageCustomer.setBackground(getResources().getDrawable(R.drawable.line_below));
+                topItems.setBackground(null);
+
+                break;
+
+            case R.id.topItems:
+                settingsFragment = new GraphTopItems();
+                getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), settingsFragment, "graphTransaction").commit();
+                yearlySales.setBackground(null);
+                topItems.setBackground(getResources().getDrawable(R.drawable.line_below));
+                averageCustomer.setBackground(null);
+                transType.setBackground(null);
                 break;
 
         }
@@ -182,6 +191,14 @@ public class NavigationActivity extends BaseCompatActivity
         if(settingsFragment != null && settingsFragment instanceof GraphTransactionFragment){
 
             ((GraphTransactionFragment)settingsFragment).createPieChart(startDate, endDate);
+
+        }else if(settingsFragment != null && settingsFragment instanceof GraphAveCustomerFragment){
+
+            ((GraphAveCustomerFragment)settingsFragment).createLineChart(startDate, endDate);
+
+        }else if(settingsFragment != null && settingsFragment instanceof GraphTopItems){
+
+            ((GraphTopItems)settingsFragment).createTopItemChart(startDate, endDate);
 
         }
 

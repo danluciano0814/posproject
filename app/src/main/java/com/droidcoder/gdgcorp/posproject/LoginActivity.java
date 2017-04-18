@@ -157,6 +157,7 @@ public class LoginActivity extends BaseCompatActivity implements AsyncCheckEmail
 
                         CurrentUser.initUser(password);
                         startActivity(new Intent(this, NavigationActivity.class));
+                        txtPassword.setText("");
 
                     }else{
                         Toast.makeText(this, "Login pin is invalid", Toast.LENGTH_LONG).show();

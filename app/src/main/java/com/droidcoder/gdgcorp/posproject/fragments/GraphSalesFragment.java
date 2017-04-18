@@ -143,7 +143,7 @@ public class GraphSalesFragment extends BaseFragment {
         YAxis leftAxis = barChartSales.getAxisLeft();
         leftAxis.setValueFormatter(new LargeValueFormatter());
         leftAxis.setDrawGridLines(false);
-        leftAxis.setSpaceTop(30f);
+        leftAxis.setSpaceTop(20f);
         leftAxis.setAxisMinValue(0f); // this replaces setStartAtZero(true
         barChartSales.getAxisRight().setEnabled(false);
 
@@ -227,7 +227,7 @@ public class GraphSalesFragment extends BaseFragment {
 
         BarData data = new BarData(dataSets);
         data.setValueFormatter(new LargeValueFormatter());
-
+        
         barChartSales.setData(data);
         barChartSales.getLegend().setEnabled(false);
         barChartSales.getDescription().setEnabled(false);
@@ -235,7 +235,7 @@ public class GraphSalesFragment extends BaseFragment {
         barChartSales.getXAxis().setAxisMinValue(startYear);
         barChartSales.groupBars(0f, groupSpace, barSpace);
         barChartSales.invalidate();
-        barChartSales.animateY(1000, Easing.EasingOption.EaseInOutQuad);
+        barChartSales.animateY(1200, Easing.EasingOption.EaseInOutQuad);
 
     }
 

@@ -65,7 +65,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/topItems"
+                        android:id="@+id/transType"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
@@ -123,7 +123,41 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Ave. Customer"
+                                android:text="Trans. Total"
+                                android:textSize="@dimen/txt_title"
+                                android:textColor="@color/green"
+                                android:background="@null"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/topItems"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:onClick="selectLeftNavigation"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@color/colorPrimary"
+                            android:scaleType="center"
+                            android:src="@drawable/ic_bar_type" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:gravity="center_vertical"
+                            android:layout_marginLeft="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Top Items"
                                 android:textSize="@dimen/txt_title"
                                 android:textColor="@color/green"
                                 android:background="@null"/>
