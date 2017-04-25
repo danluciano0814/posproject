@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.droidcoder.gdgcorp.posproject.NavigationActivity;
 import com.droidcoder.gdgcorp.posproject.R;
 
 /**
@@ -20,4 +21,9 @@ public class DashboardFragment extends BaseFragment{
         return inflater.inflate(R.layout.fragment_blank, container, false);
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ((NavigationActivity)getActivity()).refreshDashBoard();
+    }
 }

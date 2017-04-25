@@ -36,6 +36,7 @@ import com.droidcoder.gdgcorp.posproject.navactivities.SettingsActivity;
 import com.droidcoder.gdgcorp.posproject.navfragments.CustomerFragment;
 import com.droidcoder.gdgcorp.posproject.navfragments.EmployeesFragment;
 import com.droidcoder.gdgcorp.posproject.navfragments.MissingPageFragment;
+import com.droidcoder.gdgcorp.posproject.navfragments.ReportsFragment;
 import com.droidcoder.gdgcorp.posproject.utils.AsyncCheckEmail;
 import com.droidcoder.gdgcorp.posproject.utils.DBHelper;
 import com.droidcoder.gdgcorp.posproject.utils.ImageConverter;
@@ -185,6 +186,15 @@ public class NavigationActivity extends BaseCompatActivity
         }
     }
 
+    public void refreshDashBoard(){
+        settingsFragment = new GraphSalesFragment();
+        getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), settingsFragment, "graphSales").commit();
+        yearlySales.setBackground(getResources().getDrawable(R.drawable.line_below));
+        transType.setBackground(null);
+        averageCustomer.setBackground(null);
+        topItems.setBackground(null);
+    }
+
     @Override
     public void onDateFilter(Date startDate, Date endDate) {
 
@@ -199,6 +209,12 @@ public class NavigationActivity extends BaseCompatActivity
         }else if(settingsFragment != null && settingsFragment instanceof GraphTopItems){
 
             ((GraphTopItems)settingsFragment).createTopItemChart(startDate, endDate);
+
+        }
+
+        if(fm.findFragmentByTag("ReportsFragment") != null && fm.findFragmentByTag("ReportsFragment").isVisible()){
+
+            ((ReportsFragment)fm.findFragmentByTag("ReportsFragment")).generateReport(startDate, endDate);
 
         }
 

@@ -94,7 +94,8 @@ public class GraphTransactionFragment extends BaseFragment {
 
             if(orderReceipt.getDeleted() != null){
                 voidedCounter++;
-            }else if(orderReceipt.getPaymentType().equalsIgnoreCase(GlobalConstants.PAYMENT_TYPE_CASH)){
+            }else if(orderReceipt.getPaymentType().equalsIgnoreCase(GlobalConstants.PAYMENT_TYPE_CASH)
+                    || orderReceipt.getOnHold()){
                 cashCounter++;
             }else if(orderReceipt.getPaymentType().equalsIgnoreCase(GlobalConstants.PAYMENT_TYPE_CREDIT)){
                 creditCounter++;

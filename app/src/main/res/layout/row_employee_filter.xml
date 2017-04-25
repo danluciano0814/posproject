@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:padding="5dp"
+    android:id="@+id/employeeItem"
+    android:clickable="true">
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/cbxActive"
+        android:textSize="@dimen/txt_title"
+        android:padding="5dp"
+        android:focusable="false"
+        android:buttonTint="@color/colorPrimary"
+        android:focusableInTouchMode="false"
+        android:gravity="center"
+        android:clickable="false"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Employee Name"
+        android:textSize="@dimen/txt_title"
+        android:id="@+id/txtEmployeeName"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:maxLines="1"
+        android:maxLength="16"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/txtEmail"
+        android:textSize="@dimen/txt_title"
+        android:gravity="end"
+        android:layout_weight="1"
+        android:maxLines="1"
+        android:maxLength="16"
+        android:text="sample"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/txtRole"
+        android:textSize="@dimen/txt_title"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:maxLines="1"
+        android:maxLength="16"
+        android:visibility="gone"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtEmployeeId"
+        android:visibility="gone"/>
+
+</LinearLayout>

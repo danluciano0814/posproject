@@ -1,7 +1,9 @@
 package com.droidcoder.gdgcorp.posproject.navfragments;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -10,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -88,8 +91,11 @@ public class DataMigrationFragment extends BaseFragment {
         btnImportCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                importType = "customer";
-                openFile(OPEN_IMPORT_CODE);
+
+                if(isStoragePermissionGranted()){
+                    importType = "customer";
+                    openFile(OPEN_IMPORT_CODE);
+                }
 
             }
         });
@@ -97,40 +103,60 @@ public class DataMigrationFragment extends BaseFragment {
         btnImportDiscount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                importType = "discount";
-                openFile(OPEN_IMPORT_CODE);
+
+                if(isStoragePermissionGranted()){
+                    importType = "discount";
+                    openFile(OPEN_IMPORT_CODE);
+                }
+
             }
         });
 
         btnImportProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                importType = "product";
-                openFile(OPEN_IMPORT_CODE);
+
+                if(isStoragePermissionGranted()){
+                    importType = "product";
+                    openFile(OPEN_IMPORT_CODE);
+                }
+
             }
         });
 
         btnExportDiscount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                exportType = "discount";
-                confirmProcess(exportType);
+
+                if(isStoragePermissionGranted()){
+                    exportType = "discount";
+                    confirmProcess(exportType);
+                }
+
             }
         });
 
         btnExportCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                exportType = "customer";
-                confirmProcess(exportType);
+
+                if(isStoragePermissionGranted()){
+                    exportType = "customer";
+                    confirmProcess(exportType);
+                }
+
             }
         });
 
         btnExportProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                exportType = "product";
-                confirmProcess(exportType);
+
+                if(isStoragePermissionGranted()){
+                    exportType = "product";
+                    confirmProcess(exportType);
+                }
+
             }
         });
 
@@ -895,6 +921,22 @@ public class DataMigrationFragment extends BaseFragment {
         }
 
         return logs;
+    }
+
+    public  boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (getActivity().checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED && getActivity().checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            return true;
+        }
     }
 
     public class AsyncValidateImport extends AsyncTask<Void, Void, String> {

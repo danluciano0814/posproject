@@ -175,15 +175,15 @@ public class GraphSalesFragment extends BaseFragment {
             if((orderReceipt.getPaymentType().equals(GlobalConstants.PAYMENT_TYPE_CASH) || orderReceipt.getPaymentType().equals(GlobalConstants.PAYMENT_TYPE_CREDIT))
                     && cal.get(Calendar.YEAR) == calYear.get(Calendar.YEAR)
                     && orderReceipt.getIsPaid()){
-                cashSales += orderReceipt.getTotalDeductedPrice();
+                cashSales += orderReceipt.getTotalDeductedPrice() + orderReceipt.getServiceChargeTotal();
                 cashCost += orderReceipt.getTotalCostPrice();
             }else if(orderReceipt.getPaymentType().equals(GlobalConstants.PAYMENT_TYPE_CREDIT)
                     && cal.get(Calendar.YEAR) == calYear.get(Calendar.YEAR) && !orderReceipt.getIsPaid()){
-                creditSales += orderReceipt.getTotalDeductedPrice();
+                creditSales += orderReceipt.getTotalDeductedPrice() + orderReceipt.getServiceChargeTotal();
                 creditCost += orderReceipt.getTotalCostPrice();
             }else if(orderReceipt.getPaymentType().equals(GlobalConstants.PAYMENT_TYPE_POINTS)
                     && cal.get(Calendar.YEAR) == calYear.get(Calendar.YEAR)){
-                pointSales += orderReceipt.getTotalDeductedPrice();
+                pointSales += orderReceipt.getTotalDeductedPrice() + orderReceipt.getServiceChargeTotal();
                 pointCost += orderReceipt.getTotalCostPrice();
             }
         }
@@ -203,7 +203,7 @@ public class GraphSalesFragment extends BaseFragment {
                 cal.setTime(orderProduct.getCreated());
 
                 if(orderProduct.getCreated().getMonth() == i && cal.get(Calendar.YEAR) == calYear.get(Calendar.YEAR)){
-                    value1 += orderProduct.getProductDeductedPrice();
+                    value1 += orderProduct.getProductDeductedPrice() + (orderProduct.getProductDeductedPrice()/100 * orderProduct.getServiceCharge());
                     value2 += orderProduct.getProductCostPrice();
                 }
             }
