@@ -20,24 +20,24 @@
         android:gravity="center">
 
         <LinearLayout
-            android:layout_width="500dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:paddingTop="30dp"
             android:paddingBottom="30dp"
             android:gravity="center">
 
             <com.github.mikephil.charting.charts.HorizontalBarChart
                 android:id="@+id/topItemChart"
-                android:layout_width="450dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="10dp"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="500dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:orientation="vertical">
 
             <LinearLayout

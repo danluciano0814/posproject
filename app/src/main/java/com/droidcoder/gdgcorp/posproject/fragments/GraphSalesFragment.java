@@ -153,8 +153,14 @@ public class GraphSalesFragment extends BaseFragment {
 
         List<OrderProduct> orderProductList = new ArrayList<>();
 
-        //populate data here
+        //refresh dao first for updating orderProducts
+        for(OrderReceipt orderRefresh : DBHelper.getDaoSession().getOrderReceiptDao().queryBuilder()
+                    .where(OrderReceiptDao.Properties.Deleted.isNull())
+                    .list()){
+            orderRefresh.refresh();
+        }
 
+        //populate data here
         List<OrderReceipt> orderDetailsList = DBHelper.getDaoSession().getOrderReceiptDao().queryBuilder()
                 .where(OrderReceiptDao.Properties.Deleted.isNull())
                 .list();

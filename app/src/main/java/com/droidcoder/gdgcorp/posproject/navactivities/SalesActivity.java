@@ -642,6 +642,7 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
 
                 long id = DBHelper.getDaoSession().getOrderReceiptDao().insert(onHoldReceipt);
                 saveOrderToReceipt(id, orderProductRecyclerAdapter.getOrderProductList(), true, true);
+                paymentSuccessFragment.setOrderReceiptId(id);
 
                 OrderReceipt newReceipt = DBHelper.getDaoSession().getOrderReceiptDao().load(id);
                 Calendar calendar = Calendar.getInstance();
@@ -654,6 +655,7 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
             } else {
 
                 OrderReceipt onHoldReceipt = orderReceipt;
+                paymentSuccessFragment.setOrderReceiptId(orderReceipt.getId());
                 onHoldReceipt.setDeleted(null);
                 onHoldReceipt.setOnHold(false);
                 if(paymentType.equalsIgnoreCase(GlobalConstants.PAYMENT_TYPE_CREDIT)){

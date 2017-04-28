@@ -567,7 +567,7 @@ public class ProductSalesFragment extends BaseFragment{
 
                 Uri path;
 
-                if(BuildConfig.VERSION_CODE > 23){
+                if(Build.VERSION.SDK_INT > 23){
                     path = FileProvider.getUriForFile(getActivity(), BuildConfig.APPLICATION_ID + ".provider", f);
                 }else{
                     path = Uri.fromFile(f);
