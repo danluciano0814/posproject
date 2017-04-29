@@ -62,7 +62,7 @@ public class StoreSettingFragment extends BaseFragment {
 
         imageStore.setImageResource(R.drawable.noimage);
 
-        if(LFHelper.getLocalByteData(getActivity(), GlobalConstants.STORE_LOGO_FILE) != null){
+        if(LFHelper.getLocalByteData(getActivity(), GlobalConstants.STORE_LOGO_FILE).length > 0){
             byte[] imageByte = LFHelper.getLocalByteData(getActivity(), GlobalConstants.STORE_LOGO_FILE);
             imageStore.setImageBitmap(ImageConverter.bytesToBitmap(imageByte));
         }

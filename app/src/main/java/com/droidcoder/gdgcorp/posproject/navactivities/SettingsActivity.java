@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import com.droidcoder.gdgcorp.posproject.BaseCompatActivity;
 import com.droidcoder.gdgcorp.posproject.R;
 import com.droidcoder.gdgcorp.posproject.fragments.CustomerSettingFragment;
+import com.droidcoder.gdgcorp.posproject.fragments.PrinterSettingFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.SalesSettingFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.StoreSettingFragment;
 
@@ -27,6 +28,7 @@ public class SettingsActivity extends BaseCompatActivity {
     @BindView(R.id.salesComputation)LinearLayout salesComputation;
     @BindView(R.id.customerSettings)LinearLayout customerSettings;
     @BindView(R.id.storeSettings)LinearLayout storeSettings;
+    @BindView(R.id.printerSettings)LinearLayout printerSettings;
 
     Fragment settingsFragment;
 
@@ -61,6 +63,7 @@ public class SettingsActivity extends BaseCompatActivity {
                 salesComputation.setBackground(getResources().getDrawable(R.drawable.line_below));
                 customerSettings.setBackground(null);
                 storeSettings.setBackground(null);
+                printerSettings.setBackground(null);
                 break;
 
             case R.id.customerSettings:
@@ -69,6 +72,7 @@ public class SettingsActivity extends BaseCompatActivity {
                 salesComputation.setBackground(null);
                 customerSettings.setBackground(getResources().getDrawable(R.drawable.line_below));
                 storeSettings.setBackground(null);
+                printerSettings.setBackground(null);
                 break;
 
             case R.id.storeSettings:
@@ -77,6 +81,16 @@ public class SettingsActivity extends BaseCompatActivity {
                 salesComputation.setBackground(null);
                 customerSettings.setBackground(null);
                 storeSettings.setBackground(getResources().getDrawable(R.drawable.line_below));
+                printerSettings.setBackground(null);
+                break;
+
+            case R.id.printerSettings:
+                settingsFragment = new PrinterSettingFragment();
+                getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), settingsFragment, "printerSetting").commit();
+                salesComputation.setBackground(null);
+                customerSettings.setBackground(null);
+                storeSettings.setBackground(null);
+                printerSettings.setBackground(getResources().getDrawable(R.drawable.line_below));
                 break;
         }
     }

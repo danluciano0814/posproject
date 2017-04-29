@@ -1,7 +1,12 @@
 package com.droidcoder.gdgcorp.posproject.fragments;
 
+import android.annotation.SuppressLint;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -12,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.droidcoder.gdgcorp.posproject.NavigationActivity;
 import com.droidcoder.gdgcorp.posproject.R;
 import com.droidcoder.gdgcorp.posproject.dataentity.Customer;
 import com.droidcoder.gdgcorp.posproject.dataentity.OrderProduct;
@@ -20,7 +26,10 @@ import com.droidcoder.gdgcorp.posproject.dataentity.Product;
 import com.droidcoder.gdgcorp.posproject.dataentity.User;
 import com.droidcoder.gdgcorp.posproject.datasystem.CurrentUser;
 import com.droidcoder.gdgcorp.posproject.globals.GlobalConstants;
+import com.droidcoder.gdgcorp.posproject.printer.BluetoothService;
+import com.droidcoder.gdgcorp.posproject.utils.BluetoothPrinterHelper;
 import com.droidcoder.gdgcorp.posproject.utils.DBHelper;
+import com.droidcoder.gdgcorp.posproject.utils.LFHelper;
 import com.droidcoder.gdgcorp.posproject.utils.StringConverter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -56,11 +65,19 @@ public class InvoiceFormFragment extends BaseDialogFragment {
     @BindView(R.id.btnCredit)Button btnCredit;
     @BindView(R.id.btnMail)Button btnMail;
     @BindView(R.id.btnPrint)Button btnPrint;
+    @BindView(R.id.txtStatus)TextView   txtStatus;
+
+    OrderReceipt orderReceipt;
 
     SimpleDateFormat sdf;
     String spaceContent = "                                                                ";
     double reward = 0;
     Customer customer = null;
+
+    private BluetoothAdapter mBluetoothAdapter = null;
+    private BluetoothService mService = null;
+
+    private static final int BLUETOOTH_REQUEST = 2;
 
     @Nullable
     @Override
@@ -74,12 +91,15 @@ public class InvoiceFormFragment extends BaseDialogFragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        mService = new BluetoothService(getActivity(), mHandler);
+
         setCancelable(false);
         sdf = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
 
         if(!getArguments().isEmpty()){
 
-            OrderReceipt orderReceipt = DBHelper.getDaoSession().getOrderReceiptDao().load(Long.parseLong(getArguments().getString("txtId")));
+            orderReceipt = DBHelper.getDaoSession().getOrderReceiptDao().load(Long.parseLong(getArguments().getString("txtId")));
 
             User user = DBHelper.getDaoSession().getUserDao().load(orderReceipt.getUserId());
             String userName = user.getFirstName() + " " + user.getLastName();
@@ -186,6 +206,7 @@ public class InvoiceFormFragment extends BaseDialogFragment {
                                 }
                                 DBHelper.getDaoSession().getOrderReceiptDao().update(orderReceipt);
                                 Toast.makeText(getActivity(), "Receipt was voided successfully, Product stocks are returned", Toast.LENGTH_LONG).show();
+                                ((NavigationActivity)getActivity()).refreshList();
                                 dismiss();
 
                             }
@@ -241,8 +262,150 @@ public class InvoiceFormFragment extends BaseDialogFragment {
             }
         });
 
+        btnPrint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isBluetoothAvailable()){
+                    BluetoothPrinterHelper.printReceipt(getActivity(), mService, true, orderReceipt);
+                }
+            }
+        });
 
 
     }
+
+    public boolean isBluetoothAvailable(){
+        boolean isAvailable = false;
+
+        if(!LFHelper.getLocalData(getActivity(), GlobalConstants.BLUETOOTH_PRINTER_ENABLE).equalsIgnoreCase("0")){
+            if(mBluetoothAdapter != null){
+                if(mBluetoothAdapter.isEnabled()){
+                    if(mService!=null){
+                        if(!LFHelper.getLocalData(getActivity(), GlobalConstants.BLUETOOTH_PRINTER_NAME).equalsIgnoreCase("0")){
+                            String address = LFHelper.getLocalData(getActivity(), GlobalConstants.BLUETOOTH_PRINTER_NAME);
+                            address = address.substring(address.length() - 17);
+
+                            if(mBluetoothAdapter.checkBluetoothAddress(address)){
+                                isAvailable = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return isAvailable;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        if(!LFHelper.getLocalData(getActivity(), GlobalConstants.BLUETOOTH_PRINTER_ENABLE).equalsIgnoreCase("0")){
+            if(mBluetoothAdapter != null){
+                if(mBluetoothAdapter.isEnabled()){
+                    if(mService!=null){
+
+                        if(!LFHelper.getLocalData(getActivity(), GlobalConstants.BLUETOOTH_PRINTER_NAME).equalsIgnoreCase("0")){
+                            String address = LFHelper.getLocalData(getActivity(), GlobalConstants.BLUETOOTH_PRINTER_NAME);
+                            address = address.substring(address.length() - 17);
+
+                            if(mBluetoothAdapter.checkBluetoothAddress(address)){
+                                BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
+                                mService.connect(device);
+                            }
+                        }else{
+                            Toast.makeText(getActivity(), "Please Set up the printer setting first", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                }else{
+                    Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                    startActivityForResult(intent, BLUETOOTH_REQUEST);
+                }
+            }
+        }
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(mBluetoothAdapter!=null){
+            if(mBluetoothAdapter.isEnabled()){
+                if(mService!=null){
+                    if(mService.getState()==BluetoothService.STATE_NONE){
+                        mService.start();
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(mBluetoothAdapter!=null) {
+            if (requestCode == BLUETOOTH_REQUEST) {
+                if (resultCode == getActivity().RESULT_OK) {
+                    if(!LFHelper.getLocalData(getActivity(), GlobalConstants.BLUETOOTH_PRINTER_ENABLE).equalsIgnoreCase("0")){
+                        if (mService != null) {
+
+                            if(!LFHelper.getLocalData(getActivity(), GlobalConstants.BLUETOOTH_PRINTER_NAME).equalsIgnoreCase("0")){
+                                String address = LFHelper.getLocalData(getActivity(), GlobalConstants.BLUETOOTH_PRINTER_NAME);
+                                address = address.substring(address.length() - 17);
+
+                                if(mBluetoothAdapter.checkBluetoothAddress(address)){
+                                    BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
+                                    mService.connect(device);
+                                }
+                            }else{
+                                Toast.makeText(getActivity(), "Please Set up the printer setting first", Toast.LENGTH_LONG).show();
+                            }
+
+                        }
+                    }else{
+                        Toast.makeText(getActivity(), "Printer was disabled", Toast.LENGTH_LONG).show();
+                    }
+                    //Toast.makeText(OrderMainActivity.this, "BlueTooth Turned On", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if(mService!=null){
+            mService.stop();
+        }
+    }
+
+    @SuppressLint("HandlerLeak")
+    private final android.os.Handler mHandler = new android.os.Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.arg1) {
+
+                case BluetoothService.STATE_CONNECTING:
+                    txtStatus.setText("Printer Status : Connecting");
+                    txtStatus.setTextColor(getResources().getColor(R.color.light_green));
+                    break;
+
+                case BluetoothService.STATE_CONNECTED:
+                    txtStatus.setText("Printer Status : Connected");
+                    txtStatus.setTextColor(getResources().getColor(R.color.light_green));
+                    break;
+
+                case BluetoothService.STATE_NONE:
+                case BluetoothService.STATE_LISTEN:
+                    txtStatus.setText("Printer Status : Disconnected");
+                    break;
+            }
+        }
+    };
 
 }

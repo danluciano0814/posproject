@@ -171,6 +171,14 @@ public class InvoicesFragment extends BaseFragment {
 
     }
 
+    public void refreshInvoice(){
+        try {
+            invoiceFilter((String)spnrStatus.getSelectedItem(), df.format(startDate), df.format(endDate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

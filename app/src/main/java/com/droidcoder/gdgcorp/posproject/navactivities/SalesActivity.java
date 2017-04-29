@@ -386,18 +386,22 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
         btnAddCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CustomerFormFragment customerFormFragment = new CustomerFormFragment();
+
+                Toast.makeText(SalesActivity.this, "Currently unavailable", Toast.LENGTH_LONG).show();
+
+                /*CustomerFormFragment customerFormFragment = new CustomerFormFragment();
                 Bundle bundle = new Bundle();
                 customerFormFragment.setArguments(bundle);
-                customerFormFragment.show(fm, "customerForm");
+                customerFormFragment.show(fm, "customerForm");*/
             }
         });
 
         btnScanCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BarcodeCaptureActivity.class);
-                startActivityForResult(intent, BARCODE_READER_REQUEST_CODE);
+                Toast.makeText(SalesActivity.this, "Currently unavailable", Toast.LENGTH_LONG).show();
+                /*Intent intent = new Intent(getApplicationContext(), BarcodeCaptureActivity.class);
+                startActivityForResult(intent, BARCODE_READER_REQUEST_CODE);*/
             }
         });
 

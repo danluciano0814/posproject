@@ -41,6 +41,7 @@ public class PaymentSuccessFragment extends BaseDialogFragment {
     @BindView(R.id.txtEmail)TextView txtEmail;
     @BindView(R.id.btnEmail)Button btnEmail;
     @BindView(R.id.btnPrint)Button btnPrint;
+    @BindView(R.id.txtStatus)TextView   txtStatus;
 
     private BluetoothAdapter mBluetoothAdapter = null;
     private BluetoothService mService = null;
@@ -82,14 +83,45 @@ public class PaymentSuccessFragment extends BaseDialogFragment {
             @Override
             public void onClick(View v) {
 
-                DBHelper.getDaoSession().getOrderReceiptDao().load(orderReceiptId).refresh();
-                OrderReceipt orderReceipt = DBHelper.getDaoSession().getOrderReceiptDao().load(orderReceiptId);
+                if(isBluetoothAvailable()){
+                    DBHelper.getDaoSession().getOrderReceiptDao().load(orderReceiptId).refresh();
+                    OrderReceipt orderReceipt = DBHelper.getDaoSession().getOrderReceiptDao().load(orderReceiptId);
 
-                BluetoothPrinterHelper.printReceipt(getActivity(), mService, true, orderReceipt);
-
+                    BluetoothPrinterHelper.printReceipt(getActivity(), mService, true, orderReceipt);
+                }
             }
         });
 
+        btnEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Currently unavailable", Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    public boolean isBluetoothAvailable(){
+        boolean isAvailable = false;
+
+        if(!LFHelper.getLocalData(getActivity(), GlobalConstants.BLUETOOTH_PRINTER_ENABLE).equalsIgnoreCase("0")){
+            if(mBluetoothAdapter != null){
+                if(mBluetoothAdapter.isEnabled()){
+                    if(mService!=null){
+                        if(!LFHelper.getLocalData(getActivity(), GlobalConstants.BLUETOOTH_PRINTER_NAME).equalsIgnoreCase("0")){
+                            String address = LFHelper.getLocalData(getActivity(), GlobalConstants.BLUETOOTH_PRINTER_NAME);
+                            address = address.substring(address.length() - 17);
+
+                            if(mBluetoothAdapter.checkBluetoothAddress(address)){
+                                isAvailable = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return isAvailable;
     }
 
     public void setOrderReceiptId(long id){
@@ -190,16 +222,18 @@ public class PaymentSuccessFragment extends BaseDialogFragment {
             switch (msg.arg1) {
 
                 case BluetoothService.STATE_CONNECTING:
-
+                    txtStatus.setText("Printer Status : Connecting");
+                    txtStatus.setTextColor(getResources().getColor(R.color.light_green));
                     break;
 
                 case BluetoothService.STATE_CONNECTED:
-
+                    txtStatus.setText("Printer Status : Connected");
+                    txtStatus.setTextColor(getResources().getColor(R.color.light_green));
                     break;
 
                 case BluetoothService.STATE_NONE:
                 case BluetoothService.STATE_LISTEN:
-
+                    txtStatus.setText("Printer Status : Disconnected");
                     break;
             }
         }

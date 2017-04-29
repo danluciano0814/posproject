@@ -167,16 +167,19 @@
                     <EditText
                         android:id="@+id/editEmail"
                         style="@style/edittext_form"
-                        android:maxLength="42"/>
+                        android:maxLength="42"
+                        android:inputType="textEmailAddress"/>
 
                     <TextView
                         style="@style/blue_normal_txt"
-                        android:text="EMAIL PASSWORD" />
+                        android:text="EMAIL PASSWORD"
+                        android:visibility="gone"/>
 
                     <EditText
                         android:id="@+id/editEmailPassword"
                         style="@style/edittext_form"
-                        android:maxLength="42"/>
+                        android:maxLength="42"
+                        android:visibility="gone" />
 
                     <TextView
                         style="@style/blue_normal_txt"

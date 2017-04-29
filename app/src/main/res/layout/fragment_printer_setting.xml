@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtTitle"
+                    style="@style/blue_title_txt"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="start"
+                    android:text="Printer Settings" />
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_margin="1dp"
+                    android:background="@color/colorPrimary"
+                    android:drawableTop="@drawable/ic_save"
+                    android:text="SAVE SETTINGS"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txt_normal" />
+
+            </FrameLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/transparent_gray_bg"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        android:layout_marginBottom="20dp">
+
+                        <TextView
+                            style="@style/blue_title_txt"
+                            android:text="Bluetooth Printer" />
+
+                        <TextView
+                            android:id="@+id/textView"
+                            style="@style/blue_normal_txt"
+                            android:text="Enable Bluetooth Printing" />
+
+                        <Switch
+                            android:id="@+id/switchPrinter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            app:buttonTint="@color/colorPrimary"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/blue_normal_txt"
+                                    android:text="Printer Name" />
+
+                                <TextView
+                                    android:id="@+id/txtPrinterName"
+                                    style="@style/edittext_form"
+                                    android:textSize="@dimen/txt_normal"
+                                    android:gravity="center_vertical"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:gravity="bottom"
+                                android:orientation="vertical">
+
+                                <Button
+                                    android:id="@+id/btnSearchPrinter"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/colorPrimary"
+                                    android:drawableTop="@drawable/ic_search"
+                                    android:text="SEARCH PRINTER"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/txt_normal" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <TextView
+                            style="@style/blue_normal_txt"
+                            android:text="PAPER SIZE" />
+
+                        <RadioGroup
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/radioPaperSize">
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="58 MM"
+                                android:id="@+id/radio58mm"
+                                android:checked="true"
+                                android:layout_below="@+id/linearLayout4"
+                                android:buttonTint="@color/colorPrimary"
+                                />
+
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/transparent_gray_bg"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            style="@style/blue_title_txt"
+                            android:text="Receipt Display" />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/cbxAddress"
+                            android:textSize="@dimen/txt_normal"
+                            android:textColor="@color/colorPrimary"
+                            android:text="Show Address on receipt"
+                            android:focusable="false"
+                            android:buttonTint="@color/colorPrimary"
+                            android:focusableInTouchMode="false"
+                            android:layout_marginTop="10dp"/>
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/cbxEmail"
+                            android:textSize="@dimen/txt_normal"
+                            android:textColor="@color/colorPrimary"
+                            android:text="Show Email on receipt"
+                            android:focusable="false"
+                            android:buttonTint="@color/colorPrimary"
+                            android:focusableInTouchMode="false"
+                            android:layout_marginTop="10dp"/>
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/cbxMobile"
+                            android:textSize="@dimen/txt_normal"
+                            android:textColor="@color/colorPrimary"
+                            android:text="Show Mobile # on receipt"
+                            android:focusable="false"
+                            android:buttonTint="@color/colorPrimary"
+                            android:focusableInTouchMode="false"
+                            android:layout_marginTop="10dp"/>
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/cbxLandline"
+                            android:textSize="@dimen/txt_normal"
+                            android:textColor="@color/colorPrimary"
+                            android:text="Show Landline # on receipt"
+                            android:focusable="false"
+                            android:buttonTint="@color/colorPrimary"
+                            android:focusableInTouchMode="false"
+                            android:layout_marginTop="10dp"/>
+
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

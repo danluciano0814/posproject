@@ -45,6 +45,12 @@ public class GlobalConstants {
     public static final String BLUETOOTH_PRINTER_ENABLE = "enableBluetoothPrinter.txt";
     public static final String BLUETOOTH_PRINTER_NAME = "printerName.txt";
 
+    //Receipt Display
+    public static final String RECEIPT_SHOW_ADDRESS = "showAddress.txt";
+    public static final String RECEIPT_SHOW_EMAIL = "showEmail.txt";
+    public static final String RECEIPT_SHOW_MOBILE = "showMobile.txt";
+    public static final String RECEIPT_SHOW_LANDLINE = "showLandline.txt";
+
     //Message types sent from the BluetoothService Handler
     public static final int MESSAGE_STATE_CHANGE = 1;
     public static final int MESSAGE_READ = 2;

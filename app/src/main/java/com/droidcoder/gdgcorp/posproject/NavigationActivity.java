@@ -1,12 +1,14 @@
 package com.droidcoder.gdgcorp.posproject;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,6 +22,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.droidcoder.gdgcorp.posproject.dataentity.OrderProduct;
+import com.droidcoder.gdgcorp.posproject.dataentity.OrderReceipt;
+import com.droidcoder.gdgcorp.posproject.dataentity.Product;
 import com.droidcoder.gdgcorp.posproject.dataentity.UserRole;
 import com.droidcoder.gdgcorp.posproject.datasystem.CurrentUser;
 import com.droidcoder.gdgcorp.posproject.fragments.DateFilterFragment;
@@ -35,6 +41,7 @@ import com.droidcoder.gdgcorp.posproject.globals.GlobalConstants;
 import com.droidcoder.gdgcorp.posproject.navactivities.SettingsActivity;
 import com.droidcoder.gdgcorp.posproject.navfragments.CustomerFragment;
 import com.droidcoder.gdgcorp.posproject.navfragments.EmployeesFragment;
+import com.droidcoder.gdgcorp.posproject.navfragments.InvoicesFragment;
 import com.droidcoder.gdgcorp.posproject.navfragments.MissingPageFragment;
 import com.droidcoder.gdgcorp.posproject.navfragments.ReportsFragment;
 import com.droidcoder.gdgcorp.posproject.utils.AsyncCheckEmail;
@@ -222,12 +229,34 @@ public class NavigationActivity extends BaseCompatActivity
 
     @Override
     public void onBackPressed() {
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("Warning");
+            alertDialogBuilder
+                    .setMessage("Do you want to logout?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            // if this button is clicked, close
+                            NavigationActivity.super.onBackPressed();
+                        }
+                    })
+                    .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            // if this button is clicked, just close
+                            // the dialog box and do nothing
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
         }
+
     }
 
     @Override
@@ -258,6 +287,30 @@ public class NavigationActivity extends BaseCompatActivity
         if (id == R.id.nav_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
+        }
+
+        if(id == R.id.nav_logout){
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("Warning");
+            alertDialogBuilder
+                    .setMessage("Do you want to logout?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            // if this button is clicked, close
+                            NavigationActivity.super.onBackPressed();
+                        }
+                    })
+                    .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            // if this button is clicked, just close
+                            // the dialog box and do nothing
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -328,6 +381,10 @@ public class NavigationActivity extends BaseCompatActivity
             ((RoleSummaryFragment)fm.findFragmentByTag("roleSummary")).refreshList();
         }
 
+        if(fm.findFragmentByTag("InvoicesFragment") != null && fm.findFragmentByTag("InvoicesFragment").isVisible()){
+            ((InvoicesFragment)fm.findFragmentByTag("InvoicesFragment")).refreshInvoice();
+        }
+
     }
 
     public void showRoleMaintenance(){
@@ -360,6 +417,8 @@ public class NavigationActivity extends BaseCompatActivity
 
         }
     }
+
+
 
     public class AsyncSendToEmail extends AsyncTask<String, Void, String> {
 
@@ -428,4 +487,5 @@ public class NavigationActivity extends BaseCompatActivity
         }
 
     }
+
 }
