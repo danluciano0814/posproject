@@ -161,6 +161,17 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
         populateMenu();
         populateOrder();
 
+        if(categoryList().size() > 0){
+            Category category = categoryList().get(0);
+            populateSubMenu(category.getId(), category.getCategoryColor());
+
+            if(subCategoryList(category.getId()).size() > 0){
+                SubCategory subCategory = subCategoryList(category.getId()).get(0);
+                populateItemMenu(subCategory.getId(), category.getCategoryColor());
+            }
+
+        }
+
         orderReceipt = new OrderReceipt();
 
         List<String> spinnerList = new ArrayList<>();
