@@ -49,7 +49,7 @@ public class CodeRegisterFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
 
-                if(DBHelper.getDaoSession().getUserDao().loadAll().size()<=0){
+                /*if(DBHelper.getDaoSession().getUserDao().loadAll().size()<=0){
                     User user = new User();
                     user.setPasswordCode("0000");
                     user.setFirstName("system");
@@ -59,7 +59,7 @@ public class CodeRegisterFragment extends DialogFragment {
 
                     DBHelper.getDaoSession().getUserDao().insert(user);
                     CheckRegistration.saveRegister("true", getActivity());
-                }
+                }*/
 
                 for(User user : DBHelper.getDaoSession().getUserDao().loadAll()){
                     if(user.getPasswordCode().equalsIgnoreCase(etCode.getText().toString().trim())){

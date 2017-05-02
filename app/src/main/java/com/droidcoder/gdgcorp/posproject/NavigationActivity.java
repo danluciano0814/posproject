@@ -1,13 +1,24 @@
 package com.droidcoder.gdgcorp.posproject;
 
+import android.*;
+import android.Manifest;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -22,10 +33,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.droidcoder.gdgcorp.posproject.dataentity.OrderProduct;
-import com.droidcoder.gdgcorp.posproject.dataentity.OrderReceipt;
-import com.droidcoder.gdgcorp.posproject.dataentity.Product;
 import com.droidcoder.gdgcorp.posproject.dataentity.UserRole;
 import com.droidcoder.gdgcorp.posproject.datasystem.CurrentUser;
 import com.droidcoder.gdgcorp.posproject.fragments.DateFilterFragment;
@@ -47,6 +54,12 @@ import com.droidcoder.gdgcorp.posproject.navfragments.ReportsFragment;
 import com.droidcoder.gdgcorp.posproject.utils.AsyncCheckEmail;
 import com.droidcoder.gdgcorp.posproject.utils.DBHelper;
 import com.droidcoder.gdgcorp.posproject.utils.ImageConverter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.util.Date;
 import java.util.Properties;
 import javax.mail.Authenticator;
@@ -83,6 +96,9 @@ public class NavigationActivity extends BaseCompatActivity
     ProgressFragment progressFragment;
     Fragment settingsFragment;
 
+    private static final int  MEGABYTE = 1024 * 1024;
+    final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,7 +123,7 @@ public class NavigationActivity extends BaseCompatActivity
         userEmail = (TextView) header.findViewById(R.id.txtUserEmail);
         userRole = (TextView) header.findViewById(R.id.txtUserRole);
         imageUser = (ImageView) header.findViewById(R.id.imageUser);
-        
+
 
         //populate user
         imageUser.setImageBitmap(ImageConverter.bytesToBitmap(CurrentUser.getUser().getImage()));
@@ -313,6 +329,12 @@ public class NavigationActivity extends BaseCompatActivity
             alertDialog.show();
         }
 
+        if(id == R.id.nav_help){
+            if(isStoragePermissionGranted()){
+                downloadTutorialFile();
+            }
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -337,7 +359,7 @@ public class NavigationActivity extends BaseCompatActivity
                 Fragment fragment = (Fragment) cls.getConstructor().newInstance();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(content_main.getId(), fragment, name.concat("Fragment"));
-                Toast.makeText(this, "" + name.concat("Fragment"), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "" + name.concat("Fragment"), Toast.LENGTH_SHORT).show();
                 ft.commit();
             } catch (ClassNotFoundException ex) {
                 Fragment fragment = new MissingPageFragment();
@@ -415,6 +437,110 @@ public class NavigationActivity extends BaseCompatActivity
             new AsyncSendToEmail(this, passCode).execute(email);
             ((EmployeeFormFragment)fm.findFragmentByTag("employeeForm")).setEmailInvalid(emailExist);
 
+        }
+    }
+
+    public  boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+
+                ActivityCompat.requestPermissions(NavigationActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            return true;
+        }
+    }
+
+    public void downloadTutorialFile(){
+        File folder = new File(Environment.getExternalStoragePublicDirectory("/Cheappos") + "/");
+        InputStream file = null;
+
+        try{
+            file = getApplicationContext().getAssets().open("tutorial.pdf");
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }
+
+        folder.mkdir();
+
+        File pdfFile = new File(folder, "tutorial.pdf");
+
+        try{
+            pdfFile.createNewFile();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileOutputStream = new FileOutputStream(pdfFile);
+
+            byte[] buffer = new byte[MEGABYTE];
+            int bufferLength = 0;
+            while((bufferLength = file.read(buffer))>0 ){
+                fileOutputStream.write(buffer, 0, bufferLength);
+            }
+            fileOutputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        File f = new File(Environment.getExternalStoragePublicDirectory("/Cheappos"),
+                "tutorial.pdf");
+
+        Uri path;
+
+        if(Build.VERSION.SDK_INT < 24){
+            System.out.println("*** version below 24");
+            path = Uri.fromFile(f);
+        } else {
+            System.out.println("*** version 24 and up");
+
+            path = FileProvider.getUriForFile(NavigationActivity.this,
+                    getApplicationContext().getPackageName() + ".provider",
+                    f);
+        }
+
+        System.out.println(path.getPath());
+
+        Intent pdfOpenintent = new Intent(Intent.ACTION_VIEW);
+        pdfOpenintent.setDataAndType(path, "application/pdf");
+        pdfOpenintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        pdfOpenintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        pdfOpenintent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        try {
+            startActivity(pdfOpenintent);
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
+
+                 if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    downloadTutorialFile();
+
+                } else {
+
+                    Toast.makeText(getApplicationContext(), "You have no application to open pdf file.", Toast.LENGTH_SHORT).show();
+
+                }
+                return;
+            }
         }
     }
 

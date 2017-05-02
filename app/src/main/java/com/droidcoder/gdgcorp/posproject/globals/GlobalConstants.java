@@ -11,8 +11,8 @@ public class GlobalConstants {
     public static final String DB_NAME = "cheappos-db";
 
     //Emails server
-    public static final String EMAIL_SENDER = "danluciano08@gmail.com";
-    public static final String EMAIL_PASSWORD = "eizenn1008gaviel";
+    public static final String EMAIL_SENDER = "cheappos.gdg.corp@gmail.com";
+    public static final String EMAIL_PASSWORD = "eizenn1008";
 
     //Payment types
     public  static  final String PAYMENT_TYPE_CASH = "CASH";

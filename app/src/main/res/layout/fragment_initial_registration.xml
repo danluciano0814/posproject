@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="10sp"
-        android:text="NOTE: Registration require internet and a valid email for password recovering purposes."/>
+        android:text="NOTE: This app is free, registration is for password recovering purpose only, requires internet and a valid email. Check your email after registration. "/>
 
     <ScrollView
         android:layout_width="match_parent"

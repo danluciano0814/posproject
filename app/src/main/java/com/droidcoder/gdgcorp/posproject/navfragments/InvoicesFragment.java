@@ -241,7 +241,6 @@ public class InvoicesFragment extends BaseFragment {
 
     public void invoiceFilter(String status, String start, String end) throws ParseException {
 
-        Toast.makeText(getActivity(), "Status " + status, Toast.LENGTH_SHORT).show();
         Calendar calFrom = Calendar.getInstance();
         calFrom.setTime(df.parse(start));
         calFrom.set(Calendar.HOUR, 0);
