@@ -776,7 +776,7 @@ public class DataMigrationFragment extends BaseFragment {
 
             try {
                 String filename = "Discount"+ new SimpleDateFormat("MM-dd-yyyy").format(new Date()) + ".csv";
-                File path = Environment.getExternalStoragePublicDirectory("/CheapposCSV" + "/DiscountCSV");
+                File path = Environment.getExternalStoragePublicDirectory("/Cheappos" + "/DiscountCSV");
                 if(!path.exists()){
                     path.mkdirs();
                 }
@@ -834,7 +834,7 @@ public class DataMigrationFragment extends BaseFragment {
 
             try {
                 String filename = "Customer"+ new SimpleDateFormat("MM-dd-yyyy").format(new Date()) + ".csv";
-                File path = Environment.getExternalStoragePublicDirectory("/CheapposCSV" + "/CustomerCSV");
+                File path = Environment.getExternalStoragePublicDirectory("/Cheappos" + "/CustomerCSV");
                 if(!path.exists()){
                     path.mkdirs();
                 }
@@ -892,7 +892,7 @@ public class DataMigrationFragment extends BaseFragment {
 
             try {
                 String filename = "Product"+ new SimpleDateFormat("MM-dd-yyyy").format(new Date()) + ".csv";
-                File path = Environment.getExternalStoragePublicDirectory("/CheapposCSV" + "/ProductCSV");
+                File path = Environment.getExternalStoragePublicDirectory("/Cheappos" + "/ProductCSV");
                 if(!path.exists()){
                     path.mkdirs();
                 }
