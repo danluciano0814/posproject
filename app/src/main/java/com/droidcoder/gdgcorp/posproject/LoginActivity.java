@@ -203,11 +203,11 @@ public class LoginActivity extends BaseCompatActivity implements AsyncCheckEmail
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressFragment = new ProgressFragment();
+            /*progressFragment = new ProgressFragment();
             Bundle bundle = new Bundle();
             bundle.putString("loadingMessage", "Sending Email...");
             progressFragment.setArguments(bundle);
-            progressFragment.show(LoginActivity.this.getSupportFragmentManager(), "progress");
+            progressFragment.show(LoginActivity.this.getSupportFragmentManager(), "progress");*/
 
             Properties props = new Properties();
             props.put("mail.smtp.host", "smtp.gmail.com");
@@ -251,8 +251,8 @@ public class LoginActivity extends BaseCompatActivity implements AsyncCheckEmail
         protected void onPostExecute(String res) {
             super.onPostExecute(res);
             Toast.makeText(context, res, Toast.LENGTH_LONG).show();
-            progressFragment.dismiss();
-            initialRegistrationFragment.setBtnEnabled();
+            //progressFragment.dismiss();
+            initialRegistrationFragment.setBtnEnabled(passwordCode);
         }
 
     }

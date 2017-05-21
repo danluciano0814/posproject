@@ -55,9 +55,10 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/button_blue"
+                    android:padding="5dp"
                     android:drawableTop="@drawable/ic_add"
-                    android:text="CREATE CATEGORY"
+                    android:text="CATEGORY"
                     android:textColor="@color/white"
                     android:textSize="@dimen/txt_normal"
                     android:layout_margin="1dp"

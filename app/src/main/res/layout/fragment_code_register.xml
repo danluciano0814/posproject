@@ -14,8 +14,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/txt_normal"
-        android:text="NOTE: You can use the same code as login pin after you register the 4 digit code."/>
+        android:textSize="22sp"
+        android:textColor="@color/colorPrimary"
+        android:text="Thank you for signing to Cheappos. A message with 4 digit code to unlock the app has been sent to your email, Use the same code for your Login"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -39,6 +40,7 @@
                 android:gravity="center"
                 android:inputType="numberPassword"
                 android:id="@+id/etCode"
+                android:hint="Enter the 4 digit code here"
                 />
 
             <Button
@@ -50,5 +52,15 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:textSize="25dp"
+        android:id="@+id/txtCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:gravity="center"
+        android:visibility="invisible"/>
 
 </LinearLayout>

@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.droidcoder.gdgcorp.posproject.LoginActivity;
 import com.droidcoder.gdgcorp.posproject.R;
 import com.droidcoder.gdgcorp.posproject.dataentity.User;
 import com.droidcoder.gdgcorp.posproject.dataentity.UserDao;
@@ -45,6 +47,7 @@ public class InitialRegistrationFragment extends BaseFragment {
     private String passCode;
     private String email;
 
+    ProgressFragment progressFragment;
 
     @Nullable
     @Override
@@ -71,10 +74,13 @@ public class InitialRegistrationFragment extends BaseFragment {
             public void onClick(View v) {
 
                 CodeRegisterFragment codeRegisterFragment = new CodeRegisterFragment();
+                Bundle bundle = new Bundle();
+                codeRegisterFragment.setArguments(bundle);
                 codeRegisterFragment.show(getActivity().getSupportFragmentManager(), "codeRegister");
             }
         });
 
+        Toast.makeText(getActivity(), "" + btnEnterCode.getX() + "" + btnEnterCode.getY(), Toast.LENGTH_SHORT).show();
 
         setUIProperties();
     }
@@ -135,6 +141,12 @@ public class InitialRegistrationFragment extends BaseFragment {
 
                 btnSend.setEnabled(false);
 
+                progressFragment = new ProgressFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("loadingMessage", "Sending Email...");
+                progressFragment.setArguments(bundle);
+                progressFragment.show(getActivity().getSupportFragmentManager(), "progress");
+
             }else{
                 Toast.makeText(getActivity(), "Device is not Connected to the internet", Toast.LENGTH_LONG).show();
             }
@@ -148,12 +160,19 @@ public class InitialRegistrationFragment extends BaseFragment {
         if(emailExist){
             etEmail.setError("Email was already Used");
             btnSend.setEnabled(true);
+            progressFragment.dismiss();
         }
 
     }
 
-    public void setBtnEnabled(){
+    public void setBtnEnabled(String code){
         btnSend.setEnabled(true);
+        CodeRegisterFragment codeRegisterFragment = new CodeRegisterFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("code", code);
+        codeRegisterFragment.setArguments(bundle);
+        codeRegisterFragment.show(getActivity().getSupportFragmentManager(), "codeRegister");
+        progressFragment.dismiss();
     }
 
     public String generatePassCode(){

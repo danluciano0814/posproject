@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="NOTE: Registration require internet and a valid email for password recovering purposes."/>
+        android:text="NOTE: This app is free, registration is for password recovering purpose only, requires internet and a valid email. Check your email after registration. "/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -61,14 +61,18 @@
 
             <Button
                 android:text="Send"
+                android:background="@drawable/button_blue"
+                android:padding="5dp"
                 android:id="@+id/btnSend"
                 style="@style/blue_form_btn" />
 
             <Button
-                android:text="Enter Code"
                 android:id="@+id/btnEnterCode"
+                android:background="@drawable/button_blue"
+                android:padding="5dp"
+                style="@style/blue_form_btn"
                 android:layout_marginBottom="10dp"
-                style="@style/blue_form_btn" />
+                android:text="Enter Code" />
 
 
         </LinearLayout>

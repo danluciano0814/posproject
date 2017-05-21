@@ -37,7 +37,7 @@
         android:layout_height="match_parent"
         android:id="@+id/txtEmail"
         android:textSize="@dimen/txt_title"
-        android:gravity="end"
+        android:gravity="end|center_vertical"
         android:layout_weight="1"
         android:maxLines="1"
         android:maxLength="16"

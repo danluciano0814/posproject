@@ -27,14 +27,12 @@
                 android:layout_weight="1"
                 android:paddingTop="10dp">
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@color/white"
-                    android:drawableTop="@drawable/ic_return"
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/round_button_bg"
+                    android:src="@drawable/ic_back_blue"
                     android:textColor="@color/colorPrimaryDark"
-                    android:text="return"
-                    android:padding="10dp"
                     android:id="@+id/btnReturn"/>
 
             </LinearLayout>
@@ -69,12 +67,13 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
                     android:drawableTop="@drawable/ic_add"
-                    android:text="CREATE ROLE"
+                    android:text="ROLE"
                     android:textColor="@color/white"
                     android:textSize="@dimen/txt_normal"
                     android:layout_margin="1dp"
+                    android:background="@drawable/button_blue"
+                    android:padding="5dp"
                     android:id="@+id/btnCreate"
                     android:gravity="center"/>
 

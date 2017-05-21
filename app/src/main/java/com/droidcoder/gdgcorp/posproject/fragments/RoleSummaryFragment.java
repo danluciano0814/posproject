@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.droidcoder.gdgcorp.posproject.Adapter.EmployeeSummaryAdapter;
@@ -38,7 +39,7 @@ import butterknife.ButterKnife;
 
 public class RoleSummaryFragment extends BaseFragment {
 
-    @BindView(R.id.btnReturn)Button btnReturn;
+    @BindView(R.id.btnReturn)ImageView btnReturn;
     @BindView(R.id.btnCreate)Button btnCreate;
     @BindView(R.id.editRoleName)EditText editRoleName;
     @BindView(R.id.lv_role_summary)ListView lvRoleSummary;

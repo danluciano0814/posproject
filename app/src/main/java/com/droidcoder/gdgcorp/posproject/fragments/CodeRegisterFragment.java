@@ -1,5 +1,6 @@
 package com.droidcoder.gdgcorp.posproject.fragments;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,13 +10,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.droidcoder.gdgcorp.posproject.NavigationActivity;
 import com.droidcoder.gdgcorp.posproject.R;
 import com.droidcoder.gdgcorp.posproject.dataentity.User;
 import com.droidcoder.gdgcorp.posproject.datasystem.CheckRegistration;
+import com.droidcoder.gdgcorp.posproject.datasystem.CurrentUser;
 import com.droidcoder.gdgcorp.posproject.utils.DBHelper;
 import com.droidcoder.gdgcorp.posproject.utils.ImageConverter;
+import com.google.android.gms.vision.text.Text;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +33,7 @@ public class CodeRegisterFragment extends DialogFragment {
 
     @BindView(R.id.etCode) EditText etCode;
     @BindView(R.id.btnEnter) Button btnEnter;
+    @BindView(R.id.txtCode) TextView txtCode;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_code_register, container, false);
@@ -44,6 +50,13 @@ public class CodeRegisterFragment extends DialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+
+        if(!getArguments().isEmpty()){
+            if(!getArguments().getString("code").equalsIgnoreCase("")){
+                txtCode.setText("Code : " + getArguments().getString("code"));
+                txtCode.setVisibility(View.VISIBLE);
+            }
+        }
 
         btnEnter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +79,8 @@ public class CodeRegisterFragment extends DialogFragment {
                         CheckRegistration.saveRegister("true", getActivity());
                         ((OnRegistration)getActivity()).onRegistrationSuccess();
                         dismiss();
+                        CurrentUser.initUser(etCode.getText().toString().trim());
+                        startActivity(new Intent(getActivity(), NavigationActivity.class));
                     }else{
                         Toast.makeText(getActivity(), "Invalid Code", Toast.LENGTH_LONG).show();
                     }

@@ -128,7 +128,7 @@ public class SubCategoryFormFragment extends BaseDialogFragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spinnerCategoryId = Long.parseLong(((TextView)view.findViewById(R.id.txtId)).getText().toString());
-                Toast.makeText(getActivity(), "ID : " + ((TextView)view.findViewById(R.id.txtId)).getText().toString() + " / Name : " + ((TextView)view.findViewById(R.id.txtName)).getText().toString(), Toast.LENGTH_SHORT).show();
+
             }
 
             @Override

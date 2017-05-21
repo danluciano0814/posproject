@@ -15,14 +15,13 @@
             android:background="@drawable/side_nav_bar">
 
             <ImageView
+                android:id="@+id/btnDismiss"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/margin_10dp"
                 android:background="@null"
-                android:src="@drawable/ic_dismiss"
                 android:padding="10dp"
-                android:id="@+id/btnDismiss"
-                />
+                android:src="@drawable/ic_dismiss" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -32,16 +31,15 @@
                 android:padding="@dimen/margin_10dp">
 
                 <Button
+                    android:id="@+id/btnSave"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:background="@null"
+                    android:drawableRight="@drawable/ic_save"
                     android:gravity="center"
                     android:text="Save"
-                    android:drawableRight="@drawable/ic_save"
-                    android:textColor="@color/white"
                     android:textAllCaps="false"
-                    android:background="@null"
-                    android:id="@+id/btnSave"
-                    />
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
@@ -60,26 +58,26 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:text="Product Form"
                     android:id="@+id/txtTitle"
                     style="@style/blue_title_txt"
-                    android:gravity="start"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"/>
+                    android:gravity="start"
+                    android:text="Product Form" />
 
                 <CheckBox
+                    android:id="@+id/cbxActive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/cbxActive"
-                    android:textSize="@dimen/txt_normal"
-                    android:textColor="@color/colorPrimary"
-                    android:text="ACTIVE"
-                    android:focusable="false"
-                    android:buttonTint="@color/colorPrimary"
-                    android:focusableInTouchMode="false"
                     android:layout_gravity="end"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="10dp"
+                    android:buttonTint="@color/colorPrimary"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:text="ACTIVE"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/txt_normal" />
 
             </FrameLayout>
 
@@ -102,21 +100,20 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_marginRight="5dp"
                             android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:layout_marginRight="5dp">
+                            android:orientation="vertical">
 
                             <TextView
-                                android:text="Image"
-                                style="@style/blue_normal_txt" />
+                                style="@style/blue_normal_txt"
+                                android:text="Image" />
 
                             <ImageView
+                                android:id="@+id/imgProduct"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/product_image_h"
                                 android:background="@drawable/edittxt_bg"
-                                android:id="@+id/imgProduct"
-                                android:scaleType="fitXY"
-                                />
+                                android:scaleType="fitXY" />
 
 
                             <LinearLayout
@@ -125,28 +122,30 @@
                                 android:orientation="horizontal">
 
                                 <Button
+                                    android:id="@+id/btnOpen"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@color/colorPrimary"
+                                    android:layout_margin="3dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/button_blue"
+                                    android:padding="5dp"
                                     android:drawableTop="@drawable/ic_folder"
                                     android:text="OPEN"
                                     android:textColor="@color/white"
-                                    android:textSize="@dimen/txt_normal"
-                                    android:layout_weight="1"
-                                    android:layout_margin="3dp"
-                                    android:id="@+id/btnOpen"/>
+                                    android:textSize="@dimen/txt_normal" />
 
                                 <Button
+                                    android:id="@+id/btnDelete"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@color/colorPrimary"
+                                    android:layout_margin="3dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/button_blue"
+                                    android:padding="5dp"
                                     android:drawableTop="@drawable/ic_delete_white"
                                     android:text="DELETE"
                                     android:textColor="@color/white"
-                                    android:textSize="@dimen/txt_normal"
-                                    android:layout_weight="1"
-                                    android:layout_margin="3dp"
-                                    android:id="@+id/btnDelete"/>
+                                    android:textSize="@dimen/txt_normal" />
 
                             </LinearLayout>
 
@@ -155,15 +154,16 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="vertical"
+                            android:layout_marginLeft="5dp"
                             android:layout_weight="1"
-                            android:layout_marginLeft="5dp">
+                            android:orientation="vertical">
 
                             <TextView
-                                android:text="Description"
-                                style="@style/blue_normal_txt" />
+                                style="@style/blue_normal_txt"
+                                android:text="Description" />
 
                             <EditText
+                                android:id="@+id/editDescription"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="start"
@@ -171,10 +171,9 @@
                                 android:gravity="top|left"
                                 android:inputType="textMultiLine"
                                 android:overScrollMode="always"
-                                android:scrollbarStyle="insideInset"
-                                android:scrollbars="vertical"
                                 android:padding="5dp"
-                                android:id="@+id/editDescription"/>
+                                android:scrollbarStyle="insideInset"
+                                android:scrollbars="vertical" />
 
 
                         </LinearLayout>
@@ -189,53 +188,49 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/productId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/productId"
-                        android:visibility="gone"/>
+                        android:visibility="gone" />
 
                     <TextView
-                        android:text="NAME"
-                        style="@style/blue_normal_txt" />
+                        style="@style/blue_normal_txt"
+                        android:text="NAME" />
 
                     <EditText
-                        android:inputType="text"
                         android:id="@+id/editProductName"
                         style="@style/edittext_form"
-                        />
+                        android:inputType="text" />
 
                     <TextView
-                        android:text="COST PRICE"
-                        style="@style/blue_normal_txt" />
+                        style="@style/blue_normal_txt"
+                        android:text="COST PRICE" />
 
                     <EditText
-                        android:inputType="numberDecimal"
                         android:id="@+id/editCostPrice"
                         style="@style/edittext_form"
-                        android:maxLength="9"
-                        />
+                        android:inputType="numberDecimal"
+                        android:maxLength="9" />
 
                     <TextView
-                        android:text="SELL PRICE"
-                        style="@style/blue_normal_txt" />
+                        style="@style/blue_normal_txt"
+                        android:text="SELL PRICE" />
 
                     <EditText
-                        android:inputType="numberDecimal"
                         android:id="@+id/editSellPrice"
                         style="@style/edittext_form"
-                        android:maxLength="10"
-                        />
+                        android:inputType="numberDecimal"
+                        android:maxLength="10" />
 
                     <TextView
-                        android:text="STOCKS"
-                        style="@style/blue_normal_txt" />
+                        style="@style/blue_normal_txt"
+                        android:text="STOCKS" />
 
                     <EditText
-                        android:inputType="numberDecimal"
                         android:id="@+id/editStocks"
                         style="@style/edittext_form"
-                        android:maxLength="10"
-                        />
+                        android:inputType="numberDecimal"
+                        android:maxLength="10" />
 
 
                 </LinearLayout>

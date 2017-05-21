@@ -73,7 +73,7 @@ public class AsyncCheckEmail extends AsyncTask<String, Void, Boolean> {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(context, "on 1st listener error", Toast.LENGTH_SHORT).show();
+
             }
         });
 

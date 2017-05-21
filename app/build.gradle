@@ -2,6 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
 
 android {
+    signingConfigs {
+        cheappos {
+            keyAlias 'Cheappos'
+            keyPassword 'eizenn1008'
+            storeFile file('E:/accounts/Cheappos.jks')
+            storePassword 'eizenn1008'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
@@ -17,6 +25,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.cheappos
+        }
+        debug {
+            signingConfig signingConfigs.cheappos
         }
     }
 }
@@ -26,14 +38,13 @@ greendao{
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.android.support:design:25.1.0'
     compile 'com.android.support:cardview-v7:25.1.0'
-
     //email libs
     compile files('libs/activation.jar')
     compile files('libs/additionnal.jar')
@@ -44,7 +55,6 @@ dependencies {
     //bluetooth printer
     compile files('libs/btsdk.jar')
     compile files('libs/zixng.jar')
-
     //butterknife
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
@@ -68,9 +78,6 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.0'
     //time picker
     compile 'com.kovachcode:timePickerWithSeconds:1.0.1'
-
-
-
     testCompile 'junit:junit:4.12'
 }
 

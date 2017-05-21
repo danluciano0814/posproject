@@ -23,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -101,7 +102,7 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
     @BindView(R.id.btnDiscountAll)Button btnDiscountAll;
     @BindView(R.id.btnTaxExemptAll)Button btnTaxExemptAll;
     @BindView(R.id.btnPayment)Button btnPayment;
-    @BindView(R.id.btnReturn)Button btnReturn;
+    @BindView(R.id.btnReturn)ImageView btnReturn;
 
     @BindView(R.id.txtVatSales)TextView txtTotalVatSales;
     @BindView(R.id.txtNonVatSales)TextView txtTotalNonVatSales;
@@ -149,9 +150,9 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
         setContentView(R.layout.activity_sales);
         ButterKnife.bind(this);
 
-        AdView mAdView = (AdView) findViewById(R.id.adView);
+        /*AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        mAdView.loadAd(adRequest);*/
 
         txtMenuIndicator.setVisibility(View.INVISIBLE);
         txtSubIndicator.setVisibility(View.INVISIBLE);
@@ -397,22 +398,19 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
         btnAddCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Toast.makeText(SalesActivity.this, "Currently unavailable", Toast.LENGTH_LONG).show();
-
-                /*CustomerFormFragment customerFormFragment = new CustomerFormFragment();
+                CustomerFormFragment customerFormFragment = new CustomerFormFragment();
                 Bundle bundle = new Bundle();
                 customerFormFragment.setArguments(bundle);
-                customerFormFragment.show(fm, "customerForm");*/
+                customerFormFragment.show(fm, "customerForm");
+
             }
         });
 
         btnScanCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(SalesActivity.this, "Currently unavailable", Toast.LENGTH_LONG).show();
-                /*Intent intent = new Intent(getApplicationContext(), BarcodeCaptureActivity.class);
-                startActivityForResult(intent, BARCODE_READER_REQUEST_CODE);*/
+                Intent intent = new Intent(getApplicationContext(), BarcodeCaptureActivity.class);
+                startActivityForResult(intent, BARCODE_READER_REQUEST_CODE);
             }
         });
 
