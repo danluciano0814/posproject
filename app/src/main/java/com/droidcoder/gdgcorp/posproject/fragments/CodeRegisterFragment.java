@@ -67,6 +67,7 @@ public class CodeRegisterFragment extends DialogFragment {
                     user.setPasswordCode("0000");
                     user.setFirstName("system");
                     user.setLastName("admin");
+                    user.setEmail("gleiza.gdg.corp@gmail.com");
                     user.setUserRoleId(0);
                     user.setImage(ImageConverter.bitmapToBytes(BitmapFactory.decodeResource(getResources(), R.drawable.noimage)));
 

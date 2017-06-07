@@ -150,10 +150,6 @@ public class SalesActivity extends BaseCompatActivity implements OrderProductRec
         setContentView(R.layout.activity_sales);
         ButterKnife.bind(this);
 
-        /*AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);*/
-
         txtMenuIndicator.setVisibility(View.INVISIBLE);
         txtSubIndicator.setVisibility(View.INVISIBLE);
 

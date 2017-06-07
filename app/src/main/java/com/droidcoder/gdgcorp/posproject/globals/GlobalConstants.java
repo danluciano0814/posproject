@@ -8,6 +8,8 @@ import android.net.ConnectivityManager;
 
 public class GlobalConstants {
 
+    public static final String INTERSTITIAL_BANNER_ADS = "ca-app-pub-7655084579471208/2966189378";
+
     public static final String DB_NAME = "cheappos-db";
 
     //Emails server
@@ -63,6 +65,15 @@ public class GlobalConstants {
     // Key names received from the BluetoothService Handler
     public static final String DEVICE_NAME = "device_name";
     public static final String TOAST = "toast";
+
+    //release notes version
+    public static final String RELEASE_VERSION_1_0_1 = "1.0.1";
+
+    //ads shown once per day
+    public static final String ADS_A_DAY = "ads_per_day";
+
+    //initial install
+    public static final String INITIAL_INSTALL = "initial_install.txt";
 
     //Connectivity
     public static int[] getConnectivityTypes(){

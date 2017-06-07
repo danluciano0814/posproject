@@ -45,8 +45,7 @@
                 android:checkable="true"
                 android:id="@+id/nav_employee"
                 android:icon="@drawable/ic_employee"
-                android:title="Employees"
-                app:actionLayout="@layout/menu_locked" />
+                android:title="Employees" />
 
         </menu>
     </item>

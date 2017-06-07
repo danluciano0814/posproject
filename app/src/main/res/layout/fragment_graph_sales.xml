@@ -16,7 +16,7 @@
             android:background="@drawable/plain_border">
 
             <Spinner
-                android:layout_width="100dp"
+                android:layout_width="140dp"
                 android:layout_height="match_parent"
                 android:id="@+id/spinnerYear"
                 android:layout_marginLeft="20dp"

@@ -80,8 +80,6 @@ public class InitialRegistrationFragment extends BaseFragment {
             }
         });
 
-        Toast.makeText(getActivity(), "" + btnEnterCode.getX() + "" + btnEnterCode.getY(), Toast.LENGTH_SHORT).show();
-
         setUIProperties();
     }
 

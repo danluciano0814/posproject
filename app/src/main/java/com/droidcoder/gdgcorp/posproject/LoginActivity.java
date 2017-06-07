@@ -14,16 +14,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.droidcoder.gdgcorp.posproject.dataentity.User;
 import com.droidcoder.gdgcorp.posproject.dataentity.UserDao;
 import com.droidcoder.gdgcorp.posproject.datasystem.CheckRegistration;
 import com.droidcoder.gdgcorp.posproject.datasystem.CurrentUser;
 import com.droidcoder.gdgcorp.posproject.fragments.CodeRegisterFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.InitialRegistrationFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.ProgressFragment;
+import com.droidcoder.gdgcorp.posproject.fragments.ReleaseNotesFragment;
 import com.droidcoder.gdgcorp.posproject.globals.GlobalConstants;
 import com.droidcoder.gdgcorp.posproject.utils.AsyncCheckEmail;
 import com.droidcoder.gdgcorp.posproject.utils.DBHelper;
+import com.droidcoder.gdgcorp.posproject.utils.LFHelper;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+
+import java.util.Calendar;
 import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -60,6 +66,17 @@ public class LoginActivity extends BaseCompatActivity implements AsyncCheckEmail
         setContentView(R.layout.activity_login);
 
         ButterKnife.bind(this);
+
+        if(LFHelper.getLocalData(this, GlobalConstants.RELEASE_VERSION_1_0_1).equalsIgnoreCase("0")){
+            ReleaseNotesFragment releaseNotesFragment = new ReleaseNotesFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("releaseVersion", "Release");
+            bundle.putString("content", "Version 1.0.1\n\n* Remove Ads on Order Menu *\n\n * Added Customer Module * \n\t-You can now manage customer information\n\t-Enable customer rewarding feature on Customer Setting\n\t-Emailing of customer Loyalty code\n\t-Scan Customer Loyalty code" +
+                    "\n\t-Customer can now pay using credit and points\n\n * Added Employee Module * \n\t-You can now manage employees and roles\n\t-Assign Role to each employees\n\t-Generate Reports Specific to Employees"
+            );
+            releaseNotesFragment.setArguments(bundle);
+            releaseNotesFragment.show(getSupportFragmentManager(), "releaseNotes");
+        }
 
         //if not initially register show fragment
         if(!CheckRegistration.isRegistered(this)){

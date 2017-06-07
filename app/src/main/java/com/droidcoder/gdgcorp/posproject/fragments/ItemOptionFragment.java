@@ -111,6 +111,7 @@ public class ItemOptionFragment extends BaseFragment {
                     ((SalesActivity)getActivity()).addOrderProduct(id);
                 }
             });
+
         }else{
             itemMainContainer.setVisibility(View.INVISIBLE);
             itemImageContainer.setVisibility(View.INVISIBLE);

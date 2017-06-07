@@ -20,6 +20,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -28,7 +29,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,8 +44,11 @@ import com.droidcoder.gdgcorp.posproject.fragments.GraphAveCustomerFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.GraphSalesFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.GraphTopItems;
 import com.droidcoder.gdgcorp.posproject.fragments.GraphTransactionFragment;
+import com.droidcoder.gdgcorp.posproject.fragments.InitialTutorialFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.ProgressFragment;
+import com.droidcoder.gdgcorp.posproject.fragments.ReleaseNotesFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.RoleSummaryFragment;
+import com.droidcoder.gdgcorp.posproject.fragments.TutorialFragment;
 import com.droidcoder.gdgcorp.posproject.fragments.UserFormFragment;
 import com.droidcoder.gdgcorp.posproject.globals.GlobalConstants;
 import com.droidcoder.gdgcorp.posproject.navactivities.SettingsActivity;
@@ -54,12 +60,19 @@ import com.droidcoder.gdgcorp.posproject.navfragments.ReportsFragment;
 import com.droidcoder.gdgcorp.posproject.utils.AsyncCheckEmail;
 import com.droidcoder.gdgcorp.posproject.utils.DBHelper;
 import com.droidcoder.gdgcorp.posproject.utils.ImageConverter;
+import com.droidcoder.gdgcorp.posproject.utils.LFHelper;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
 import javax.mail.Authenticator;
@@ -86,6 +99,7 @@ public class NavigationActivity extends BaseCompatActivity
 
     //user
     NavigationView navigationView;
+    Toolbar toolbar;
 
     LinearLayout userMain;
     ImageView imageUser;
@@ -96,6 +110,12 @@ public class NavigationActivity extends BaseCompatActivity
     ProgressFragment progressFragment;
     Fragment settingsFragment;
 
+    InitialTutorialFragment initTutorial;
+    int x = 0;
+    int y = 0;
+
+    private InterstitialAd mInterstitialAd;
+
     private static final int  MEGABYTE = 1024 * 1024;
     final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 0;
 
@@ -103,11 +123,31 @@ public class NavigationActivity extends BaseCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
 
         fm = getSupportFragmentManager();
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        //mAdView.loadAd(adRequest);
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(GlobalConstants.INTERSTITIAL_BANNER_ADS);
+        final AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
+        mInterstitialAd.loadAd(adRequestBuilder.build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                showInterstitial();
+            }
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                mInterstitialAd.loadAd(adRequestBuilder.build());
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -123,6 +163,13 @@ public class NavigationActivity extends BaseCompatActivity
         userEmail = (TextView) header.findViewById(R.id.txtUserEmail);
         userRole = (TextView) header.findViewById(R.id.txtUserRole);
         imageUser = (ImageView) header.findViewById(R.id.imageUser);
+
+        if(LFHelper.getLocalData(this, GlobalConstants.INITIAL_INSTALL).equalsIgnoreCase("0")) {
+            initTutorial = new InitialTutorialFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.tutorial_frame, initTutorial, "initialTutorial").commit();
+        }
+
+
 
 
         //populate user
@@ -164,6 +211,38 @@ public class NavigationActivity extends BaseCompatActivity
         getSupportFragmentManager().beginTransaction().replace(mainFrame.getId(), settingsFragment, "salesSetting").commit();
         yearlySales.setBackground(getResources().getDrawable(R.drawable.line_below));
 
+
+    }
+
+    public void showInterstitial(){
+        //Show intertestial on second day of installation and once per day
+        if(LFHelper.getLocalData(this, GlobalConstants.ADS_A_DAY).equalsIgnoreCase("0")){
+            Calendar cal = Calendar.getInstance();
+            String date = cal.get(Calendar.YEAR) + "-" + cal.get(Calendar.MONTH) + "-" + cal.get(Calendar.DAY_OF_MONTH);
+            LFHelper.saveLocalData(this, GlobalConstants.ADS_A_DAY, date);
+        }else{
+
+            Calendar cal = Calendar.getInstance();
+            String date = cal.get(Calendar.YEAR) + "-" + cal.get(Calendar.MONTH) + "-" + cal.get(Calendar.DAY_OF_MONTH);
+            String prevDate = LFHelper.getLocalData(this, GlobalConstants.ADS_A_DAY);
+
+            if(!prevDate.equals(date)){
+                //show ads here
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                    LFHelper.saveLocalData(this, GlobalConstants.ADS_A_DAY, date);
+                } else {
+
+                }
+            }else{
+
+            }
+
+        }
+    }
+
+    public void removeInitialTutorial(){
+        getSupportFragmentManager().beginTransaction().remove(initTutorial).commit();
     }
 
     public void selectLeftNavigation(View v){
@@ -275,15 +354,19 @@ public class NavigationActivity extends BaseCompatActivity
 
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.navigation, menu);
 
         if(CurrentUser.getUser().getUserRoleId() > 0) {
             UserRole role = DBHelper.getDaoSession().getUserRoleDao().load(CurrentUser.getUser().getUserRoleId());
             menu.findItem(R.id.nav_settings).setVisible(role.getAllowSetting());
         }
+
+        MenuItem item = toolbar.getMenu().findItem(R.id.nav_help);
 
         return true;
     }
@@ -331,7 +414,9 @@ public class NavigationActivity extends BaseCompatActivity
 
         if(id == R.id.nav_help){
             if(isStoragePermissionGranted()){
-                downloadTutorialFile();
+                //downloadTutorialFile();
+                TutorialFragment tutorialFragment = new TutorialFragment();
+                tutorialFragment.show(getSupportFragmentManager(), "tutorial");
             }
         }
 
@@ -349,18 +434,32 @@ public class NavigationActivity extends BaseCompatActivity
         }
         name = name.replaceAll(" ", "");
 
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+
         /*
         If item is checkable, the content is a fragment and will be displayed in the main content layout.
         Otherwise, the content is an intent or activity that can be launched separately.
         */
         if (item.isCheckable()) {
             try {
+
+                if(name.equalsIgnoreCase("Reports") || name.equalsIgnoreCase("Invoices") || name.equalsIgnoreCase("DataMigration")){
+                    if (mInterstitialAd.isLoaded()) {
+                        Toast.makeText(this, "ad is loaded and this code runs", Toast.LENGTH_SHORT).show();
+                        mInterstitialAd.show();
+                    }
+                }
+
                 Class<?> cls = Class.forName(getPackageName().concat(".navfragments.").concat(name.concat("Fragment")));
                 Fragment fragment = (Fragment) cls.getConstructor().newInstance();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(content_main.getId(), fragment, name.concat("Fragment"));
                 //Toast.makeText(this, "" + name.concat("Fragment"), Toast.LENGTH_SHORT).show();
                 ft.commit();
+
+
             } catch (ClassNotFoundException ex) {
                 Fragment fragment = new MissingPageFragment();
                 FragmentTransaction ft = fm.beginTransaction();
@@ -383,9 +482,6 @@ public class NavigationActivity extends BaseCompatActivity
             }
         }
 
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
