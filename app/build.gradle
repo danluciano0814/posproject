@@ -4,10 +4,10 @@ apply plugin: 'org.greenrobot.greendao'
 android {
     signingConfigs {
         cheappos {
-            keyAlias 'Cheappos'
-            keyPassword 'eizenn1008'
-            storeFile file('E:/accounts/Cheappos.jks')
-            storePassword 'eizenn1008'
+            //keyAlias 'Cheappos'
+            //keyPassword 'eizenn1008'
+            //storeFile file('E:/accounts/Cheappos.jks')
+            //storePassword 'eizenn1008'
         }
     }
     compileSdkVersion 25
